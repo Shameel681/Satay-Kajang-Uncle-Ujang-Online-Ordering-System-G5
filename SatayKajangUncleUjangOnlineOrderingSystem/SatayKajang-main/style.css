@@ -1,8 +1,9 @@
-
-/* Base Styles */  
 /* google fonts */
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Archivo+Black&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap');
+
+
+/* google fonts */  
 
 /* Base Styles */  
 * {
@@ -22,30 +23,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
-}
-
-.header-brand {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid white;
-    flex-shrink: 0;
-}
-
-.logo-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 a {
@@ -75,18 +52,6 @@ ul {
     transform: translateY(-3px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .logo-circle {
-        width: 40px;
-        height: 40px;
-    }
-    
-    header h1 {
-        font-size: 1.5rem;
-    }
-}
-
 /* Header Styles */
 header {
     background: #2c3e50;
@@ -98,15 +63,39 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap; /* Prevent wrapping on one line */
+}
+
+.logo-and-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 header h1 {
     font-family: 'crete round', sans-serif;
+    white-space: nowrap; /* Prevent title from wrapping */
+}
+
+.logo-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid white;
+    flex-shrink: 0;
+}
+
+.logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 nav ul {
     display: flex;
     align-items: center;
+    flex-wrap: nowrap; /* Prevent navigation items from wrapping */
 }
 
 nav ul li {
@@ -116,6 +105,7 @@ nav ul li {
 nav ul li a {
     padding: 5px 10px;
     border-radius: 3px;
+    transition: background 0.3s ease;
 }
 
 nav ul li a:hover,
@@ -136,6 +126,47 @@ nav ul li .btn {
 nav ul li .btn:hover {
     background: #d35400;
     transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .logo-and-title {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        gap: 10px;
+    }
+
+    nav ul li {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    nav ul li .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
 }
 
 /* Footer */
@@ -1272,4 +1303,172 @@ footer::after {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* Custom Modal Styles for Registration */
+.custom-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    font-family: 'crete round', sans-serif;
+}
+
+.custom-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: modalPopIn 0.3s ease-out forwards;
+}
+
+.custom-modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #e67e22;
+}
+
+.custom-modal-content h2.error-title {
+    color: #ff4444;
+}
+
+.custom-modal-content h2.success-title {
+    color: #2ecc71;
+}
+
+.custom-modal-content p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.custom-modal-content button {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.custom-modal-content button:hover {
+    background-color: #d35400;
+}
+
+@keyframes modalPopIn {
+    from {
+        transform: scale(0.7) translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Register page specific styles */
+.register-section {
+    background: #f5E6CA;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.register-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    font-family: 'crete round', sans-serif;
+}
+
+.register-title {
+    font-size: 2.2rem;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.register-subtitle {
+    text-align: center;
+    color: #e67e22;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.form-group label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-group input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #e67e22;
+    outline: none;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #e67e22;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #7f8c8d;
+}
+
+.login-link a {
+    color: #e67e22;
+    font-weight: bold;
 }
