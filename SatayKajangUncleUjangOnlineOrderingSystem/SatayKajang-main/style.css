@@ -1377,98 +1377,21 @@ footer::after {
     }
 }
 
-/* Register page specific styles */
-.register-section {
-    background: #f5E6CA;
-    padding: 60px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-}
+/* Register successful/fail box specific styles */
 
-.register-card {
-    background: #fff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
-    font-family: 'crete round', sans-serif;
-}
-
-.register-title {
-    font-size: 2.2rem;
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.register-subtitle {
-    text-align: center;
-    color: #e67e22;
-    margin-bottom: 30px;
-    font-style: italic;
-}
-
-.form-group label {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-.form-group input {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: #fafafa;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus {
-    border-color: #e67e22;
-    outline: none;
-}
-
-.register-btn {
-    width: 100%;
+.message-box {
     padding: 15px;
-    font-size: 1.2rem;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.register-btn:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
-}
-
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #e67e22;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
-    display: none;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.login-link {
-    text-align: center;
-    margin-top: 20px;
-    color: #7f8c8d;
-}
-
-.login-link a {
-    color: #e67e22;
+    margin-bottom: 20px;
+    border-radius: 8px;
     font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+.message-box.success {
+    background-color: #2ecc71; /* Green */
+}
+
+.message-box.error {
+    background-color: #e74c3c; /* Red */
 }
