@@ -1,3 +1,12 @@
+<?php
+// Include the database connection file which starts the session
+require_once 'connect.php'; 
+
+// Check if the user is logged in
+$is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+$customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,26 +17,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
         <div class="container">
-            <!-- Menyesuaikan struktur header agar konsisten dengan index.html -->
             <div class="logo-and-title">
                 <div class="logo-circle">
-                    <!-- Memperbarui path gambar logo agar konsisten dengan halaman utama -->
                     <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
                 </div>
-                <h1><a href="index.html">Satay Kajang Uncle Ujang</a></h1>
+                <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="about.php" class="active">About</a></li>
+                    <li><a href="menu.php">Menu</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="register.php" class="btn">Register as Customer</a></li>
+                    
+                    <?php if ($is_loggedin): ?>
+                    <li>
+                        <a href="logout.php" class="btn">Logout</a>
+                    </li>
+                    <?php else: ?>
+                    <li>
+                        <a href="register.php" class="btn">Register</a>
+                    </li>
+                    <li>
+                        <a href="login.php" class="btn">Login</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>
@@ -39,7 +58,6 @@
                 <h1>Setiap Hidangan Memiliki Kisahnya Tersendiri</h1>
                 <p>di mana setiap perniagaan mempunyai cerita dan garis masa untuk dikongsi bersama</p>
             </div>
-            <!-- Menghapus div penutup yang tidak perlu di sini -->
         </section>
 
         <section class="about-story">
@@ -49,7 +67,6 @@
             </section>
             
             <div class="timeline" id="timeline-section">
-                <!-- 2016 - Left -->
                 <div class="timeline-item" data-side="left">
                     <div class="timeline-year glow">2016</div>
                     <div class="timeline-content">
@@ -58,7 +75,6 @@
                     </div>
                 </div>
                 
-                <!-- 2019 - Right -->
                 <div class="timeline-item" data-side="right">
                     <div class="timeline-year glow">2019</div>
                     <div class="timeline-content">
@@ -67,7 +83,6 @@
                     </div>
                 </div>
                 
-                <!-- 2020 - Left -->
                 <div class="timeline-item" data-side="left">
                     <div class="timeline-year glow">2020</div>
                     <div class="timeline-content">
@@ -76,7 +91,6 @@
                     </div>
                 </div>
                 
-                <!-- 2022 - Right -->
                 <div class="timeline-item" data-side="right">
                     <div class="timeline-year glow">2022</div>
                     <div class="timeline-content">
@@ -85,7 +99,6 @@
                     </div>
                 </div>
                 
-                <!-- 2025 - Left -->
                 <div class="timeline-item" data-side="left">
                     <div class="timeline-year glow">2025</div>
                     <div class="timeline-content">

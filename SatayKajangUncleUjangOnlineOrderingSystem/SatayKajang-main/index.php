@@ -1,3 +1,12 @@
+<?php
+// Include the database connection file which starts the session
+require_once 'connect.php'; 
+
+// Check if the user is logged in
+$is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+$customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +15,7 @@
     <title>Satay Kajang Uncle Ujang - Home</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
@@ -15,15 +24,26 @@
                 <div class="logo-circle">
                     <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
                 </div>
-                <h1><a href="index.html">Satay Kajang Uncle Ujang</a></h1>
+                <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="register.php" class="btn">Register as Customer</a></li>
+                    <li><a href="index.php" class="active">Home</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="menu.php">Menu</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <?php if ($is_loggedin): ?>
+                    <li>
+                        <a href="logout.php" class="btn">Logout</a>
+                    </li>
+                    <?php else: ?>
+                    <li>
+                        <a href="register.php" class="btn">Register</a>
+                    </li>
+                    <li>
+                        <a href="login.php" class="btn">Login</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>
@@ -32,10 +52,14 @@
     <main>
         <section class="hero">
             <div class="hero-content">
+                <?php if ($is_loggedin): ?>
+                <h1>Welcome, <?php echo $customer_name; ?>!</h1>
+                <?php else: ?>
                 <h1>Belum Try Belum Tahu,<br>
                     Sudah Try Ingat Selalu...</h1>
+                <?php endif; ?>
                 <p class="tagline">Ramuan Rempah Ratus Turun Temurun</p>
-                <a href="menu.html" class="btn">View Our Menu</a>
+                <a href="menu.php class="btn">View Our Menu</a>
             </div>
         </section>
 
