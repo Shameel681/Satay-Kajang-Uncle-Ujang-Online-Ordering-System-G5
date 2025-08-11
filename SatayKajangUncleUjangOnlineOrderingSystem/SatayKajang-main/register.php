@@ -1,70 +1,68 @@
 <?php
+// Include the database connection file, which starts the session
+require_once 'connect.php';
 
-// This entire block of code is the PHP logic that runs on the server.
-// It connects to the database and processes the form data.
-
-// Database connection details
-$servername = "localhost";
-$username = "root"; // Your XAMPP username
-$password = ""; // Your XAMPP password
-$dbname = "SKUUOOS";
-
+// Initialize variables for messages
 $message = '';
 $message_type = '';
 
+// Check if the user is logged in
+$is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Get form data and use the null coalescing operator to avoid errors
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $phone_no = $_POST['phone'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    // Check connection
-    if ($conn->connect_error) {
-        $message = 'An internal server error occurred. Please try again later.';
+    // Basic server-side validation to ensure all required fields are filled
+    if (empty($name) || empty($email) || empty($phone_no) || empty($password)) {
+        $message = 'All fields are required.';
         $message_type = 'error';
     } else {
-        // Get the form data
-        $full_name = $_POST['name'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $phone_no = $_POST['phone'] ?? '';
-        $password = $_POST['password'] ?? '';
+        // Hash the password for security before storing it in the database
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        // Basic server-side validation
-        if (empty($full_name) || empty($email) || empty($phone_no) || empty($password)) {
-            $message = 'All fields are required.';
+        // Check if the email already exists in the database using a prepared statement
+        $check_sql = "SELECT customer_id FROM customer WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            $message = 'Registration failed. The email is already registered.';
             $message_type = 'error';
         } else {
-            // Hash the password for security
-            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            // Use a prepared statement to insert new user data
+            $insert_sql = "INSERT INTO customer (name, email, phone_no, password) VALUES (?, ?, ?, ?)";
+            $insert_stmt = $conn->prepare($insert_sql);
+            $insert_stmt->bind_param("ssss", $name, $email, $phone_no, $password_hash);
 
-            // Check if email already exists
-            $check_sql = "SELECT id FROM customer WHERE email = ?";
-            $check_stmt = $conn->prepare($check_sql);
-            $check_stmt->bind_param("s", $email);
-            $check_stmt->execute();
-            $check_stmt->store_result();
+            if ($insert_stmt->execute()) {
+                // Get the ID of the newly registered user
+                $customer_id = $insert_stmt->insert_id;
 
-            if ($check_stmt->num_rows > 0) {
-                $message = 'Registration failed. The email is already registered.';
-                $message_type = 'error';
+                // **NEW FEATURE: Automatically log in the user after successful registration**
+                $_SESSION['loggedin'] = true;
+                $_SESSION['customer_id'] = $customer_id;
+                $_SESSION['name'] = $name;
+
+                // Redirect to the home page or a success page
+                header("Location: index.php");
+                exit;
             } else {
-                // Use a prepared statement to prevent SQL injection
-                $sql = "INSERT INTO customer (full_name, email, phone_no, password_hash) VALUES (?, ?, ?, ?)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ssss", $full_name, $email, $phone_no, $password_hash);
-
-                if ($stmt->execute()) {
-                    $message = 'Registration successful! You can now log in.';
-                    $message_type = 'success';
-                } else {
-                    $message = 'Registration failed. Please try again.';
-                    $message_type = 'error';
-                }
-                $stmt->close();
+                $message = 'Registration failed. Please try again.';
+                $message_type = 'error';
             }
-            $check_stmt->close();
+            $insert_stmt->close();
         }
-        $conn->close();
+        $check_stmt->close();
     }
+    // Close the database connection at the end of the script
+    $conn->close();
 }
 ?>
 
@@ -77,27 +75,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="CSS/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-
-
     <header>
         <div class="container">
             <div class="logo-and-title">
                 <div class="logo-circle">
                     <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
                 </div>
-                <h1><a href="index.html">Satay Kajang Uncle Ujang</a></h1>
+                <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="register.html" class="active btn">Register as Customer</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="menu.php">Menu</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    
+                    <?php if ($is_loggedin): ?>
+                    <li>
+                        <a href="logout.php" class="btn">Logout</a>
+                    </li>
+                    <?php else: ?>
+                    <li>
+                        <a href="register.php" class="btn active">Register</a>
+                    </li>
+                    <li>
+                        <a href="login.php" class="btn">Login</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>
