@@ -1,8 +1,10 @@
+
+/* Base Styles */  
 /* google fonts */
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Archivo+Black&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap');
 
-/* Base Styles */  
+/* Base Styles */  
 * {
     margin: 0;
     padding: 0;
@@ -92,17 +94,19 @@ header {
     padding: 20px 0;
 }
 
-header h1 {
-    float: left;
-    font-family: 'crete round', sans-serif;
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-nav {
-    float: right;
+header h1 {
+    font-family: 'crete round', sans-serif;
 }
 
 nav ul {
     display: flex;
+    align-items: center;
 }
 
 nav ul li {
@@ -119,10 +123,19 @@ nav ul li a.active {
     background: #e67e22;
 }
 
-header::after {
-    content: "";
-    display: table;
-    clear: both;
+nav ul li .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: block;
+    background: #e67e22;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+nav ul li .btn:hover {
+    background: #d35400;
+    transform: translateY(-3px);
 }
 
 /* Footer */
@@ -371,13 +384,13 @@ footer::after {
     color: white;
     line-height: 1.8;
     text-shadow: -1px -1px 0 black,
-                 0   -1px 0 black,
+                 0   -1px 0 black,
                  1px -1px 0 black,
-                 1px  0   0 black,
-                 1px  1px 0 black,
-                 0    1px 0 black,
-                 -1px  1px 0 black,
-                 -1px  0   0 black;
+                 1px  0   0 black,
+                 1px  1px 0 black,
+                 0    1px 0 black,
+                 -1px  1px 0 black,
+                 -1px  0   0 black;
 }
 
 /* Timeline Styles */
@@ -448,27 +461,27 @@ footer::after {
     text-align: center;
     margin-bottom: 15px;
     text-shadow: 
-        -1px -1px 0 white,
-         0   -1px 0 white,
-         1px -1px 0 white,
-         1px  0   0 white,
-         1px  1px 0 white,
-         0    1px 0 white,
-        -1px  1px 0 white,
-        -1px  0   0 white; 
+                 -1px -1px 0 white,
+                  0   -1px 0 white,
+                  1px -1px 0 white,
+                  1px  0   0 white,
+                  1px  1px 0 white,
+                  0    1px 0 white,
+                 -1px  1px 0 white,
+                 -1px  0   0 white; 
     font-family: 'crete round', sans-serif;
 }
 
 .timeline-text {
     color: white;
     text-shadow: -1px -1px 0 black,
-                 0   -1px 0 black,
+                 0   -1px 0 black,
                  1px -1px 0 black,
-                 1px  0   0 black,
-                 1px  1px 0 black,
-                 0    1px 0 black,
-                -1px  1px 0 black,
-                -1px  0   0 black;
+                 1px  0   0 black,
+                 1px  1px 0 black,
+                 0    1px 0 black,
+                 -1px  1px 0 black,
+                 -1px  0   0 black;
     line-height: 1.7;
     font-size: 1.1rem;
     font-family: 'crete round', sans-serif;
@@ -1190,9 +1203,6 @@ footer::after {
         font-size: 0.9rem;
     }
 }
-
-
-
 
 #custom-minimum-modal {
     position: fixed;
