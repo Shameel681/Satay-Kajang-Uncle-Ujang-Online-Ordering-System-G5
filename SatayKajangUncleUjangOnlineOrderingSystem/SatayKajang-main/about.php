@@ -33,7 +33,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                     <li><a href="index.php">Home</a></li>
                     <li><a href="about.php" class="active">About</a></li>
                     <li><a href="menu.php">Menu</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                     
                     <?php if ($is_loggedin): ?>
                     <li>
