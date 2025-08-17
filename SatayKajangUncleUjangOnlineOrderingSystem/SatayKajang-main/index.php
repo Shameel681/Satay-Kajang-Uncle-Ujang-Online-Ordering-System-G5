@@ -51,24 +51,23 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
 
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <?php if ($is_loggedin): ?>
-                <h1>Welcome, <?php echo $customer_name; ?>!</h1>
-                <?php else: ?>
-                <h1>Belum Try Belum Tahu,<br>
-                    Sudah Try Ingat Selalu...</h1>
-                <?php endif; ?>
-                <p class="tagline">Ramuan Rempah Ratus Turun Temurun</p>
-                <a href="menu.php class="btn">View Our Menu</a>
-            </div>
-        </section>
+        <div class="hero-content">
+            <?php if ($is_loggedin): ?>
+                <h1>Welcome, <?php echo $customer_name; ?></h1>
+            <?php else: ?>
+                <h1>Belum Try Belum Tahu,<br>Sudah Try Ingat Selalu...</h1>
+            <?php endif; ?>
+            <p class="tagline">Ramuan Rempah Ratus Turun Temurun</p>
+            <a href="menu.php" class="btn">View Our Menu</a>
+        </div>
+    </section>
 
         <section class="featured">
             <div class="container">
                 <h2>OUR SIGNATURE</h2>
                 <div class="features">
                     <div class="feature-item">
-                        <img src="image/satay ayam.png" width="100%" height="71%">
+                        <img src="image/satay ayam.png" width="100%" height="auto">
                         <h3>Satay Ayam</h3>
                         <p>Ayam diperap rempah rahsia, memanggang harum semerbak</p>
                     </div>

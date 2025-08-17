@@ -1,5 +1,6 @@
 <?php
-// Include the database connection file which starts the session
+
+// Include the database connection file
 require_once 'connect.php'; 
 
 // Check if the user is logged in

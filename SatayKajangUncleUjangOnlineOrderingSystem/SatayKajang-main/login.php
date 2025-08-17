@@ -18,33 +18,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'] ?? '';
 
     // Use a prepared statement to prevent SQL injection
-    $sql = "SELECT customer_id, name, password FROM customer WHERE email = ?";
+    $sql = "SELECT customer_id, name, email, password FROM customer WHERE email = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if ($stmt) {
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        // Verify the hashed password
-        if (password_verify($password, $row['password'])) {
-            // Password is correct, so start a new session
-            $_SESSION['loggedin'] = true;
-            $_SESSION['customer_id'] = $row['customer_id'];
-            $_SESSION['name'] = $row['name'];
-            
-            // Redirect to the home page
-            header("Location: index.php"); 
-            exit;
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            // Verify the hashed password
+            if (password_verify($password, $row['password'])) {
+                // Password is correct, so start a new session
+                $_SESSION['loggedin'] = true;
+                $_SESSION['customer_id'] = $row['customer_id'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['email'] = $row['email']; // <-- store email so other pages can use it
+
+                // Redirect to the home page
+                header("Location: index.php"); 
+                exit;
+            } else {
+                // Password is not valid, set an error message
+                $message = "Invalid password.";
+            }
         } else {
-            // Password is not valid, set an error message
-            $message = "Invalid password.";
+            // Email not found, set an error message
+            $message = "No account found with that email.";
         }
+        $stmt->close();
     } else {
-        // Email not found, set an error message
-        $message = "No account found with that email.";
+        $message = "Failed to prepare login statement.";
     }
-    $stmt->close();
 }
 
 // Check if a connection exists before trying to close it
