@@ -2,10 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Archivo+Black&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap');
 
-
-/* google fonts */  
-
-/* Base Styles */  
+/* Base Styles */  
 * {
     margin: 0;
     padding: 0;
@@ -63,7 +60,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Prevent wrapping on one line */
+    flex-wrap: nowrap;
 }
 
 .logo-and-title {
@@ -74,7 +71,7 @@ header .container {
 
 header h1 {
     font-family: 'crete round', sans-serif;
-    white-space: nowrap; /* Prevent title from wrapping */
+    white-space: nowrap;
 }
 
 .logo-circle {
@@ -95,7 +92,7 @@ header h1 {
 nav ul {
     display: flex;
     align-items: center;
-    flex-wrap: nowrap; /* Prevent navigation items from wrapping */
+    flex-wrap: nowrap;
 }
 
 nav ul li {
@@ -148,7 +145,7 @@ nav ul li .btn:hover {
     nav ul {
         flex-direction: row;
         justify-content: center;
-        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        flex-wrap: wrap;
         gap: 10px;
     }
 
@@ -415,13 +412,13 @@ footer::after {
     color: white;
     line-height: 1.8;
     text-shadow: -1px -1px 0 black,
-                 0   -1px 0 black,
+                 0   -1px 0 black,
                  1px -1px 0 black,
-                 1px  0   0 black,
-                 1px  1px 0 black,
-                 0    1px 0 black,
-                 -1px  1px 0 black,
-                 -1px  0   0 black;
+                 1px  0   0 black,
+                 1px  1px 0 black,
+                 0    1px 0 black,
+                 -1px  1px 0 black,
+                 -1px  0   0 black;
 }
 
 /* Timeline Styles */
@@ -493,26 +490,26 @@ footer::after {
     margin-bottom: 15px;
     text-shadow: 
                  -1px -1px 0 white,
-                  0   -1px 0 white,
+                  0   -1px 0 white,
                   1px -1px 0 white,
-                  1px  0   0 white,
-                  1px  1px 0 white,
-                  0    1px 0 white,
-                 -1px  1px 0 white,
-                 -1px  0   0 white; 
+                  1px  0   0 white,
+                  1px  1px 0 white,
+                  0    1px 0 white,
+                 -1px  1px 0 white,
+                 -1px  0   0 white; 
     font-family: 'crete round', sans-serif;
 }
 
 .timeline-text {
     color: white;
     text-shadow: -1px -1px 0 black,
-                 0   -1px 0 black,
+                 0   -1px 0 black,
                  1px -1px 0 black,
-                 1px  0   0 black,
-                 1px  1px 0 black,
-                 0    1px 0 black,
-                 -1px  1px 0 black,
-                 -1px  0   0 black;
+                 1px  0   0 black,
+                 1px  1px 0 black,
+                 0    1px 0 black,
+                 -1px  1px 0 black,
+                 -1px  0   0 black;
     line-height: 1.7;
     font-size: 1.1rem;
     font-family: 'crete round', sans-serif;
@@ -963,21 +960,6 @@ footer::after {
 }
 
 /* Animations */
-@keyframes fadeIn {
-    from { opacity: 0.3; }
-    to { opacity: 0.6; }
-}
-
-@keyframes slideIn {
-    from { transform: translateY(-100px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes fadeInUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
 @keyframes flyToCart {
     from {
         transform: translate(0, 0) scale(1);
@@ -986,252 +968,6 @@ footer::after {
     to {
         transform: translate(-200px, -150px) scale(0.1);
         opacity: 0;
-    }
-}
-
-/* Hero Section */
-.all-contact {
-    background: url('image/getittouch2.jpg') no-repeat center center;
-    background-size: cover;
-    height: 300px;
-    position: relative;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-}
-
-.all-contact h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    animation: fadeIn 1s ease-in;
-    font-family: 'pacifico', sans-serif;
-}
-
-.all-contact p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    font-family: 'crete round', sans-serif;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Contact Section */
-.contact {
-    padding: 60px 0;
-    background-color: #f5E6CA;
-}
-
-.contact h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #2c3e50;
-    margin-bottom: 40px;
-    text-transform: uppercase;
-    font-family: 'crete round', sans-serif;
-}
-
-.contact-info {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-bottom: 50px;
-}
-
-.contact-card {
-    background: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 250px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.contact-card i {
-    font-size: 2rem;
-    color: #e67e22;
-    margin-bottom: 15px;
-}
-
-.contact-card h3 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-    margin-bottom: 10px;
-    font-family: 'crete round', sans-serif;
-}
-
-.contact-info p {
-    font-family: 'Crete Round', sans-serif;
-    color: #2c3e50;
-}
-
-.contact-card a {
-    color: #e67e22;
-    margin-bottom: 15px;
-}
-
-.contact-card p a:hover {
-    text-decoration: underline;
-}
-
-.contact-form {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 30px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: slideUp 1s ease-out;
-    font-family: 'crete round', sans-serif;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.contact-form h3 {
-    text-align: center;
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-    font-family: 'crete round', sans-serif;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 5px;
-    font-family: 'crete round', sans-serif;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #e67e22;
-    outline: none;
-}
-
-.form-group textarea {
-    height: 150px;
-    resize: vertical;
-}
-
-.error {
-    color: #ff4444;
-    font-size: 0.9rem;
-    display: block;
-    margin-top: 5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.error.active {
-    opacity: 1;
-}
-
-.contact-form .btn {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1rem;
-    background: #e67e22;
-    border: none;
-    cursor: pointer;
-}
-
-.contact-form .btn:hover {
-    background: #d0681c;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .header-brand {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    nav ul {
-        justify-content: center;
-        margin-top: 10px;
-    }
-
-    .all-contact {
-        height: 200px;
-    }
-
-    .all-contact h2 {
-        font-size: 2rem;
-    }
-
-    .all-contact p {
-        font-size: 1rem;
-    }
-
-    .contact-info {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .contact-card {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    .contact-form {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .all-contact h2 {
-        font-size: 1.5rem;
-    }
-
-    .contact h2 {
-        font-size: 2rem;
-    }
-
-    .contact-card {
-        padding: 15px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.9rem;
     }
 }
 
@@ -1298,11 +1034,6 @@ footer::after {
 
 #custom-minimum-modal button:hover {
     background-color: #e64a19;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 /* Custom Modal Styles for Registration */
@@ -1378,7 +1109,6 @@ footer::after {
 }
 
 /* Register successful/fail box specific styles */
-
 .message-box {
     padding: 15px;
     margin-bottom: 20px;
@@ -1389,9 +1119,9 @@ footer::after {
 }
 
 .message-box.success {
-    background-color: #2ecc71; /* Green */
+    background-color: #2ecc71;
 }
 
 .message-box.error {
-    background-color: #e74c3c; /* Red */
+    background-color: #e74c3c;
 }

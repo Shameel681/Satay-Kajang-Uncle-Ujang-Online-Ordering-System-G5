@@ -1,5 +1,7 @@
 <?php
-// Start the session
+
+//session start\
+
 session_start();
 
 // Database connection details
