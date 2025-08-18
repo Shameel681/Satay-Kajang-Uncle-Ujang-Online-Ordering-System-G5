@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2025 at 09:34 PM
+-- Generation Time: Aug 18, 2025 at 05:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,18 +32,19 @@ CREATE TABLE `customer` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `phone_no` varchar(20) DEFAULT NULL
+  `phone_no` varchar(20) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`) VALUES
-(1, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'Shameel681@gmail.com', '$2y$10$uz7mOBzrPvktzY31lmnA/eQgO/XXCwyUXRUR2xrWr5/E6T3dDhumu', '011-10084626'),
-(2, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', '$2y$10$or5N59syXjotYSgypPhg/.Shz0Iw1Bm9ERcmS8W/5BBig0xDsTQhi', '011-62226128'),
-(3, 'ANAS IZZUDDIN BIN MUAMAR ', 'anas3939@gmail.com', '$2y$10$4Dvud/q9cYjln6Ow0Lk7K.xlCJ9DImmL0kuNhUB3RMQMR/Q4DOd62', '011-101010101'),
-(4, 'suhaimi sham', 'suhaimi@gmail.com', '$2y$10$79IvAgCfEHpranqu8d7ib.urSWsjGZaY8uEWdZ08iXpskqxtOzTey', '01119181717');
+INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`, `address`) VALUES
+(1, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'Shameel681@gmail.com', '$2y$10$uz7mOBzrPvktzY31lmnA/eQgO/XXCwyUXRUR2xrWr5/E6T3dDhumu', '011-10084626', NULL),
+(2, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', '$2y$10$or5N59syXjotYSgypPhg/.Shz0Iw1Bm9ERcmS8W/5BBig0xDsTQhi', '011-62226128', NULL),
+(3, 'ANAS IZZUDDIN BIN MUAMAR ', 'anas3939@gmail.com', '$2y$10$4Dvud/q9cYjln6Ow0Lk7K.xlCJ9DImmL0kuNhUB3RMQMR/Q4DOd62', '011-101010101', NULL),
+(4, 'suhaimi sham', 'suhaimi@gmail.com', '$2y$10$79IvAgCfEHpranqu8d7ib.urSWsjGZaY8uEWdZ08iXpskqxtOzTey', '01119181717', NULL);
 
 -- --------------------------------------------------------
 
