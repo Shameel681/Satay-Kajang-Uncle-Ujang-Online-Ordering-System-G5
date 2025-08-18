@@ -84,6 +84,7 @@ if (isset($conn)) {
                     <li><a href="about.php">About</a></li>
                     <li><a href="menu.php">Menu</a></li>
                     <li><a href="contact.php">Contact</a></li>
+                    <li><a href="profCust.php">Profile</a></li>
                     
                     <?php if ($is_loggedin): ?>
                     <li>
