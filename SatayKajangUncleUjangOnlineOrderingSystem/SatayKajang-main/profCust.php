@@ -55,39 +55,7 @@ $stmt->close();
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   />
-  <style>
-    /* Toast style - smooth drop-in and fade-out */
-    #toast {
-    position: fixed;
-    top: 20px;
-    left: 50%; /* ✅ horizontally center */
-    transform: translate(-50%, -30px); /* ✅ move back left by 50% */
-    background-color: #dff0d8;
-    color: #3c763d;
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    font-family: 'Crete Round', sans-serif;
-    font-weight: 600;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    z-index: 9999;
-    font-size: 16px;
-    visibility: hidden;
-  }
-
-  #toast.show {
-    opacity: 1;
-    transform: translate(-50%, 0); /* ✅ slide down while staying centered */
-    visibility: visible;
-  }
-
-  #toast.hide {
-    opacity: 0;
-    transform: translate(-50%, -30px); /* ✅ slide back up */
-  }
-
-  </style>
+  
 </head>
 <body>
 <header>
