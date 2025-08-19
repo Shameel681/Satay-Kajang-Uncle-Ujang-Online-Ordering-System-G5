@@ -180,7 +180,7 @@ $stmt->close();
         </form>
 
         <div class="profile-actions" style="margin-top: 25px;">
-          <button class="btn" id="editProfileBtn"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+          <button class="btn" id="editProfileBtn"></i> Edit Profile</button>
         </div>
       </div>
     </div>
