@@ -41,6 +41,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $customer = $result->fetch_assoc();
 $stmt->close();
+$background = "image/SatayImage.png";
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +58,7 @@ $stmt->close();
   />
   
 </head>
-<body>
+<body style="background-image: url('<?php echo $background; ?>'); background-size: cover; background-repeat: no-repeat; background-position: center;">
 <header>
   <div class="container">
     <div class="logo-and-title">
