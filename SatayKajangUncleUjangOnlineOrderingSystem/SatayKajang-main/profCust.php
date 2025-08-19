@@ -62,12 +62,14 @@ $stmt->close();
     top: 20px;
     left: 50%; /* ✅ horizontally center */
     transform: translate(-50%, -30px); /* ✅ move back left by 50% */
-    background-color: #4CAF50;
-    color: white;
+    background-color: #dff0d8;
+    color: #3c763d;
     padding: 15px 25px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     opacity: 0;
+    font-family: 'Crete Round', sans-serif;
+    font-weight: 600;
     transition: opacity 0.6s ease, transform 0.6s ease;
     z-index: 9999;
     font-size: 16px;
