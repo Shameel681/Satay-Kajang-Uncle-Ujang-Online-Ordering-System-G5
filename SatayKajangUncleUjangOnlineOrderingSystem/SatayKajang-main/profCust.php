@@ -94,9 +94,9 @@ $stmt->close();
         <?php endif; ?>
 
         <div class="profile-details" id="profileDetails">
-          <p><strong>Email:</strong> <?php echo htmlspecialchars($customer['email']); ?></p>
-          <p><strong>Phone:</strong> <?php echo htmlspecialchars($customer['phone_no']); ?></p>
-          <p><strong>Address:</strong> <?php echo nl2br(htmlspecialchars($customer['address'])); ?></p>
+          <p><strong>Email:</strong><br> <?php echo htmlspecialchars($customer['email']); ?></p>
+          <p><strong>Phone:</strong><br> <?php echo htmlspecialchars($customer['phone_no']); ?></p>
+          <p><strong>Address:</strong><br> <?php echo nl2br(htmlspecialchars($customer['address'])); ?></p>
         </div>
 
         <form

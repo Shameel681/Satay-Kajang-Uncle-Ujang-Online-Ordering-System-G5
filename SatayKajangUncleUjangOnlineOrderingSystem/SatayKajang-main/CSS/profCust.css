@@ -118,3 +118,9 @@ outline: none;
 height: 120px;
 resize: vertical;
 }
+
+.profile-details {
+margin-bottom: 50px;
+margin-inline: 20px;
+margin-top: 20px;
+}
