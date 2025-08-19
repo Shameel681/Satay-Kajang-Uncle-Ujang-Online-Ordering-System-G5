@@ -85,3 +85,36 @@ body {
     opacity: 0;
     transform: translate(-50%, -30px); /* ✅ slide back up */
   }
+
+  
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+font-weight: 600;
+color: #2c3e50;
+margin-bottom: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 12px;
+border: 2px solid #ddd;
+border-radius: 5px;
+font-size: 1rem;
+transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+border-color: #e67e22;
+outline: none;
+}
+
+.form-group textarea {
+height: 120px;
+resize: vertical;
+}

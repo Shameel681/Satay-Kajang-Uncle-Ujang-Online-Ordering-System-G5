@@ -105,41 +105,45 @@ $stmt->close();
           method="POST"
           style="display: none; text-align: left; margin-top: 20px;"
         >
-          <label for="name">Name:</label><br />
+          <div class="form-group">
+          <label for="name">Name:</label>
           <input
             type="text"
             id="name"
             name="name"
             value="<?php echo htmlspecialchars($customer['name']); ?>"
             required
-          /><br /><br />
-
-          <label for="email">Email:</label><br />
+          /></div><br />
+          
+          <div class="form-group">
+          <label for="email">Email:</label>
           <input
             type="email"
             id="email"
             name="email"
             value="<?php echo htmlspecialchars($customer['email']); ?>"
             required
-          /><br /><br />
-
-          <label for="phone_no">Phone Number:</label><br />
+          /></div><br />
+          
+          <div class="form-group">
+          <label for="phone_no">Phone Number:</label>
           <input
             type="text"
             id="phone_no"
             name="phone_no"
             value="<?php echo htmlspecialchars($customer['phone_no']); ?>"
             required
-          /><br /><br />
-
-          <label for="address">Address:</label><br />
+          /></div><br />
+          
+          <div class="form-group">
+          <label for="address">Address:</label>
           <textarea
             id="address"
             name="address"
             rows="3"
             required
           ><?php echo htmlspecialchars($customer['address']); ?></textarea
-          ><br /><br />
+          ></div><br/>
 
           <button type="submit" class="btn">Save</button>
           <button type="button" class="btn" id="cancelEditBtn" style="background:#999; margin-left:10px;">
