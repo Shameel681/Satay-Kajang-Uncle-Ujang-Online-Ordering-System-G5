@@ -56,30 +56,35 @@ $stmt->close();
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   />
   <style>
-    /* Toast style */
+    /* Toast style - smooth drop-in and fade-out */
     #toast {
-      visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      border-radius: 5px;
-      padding: 16px;
-      position: fixed;
-      z-index: 9999;
-      left: 50%;
-      top: 30px;
-      font-size: 17px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: visibility 0s, opacity 0.5s ease-in-out;
-      opacity: 0;
-    }
+    position: fixed;
+    top: 20px;
+    left: 50%; /* ✅ horizontally center */
+    transform: translate(-50%, -30px); /* ✅ move back left by 50% */
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 9999;
+    font-size: 16px;
+    visibility: hidden;
+  }
 
-    #toast.show {
-      visibility: visible;
-      opacity: 1;
-    }
+  #toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0); /* ✅ slide down while staying centered */
+    visibility: visible;
+  }
+
+  #toast.hide {
+    opacity: 0;
+    transform: translate(-50%, -30px); /* ✅ slide back up */
+  }
+
   </style>
 </head>
 <body>
@@ -201,13 +206,26 @@ $stmt->close();
 
 <script src="script/profCust.js"></script>
 <script>
-  // Show toast if it has content
   const toast = document.getElementById('toast');
-  if (toast.textContent.trim() !== "") {
+
+  function showToast() {
     toast.classList.add('show');
+
     setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3500);
+      toast.classList.add('hide');
+    }, 3000);
+
+    toast.addEventListener('transitionend', () => {
+      if (toast.classList.contains('hide')) {
+        toast.classList.remove('show', 'hide');
+        toast.style.visibility = 'hidden';
+      }
+    });
+  }
+
+  // Show toast if it has a message
+  if (toast.textContent.trim() !== "") {
+    showToast();
   }
 </script>
 </body>
