@@ -74,13 +74,13 @@ if ($is_loggedin) {
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About</a></li>
-                    <li><a href="contact.php" class="active">Contact</a></li>
+                    <li><a href="about.php">About Us</a></li>
+                    <li><a href="contact.php" class="active">Contact Us</a></li>
                     <?php if ($is_loggedin): ?>
                         <li><a href="profCust.php">Profile</a></li>
                         <li><a href="logout.php" class="btn">Logout</a></li>
                     <?php else: ?>
-                        <li><a href="register.php" class="btn">Register</a></li>
+                        <li><a href="register.php" class="btn">Register as Customer</a></li>
                         <li><a href="login.php" class="btn">Login</a></li>
                     <?php endif; ?>
                 </ul>

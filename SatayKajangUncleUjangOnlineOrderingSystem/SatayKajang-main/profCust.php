@@ -71,8 +71,8 @@ $background = "image/SatayImage.png";
       <ul>
         <li><a href="index.php">Home</a></li>
         <li><a href="menu.php">Menu</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="contact.php">Contact</a></li>
+        <li><a href="about.php">About Us</a></li>
+        <li><a href="contact.php">Contact Us</a></li>
         <li><a href="profCust.php" class="active">Profile</a></li>
         <li><a href="logout.php" class="btn">Logout</a></li>
       </ul>

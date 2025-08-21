@@ -82,8 +82,8 @@ if (isset($conn)) {
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About</a></li>
-                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="about.php">About Us</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
                     
                     <?php if ($is_loggedin): ?>
                         <li><a href="profCust.php">Profile</a></li>
@@ -92,7 +92,7 @@ if (isset($conn)) {
                     </li>
                     <?php else: ?>
                     <li>
-                        <a href="register.php" class="btn">Register</a>
+                        <a href="register.php" class="btn">Register as Customer</a>
                     </li>
                     <li>
                         <a href="login.php" class="btn active">Login</a>
