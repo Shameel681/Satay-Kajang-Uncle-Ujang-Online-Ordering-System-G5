@@ -30,6 +30,8 @@ if ($is_loggedin) {
         $customer_email = htmlspecialchars($customer_data['email']);
     }
 }
+// Get the current page name
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,46 +40,50 @@ if ($is_loggedin) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satay Kajang Uncle Ujang - Contact Us</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/header.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="css/contact.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        .alert {
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 700px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .alert.success {
-            background-color: #dff0d8;
-            color: #3c763d;
-            border: 1px solid #d6e9c6;
-        }
-        .alert.error {
-            background-color: #f2dede;
-            color: #a94442;
-            border: 1px solid #ebccd1;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <div class="container">
+      <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satay Kajang Uncle Ujang - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/header.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+      <header class="header1">
             <div class="logo-and-title">
                 <div class="logo-circle">
                     <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
                 </div>
                 <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
+    </header>
+
+    <header class="header2">
+            
             <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="contact.php" class="active">Contact Us</a></li>
+                <ul class="nav-links">
+                    <li><a href="index.php" <?php if ($current_page == 'index.php') echo 'class="active"'; ?>>Home</a></li>
+                    <li><a href="menu.php" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
+                    <li><a href="about.php" <?php if ($current_page == 'about.php') echo 'class="active"'; ?>>About Us</a></li>
+                    <li><a href="contact.php" <?php if ($current_page == 'contact.php') echo 'class="active"'; ?>>Contact Us</a></li>
                     <?php if ($is_loggedin): ?>
-                        <li><a href="profCust.php">Profile</a></li>
+                        <li><a href="profCust.php" <?php if ($current_page == 'profCust.php') echo 'class="active"'; ?>>Profile</a></li>
+                    <?php endif; ?>
+                </ul>
+                <ul class="auth-links">
+                    <?php if ($is_loggedin): ?>
                         <li><a href="logout.php" class="btn">Logout</a></li>
                     <?php else: ?>
                         <li><a href="register.php" class="btn">Register as Customer</a></li>
@@ -85,12 +91,12 @@ if ($is_loggedin) {
                     <?php endif; ?>
                 </ul>
             </nav>
-        </div>
     </header>
+
+    
 
     <?php if (isset($_SESSION['feedback_success']) || isset($_SESSION['feedback_errors'])): ?>
         <div id="feedbackToast" class="toast <?php echo isset($_SESSION['feedback_success']) ? 'success' : 'error'; ?>">
-            <span>
             <?php
                 if (isset($_SESSION['feedback_success'])) {
                     echo htmlspecialchars($_SESSION['feedback_success']);
@@ -102,8 +108,6 @@ if ($is_loggedin) {
                     unset($_SESSION['feedback_errors']);
                 }
             ?>
-            </span>
-            <button class="toast-close" aria-label="Close">&times;</button>
         </div>
     <?php endif; ?>
 
@@ -185,6 +189,7 @@ if ($is_loggedin) {
         </div>
     </footer>
 
+    <script src="script/dashboard.js"></script>
     <script src="script/feedback.js"></script>
 </body>
 </html>

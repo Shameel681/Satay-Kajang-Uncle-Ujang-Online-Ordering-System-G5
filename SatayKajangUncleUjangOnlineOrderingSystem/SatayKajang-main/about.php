@@ -1,11 +1,13 @@
 <?php
-
-// Include the database connection file
+// Include the database connection file which starts the session
 require_once 'connect.php'; 
 
 // Check if the user is logged in
 $is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
+
+// Get the current page name
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -13,47 +15,49 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satay Kajang Uncle Ujang - About Us</title>
+    <title>Satay Kajang Uncle Ujang - Login</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/header.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <div class="container">
+      <header class="header1">
             <div class="logo-and-title">
                 <div class="logo-circle">
                     <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
                 </div>
                 <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
+    </header>
+
+    <header class="header2">
+        
             <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php" class="active">About Us</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    
+                <ul class="nav-links">
+                    <li><a href="index.php" <?php if ($current_page == 'index.php') echo 'class="active"'; ?>>Home</a></li>
+                    <li><a href="menu.php" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
+                    <li><a href="about.php" <?php if ($current_page == 'about.php') echo 'class="active"'; ?>>About Us</a></li>
+                    <li><a href="contact.php" <?php if ($current_page == 'contact.php') echo 'class="active"'; ?>>Contact Us</a></li>
                     <?php if ($is_loggedin): ?>
-                        <li><a href="profCust.php">Profile</a></li>
-                    <li>
-                        <a href="logout.php" class="btn">Logout</a>
-                    </li>
+                        <li><a href="profCust.php" <?php if ($current_page == 'profCust.php') echo 'class="active"'; ?>>Profile</a></li>
+                    <?php endif; ?>
+                </ul>
+                <ul class="auth-links">
+                    <?php if ($is_loggedin): ?>
+                        <li><a href="logout.php" class="btn">Logout</a></li>
                     <?php else: ?>
-                    <li>
-                        <a href="register.php" class="btn">Register as Customer</a>
-                    </li>
-                    <li>
-                        <a href="login.php" class="btn">Login</a>
-                    </li>
+                        <li><a href="register.php" class="btn">Register as Customer</a></li>
+                        <li><a href="login.php" class="btn">Login</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
-        </div>
     </header>
 
+   
     <main>
         <section class="about">
             <div class="about-content">
@@ -153,6 +157,6 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
             </div>
         </div>
     </footer>
-    <script src="scripts.js"></script>
+    <script src="script/dashboard.js"></script>
 </body>
 </html>

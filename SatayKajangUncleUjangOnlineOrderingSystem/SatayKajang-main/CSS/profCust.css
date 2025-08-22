@@ -1,4 +1,4 @@
-.body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-size: cover;
@@ -58,11 +58,11 @@
     background: #e56e1f;
 }
 
- #toast {
+#toast {
     position: fixed;
     top: 20px;
-    left: 50%; /* ✅ horizontally center */
-    transform: translate(-50%, -30px); /* ✅ move back left by 50% */
+    left: 50%;
+    transform: translate(-50%, -30px);
     background-color: #dff0d8;
     color: #3c763d;
     padding: 15px 25px;
@@ -75,54 +75,53 @@
     z-index: 9999;
     font-size: 16px;
     visibility: hidden;
-  }
+}
 
-  #toast.show {
+#toast.show {
     opacity: 1;
-    transform: translate(-50%, 0); /* ✅ slide down while staying centered */
+    transform: translate(-50%, 0);
     visibility: visible;
-  }
+}
 
-  #toast.hide {
+#toast.hide {
     opacity: 0;
-    transform: translate(-50%, -30px); /* ✅ slide back up */
-  }
+    transform: translate(-50%, -30px);
+}
 
-  
-.form-group { 
-margin-bottom: 20px;
+.form-group {
+    margin-bottom: 20px;
 }
 
 .form-group label {
-display: block;
-font-weight: 600;
-color: #2c3e50;
-margin-bottom: 0.5px;
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5px;
 }
 
 .form-group input,
 .form-group textarea {
-width: 100%;
-padding: 12px;
-border: 2px solid #ddd;
-border-radius: 5px;
-font-size: 1rem;
-transition: border-color 0.3s ease;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-border-color: #e67e22;
-outline: none;
+    border-color: #e67e22;
+    outline: none;
 }
 
 .form-group textarea {
-height: 120px;
-resize: vertical;
+    height: 120px;
+    resize: vertical;
 }
 
 .profile-details {
-margin-bottom: 50px;
-margin-inline: 20px;
-margin-top: 20px;
+    margin-bottom: 50px;
+    margin-inline: 20px;
+    margin-top: 20px;
 }

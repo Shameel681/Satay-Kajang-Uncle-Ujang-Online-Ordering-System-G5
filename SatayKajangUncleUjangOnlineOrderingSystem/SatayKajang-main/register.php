@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Get the ID of the newly registered user
                 $customer_id = $insert_stmt->insert_id;
 
-                // **NEW FEATURE: Automatically log in the user after successful registration**
+                // Automatically log in the user after successful registration
                 $_SESSION['loggedin'] = true;
                 $_SESSION['customer_id'] = $customer_id;
                 $_SESSION['name'] = $name;
@@ -64,6 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close the database connection at the end of the script
     $conn->close();
 }
+// Get the current page name
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -73,43 +75,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satay Kajang Uncle Ujang - Register</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/header.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="CSS/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <div class="container">
+      <header class="header1">
             <div class="logo-and-title">
                 <div class="logo-circle">
                     <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
                 </div>
                 <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
+    </header>
+
+    <header class="header2">
+           
             <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    
+                <ul class="nav-links">
+                    <li><a href="index.php" <?php if ($current_page == 'index.php') echo 'class="active"'; ?>>Home</a></li>
+                    <li><a href="menu.php" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
+                    <li><a href="about.php" <?php if ($current_page == 'about.php') echo 'class="active"'; ?>>About Us</a></li>
+                    <li><a href="contact.php" <?php if ($current_page == 'contact.php') echo 'class="active"'; ?>>Contact Us</a></li>
                     <?php if ($is_loggedin): ?>
-                        <li><a href="profCust.php">Profile</a></li>
-                    <li>
-                        <a href="logout.php" class="btn">Logout</a>
-                    </li>
+                        <li><a href="profCust.php" <?php if ($current_page == 'profCust.php') echo 'class="active"'; ?>>Profile</a></li>
+                    <?php endif; ?>
+                </ul>
+                <ul class="auth-links">
+                    <?php if ($is_loggedin): ?>
+                        <li><a href="logout.php" class="btn">Logout</a></li>
                     <?php else: ?>
-                    <li>
-                        <a href="register.php" class="btn active">Register as Customer</a>
-                    </li>
-                    <li>
-                        <a href="login.php" class="btn">Login</a>
-                    </li>
+                        <li><a href="register.php" class="btn" <?php if ($current_page == 'register.php') echo 'class="active"'; ?>>Register as Customer</a></li>
+                        <li><a href="login.php" class="btn" <?php if ($current_page == 'login.php') echo 'class="active"'; ?>>Login</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
-        </div>
     </header>
+
+    
 
     <main>
         <section class="registration-form">
@@ -119,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <?php if (!empty($message)): ?>
                 <div class="message-box <?php echo $message_type; ?>">
-                    <?php echo $message; ?>
+                    <?php echo htmlspecialchars($message); ?>
                 </div>
                 <?php endif; ?>
 
@@ -156,5 +162,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </footer>
+    <script src="script/dashboard.js"></script>
 </body>
 </html>
