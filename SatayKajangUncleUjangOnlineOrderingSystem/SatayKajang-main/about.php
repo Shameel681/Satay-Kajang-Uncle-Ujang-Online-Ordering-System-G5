@@ -153,7 +153,6 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
             </div>
         </div>
     </footer>
-
     <script src="scripts.js"></script>
 </body>
 </html>

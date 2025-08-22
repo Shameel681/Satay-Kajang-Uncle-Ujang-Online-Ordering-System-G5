@@ -180,6 +180,7 @@ $background = "image/SatayImage.png";
 </footer>
 
 <script src="script/profCust.js"></script>
+
 <script>
   const toast = document.getElementById('toast');
 
@@ -202,6 +203,7 @@ $background = "image/SatayImage.png";
   if (toast.textContent.trim() !== "") {
     showToast();
   }
+
 </script>
 </body>
 </html>
