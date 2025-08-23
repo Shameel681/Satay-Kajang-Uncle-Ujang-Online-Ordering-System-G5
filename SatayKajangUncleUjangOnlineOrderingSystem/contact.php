@@ -37,29 +37,11 @@ if ($is_loggedin) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satay Kajang Uncle Ujang - Contact Us</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/contact.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/base.css">
+    <link rel="stylesheet" href="CSS/header.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/contact.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        .alert {
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 700px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .alert.success {
-            background-color: #dff0d8;
-            color: #3c763d;
-            border: 1px solid #d6e9c6;
-        }
-        .alert.error {
-            background-color: #f2dede;
-            color: #a94442;
-            border: 1px solid #ebccd1;
-        }
-    </style>
 </head>
 <body>
     <header>

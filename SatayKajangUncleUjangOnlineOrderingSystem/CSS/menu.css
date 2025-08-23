@@ -1,0 +1,421 @@
+/* Menu Page */
+.menu {
+    padding: 60px 0;
+    background: #f5E6CA;
+    font-family: 'crete round', sans-serif;
+}
+
+.menu h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+    font-family: 'pacifico', sans-serif;
+}
+
+.menu-category {
+    margin-bottom: 50px;
+}
+
+.menu-category h3 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #e67e22;
+}
+
+.menu-category ul li {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-category ul li:last-child {
+    border-bottom: none;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.menu-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.menu-details {
+    flex: 1;
+}
+
+.price {
+    float: right;
+    font-weight: bold;
+    color: #e67e22;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+#modal-description {
+    font-size: 1rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+#modal-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #e67e22;
+    margin-bottom: 15px;
+}
+
+.quantity-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.quantity-selector button {
+    width: 40px;
+    height: 40px;
+    background-color: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.quantity-selector button:hover {
+    background-color: #d0681c;
+}
+
+.quantity-selector button:active {
+    transform: scale(0.95);
+}
+
+.quantity-selector input {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'crete round', sans-serif;
+}
+
+.quantity-selector input:focus {
+    border-color: #e67e22;
+    outline: none;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    background-color: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #d0681c;
+}
+
+/* Cart Section */
+.cart-section {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cart-icon {
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.cart-count {
+    background-color: #e67e22;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+/* Cart Modal Styles */
+.cart-modal-content {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+.cart-modal-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.cart-modal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.cart-modal-content li span {
+    flex: 1;
+    font-size: 1.1rem;
+}
+
+.cart-modal-content li button {
+    padding: 5px 10px;
+    background-color: #ff4444;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cart-modal-content li button:hover {
+    background-color: #cc0000;
+}
+
+.cart-modal-content p {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.cart-modal-content button {
+    padding: 8px 15px;
+    background-color: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cart-modal-content button:hover {
+    background-color: #d0681c;
+}
+
+/* Animations */
+@keyframes flyToCart {
+    from {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-200px, -150px) scale(0.1);
+        opacity: 0;
+    }
+}
+
+#custom-minimum-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+#custom-minimum-modal .modal-content {
+    background: url('image/satay-background.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    max-width: 500px;
+}
+
+#custom-minimum-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    opacity: 0.8;
+    z-index: -1;
+}
+
+#custom-minimum-modal h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    animation: fadeIn 1s;
+}
+
+#custom-minimum-modal p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s;
+}
+
+#custom-minimum-modal button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#custom-minimum-modal button:hover {
+    background-color: #e64a19;
+}
+
+/* Custom Modal Styles for Registration */
+.custom-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    font-family: 'crete round', sans-serif;
+}
+
+.custom-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: modalPopIn 0.3s ease-out forwards;
+}
+
+.custom-modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #e67e22;
+}
+
+.custom-modal-content h2.error-title {
+    color: #ff4444;
+}
+
+.custom-modal-content h2.success-title {
+    color: #2ecc71;
+}
+
+.custom-modal-content p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.custom-modal-content button {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.custom-modal-content button:hover {
+    background-color: #d35400;
+}
+
+@keyframes modalPopIn {
+    from {
+        transform: scale(0.7) translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
