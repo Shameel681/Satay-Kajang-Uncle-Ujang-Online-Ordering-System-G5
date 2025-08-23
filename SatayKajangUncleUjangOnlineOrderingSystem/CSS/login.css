@@ -267,6 +267,23 @@ footer::after {
     text-decoration: underline;
 }
 
+/* Forgot Password Link */
+.forgot-link {
+    margin-top: -10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.forgot-link a {
+    color: #f07b3f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.forgot-link a:hover {
+    text-decoration: underline;
+}
+
 /* Message Box for Errors/Success */
 .message-box {
     padding: 15px;
@@ -281,13 +298,3 @@ footer::after {
     color: #cc0000;
     border: 1px solid #cc0000;
 }
-
-
-
-
-
-
-
-
-
-
