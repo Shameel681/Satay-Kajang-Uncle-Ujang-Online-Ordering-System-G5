@@ -133,6 +133,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </div>
                     <button type="submit" class="btn">Login</button>
                     <p class="register-link">Don't have an account? <a href="register.php">Register here</a></p>
+                    <p class="forgot-link"><a href="forgot_cus.php">Forgot Password?</a></p>
                 </form>
             </div>
         </section>

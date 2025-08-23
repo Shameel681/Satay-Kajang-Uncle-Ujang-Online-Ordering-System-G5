@@ -282,8 +282,19 @@ footer::after {
     border: 1px solid #cc0000;
 }
 
+/*forgot password*/
 
-
+.forgot-link {
+    text-align: center;
+    margin-top: 10px;
+}
+.forgot-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+.forgot-link a:hover {
+    text-decoration: underline;
+}
 
 
 
