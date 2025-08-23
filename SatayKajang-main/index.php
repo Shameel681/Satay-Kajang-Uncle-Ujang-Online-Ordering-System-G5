@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satay Kajang Uncle Ujang - Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -16,13 +18,13 @@
         <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
         </div>
         <div class="container">
-            <h1><a href="index.html">Satay Kajang Uncle Ujang</a></h1>
+            <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             <nav>
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.php" class="active">Home</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="menu.php">Menu</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,7 +36,7 @@
         <h1>Belum Try Belum Tahu,<br>
              Sudah Try Ingat Selalu...</h1>
         <p class="tagline">Ramuan Rempah Ratus Turun Temurun</p>
-        <a href="menu.html" class="btn">View Our Menu</a>
+        <a href="menu.php" class="btn">View Our Menu</a>
     </div>
 </section>
 

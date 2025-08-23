@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Family Satay - Our Menu</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -14,13 +16,13 @@
                 <img src="image/LogoSataysebenar.jpg" alt="Satay Kajang Logo">
             </div>
             <div class="container">
-                <h1><a href="index.html">Satay Kajang Uncle Ujang</a></h1>
+                <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
                 <nav>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="menu.html" class="active">Menu</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="about.php">About</a></li>
+                        <li><a href="menu.php" class="active">Menu</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="cart-section">
