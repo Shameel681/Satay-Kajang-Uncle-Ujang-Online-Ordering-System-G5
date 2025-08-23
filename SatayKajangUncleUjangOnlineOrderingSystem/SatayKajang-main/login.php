@@ -2,7 +2,8 @@
 // Include the database connection file which starts the session
 require_once 'connect.php'; 
 
-// Initialize variables for messages and login status
+
+// Initialize varibles for messages and login status
 $message = '';
 $is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 

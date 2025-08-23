@@ -5,48 +5,36 @@ require_once 'connect.php';
 // Define the $is_loggedin variable based on the session
 $is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 
-// Check if the user is logged in
-if (!$is_loggedin) {
-    // If not logged in, redirect to login page
+// Check if the user is logged in and email is set
+if (!$is_loggedin || !isset($_SESSION['email'])) {
     header("Location: login.php");
     exit;
 }
 
-// Assume the user's email is stored in the session upon login
+// Get the user's email from the session
 $customer_email = $_SESSION['email'];
 
-// SQL query to fetch the user's data from the customer table with the correct column names
+// SQL query to fetch the user's data from the customer table
 $sql = "SELECT name, email, phone_no, address FROM customer WHERE email = ?";
 
 // Use a prepared statement to prevent SQL injection
 if ($stmt = $conn->prepare($sql)) {
-    // Bind the customer's email to the parameter
     $stmt->bind_param("s", $customer_email);
-    
-    // Execute the query
     $stmt->execute();
-    
-    // Get the result
     $result = $stmt->get_result();
     
-    // Check if a user was found
     if ($result->num_rows > 0) {
-        // Fetch the user data
         $user_data = $result->fetch_assoc();
         $customer_name = htmlspecialchars($user_data['name']);
-        $customer_phone = htmlspecialchars($user_data['phone_no']); // Use the correct column name
+        $customer_phone = htmlspecialchars($user_data['phone_no']);
         $customer_address = htmlspecialchars($user_data['address']);
     } else {
-        // This case should not happen if login is successful, but it's good practice to handle it
-        $customer_name = "Not found";
-        $customer_phone = "Not found";
-        $customer_address = "Not found";
+        header("Location: login.php?error=user_not_found");
+        exit;
     }
     
-    // Close the statement
     $stmt->close();
 } else {
-    // Handle prepare error
     die("Error preparing statement: " . $conn->error);
 }
 
@@ -56,6 +44,8 @@ $conn->close();
 // Get the current page name for active link styling
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
