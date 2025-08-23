@@ -55,3 +55,61 @@ body {
 .btn:hover {
     background: #e56e1f;
 }
+
+/* Styling for form inputs */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    margin-bottom: 15px;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff7f27;
+    background-color: #fff;
+}
+
+/* Styles for the readonly state */
+.form-group input[readonly],
+.form-group textarea[readonly] {
+    background-color: #f0f0f0;
+    cursor: default;
+    border-color: #eee;
+}
+
+/* Message Box Styling */
+.message-box {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.message-box.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.message-box.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
