@@ -1,130 +1,146 @@
-/* First Header Styles (Logo and Title) */
-.header1 {
-    background: #2c3e50;
-    color: white;
+/* ======================== */
+/* === MAIN HEADER STYLES === */
+/* ======================== */
+
+/* General header styling for top and bottom parts */
+.header1, .header2 {
+    width: 100%;
+    background-color: #2c3e50; /* Changed background color to dark blue-gray */
+    border-bottom: 2px solid #34495e; /* Subtle line to separate from content, changed color to complement background */
+    font-family: 'Bebas Neue', sans-serif;
     padding: 10px 0;
-    text-align: center;
-    display: block; /* Ensures it takes up the full width and starts a new line */
+    box-sizing: border-box;
+    color: #ffffff; /* Set all font color in header to white */
 }
 
-.header1 .logo-and-title {
-    display: inline-block;
-}
+/* ============================ */
+/* === TOP HEADER (HEADER 1) === */
+/* ============================ */
 
-.header1 .logo-circle {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 15px;
-}
-
-.header1 .logo-circle img {
-    height: 60px;
-    border-radius: 50%; /* This is the added line to make the image circular */
-}
-
-.header1 h1 {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0;
-}
-
-.header1 h1 a {
-    color: white;
-    text-decoration: none;
-    font-size: 2.5rem;
-}
-
-/* Second Header Styles (Navigation and Buttons) */
-.header2 {
-    background: #2c3e50;
-    padding: 5px 0;
-    border-top: none;
-    display: flex; /* Use flexbox for the main alignment */
-    justify-content: space-between; /* Pushes items to the ends */
+/* Flexbox container for logo and title */
+.logo-and-title {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 15px; /* Space between logo and text */
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Pop-up Menu Button */
-.popup-menu-btn {
-    display: none;
+/* Logo image container */
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Makes the logo image round */
+    overflow: hidden; /* Hides parts of the image that exceed the circle */
+    border: 3px solid #ff5722; /* A vibrant border color */
+    flex-shrink: 0; /* Prevents the circle from shrinking */
 }
 
-/* Navigation Links */
-nav {
+.logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the circle */
+}
+
+/* Site title styling */
+.logo-and-title h1 a {
+    font-size: 2.5rem;
+    color: #ffffff; /* Changed link color to white */
+    text-decoration: none; /* Removes the underline from the link */
+    transition: color 0.3s ease;
+}
+
+.logo-and-title h1 a:hover {
+    color: #ff5722; /* Changes color on hover */
+}
+
+/* ============================== */
+/* === BOTTOM HEADER (HEADER 2) === */
+/* ============================== */
+
+/* Navigation menu container */
+.nav-menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-menu nav {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    flex-grow: 1; /* Allows the nav to take up available space */
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
+/* Main navigation links */
+.nav-links, .auth-links {
+    list-style: none; /* Removes bullet points */
     padding: 0;
+    margin: 0;
     display: flex;
+    gap: 25px;
+    align-items: center;
 }
 
-nav ul.nav-links {
-    justify-content: center;
-    flex-grow: 1; /* Centers the nav links by taking up space */
-}
-
-nav ul li {
-    margin: 0 10px;
-}
-
-nav ul li a {
-    color: white;
+.nav-links a, .auth-links a {
     text-decoration: none;
-    font-size: 1rem;
+    color: #ffffff; /* Changed link color to white */
+    font-size: 1.1rem;
+    text-transform: uppercase;
     font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 3px;
-    transition: background 0.3s ease;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
 }
 
-nav ul li a.active {
-    background: #e67e22;
+.nav-links a:hover, .auth-links a:hover {
+    color: #ff5722;
 }
 
-/* Login/Register buttons */
-nav ul li .btn {
+/* Active page link styling */
+.nav-links a.active {
+    color: #ff5722;
+    border-bottom: 2px solid #ff5722;
+    padding-bottom: 5px;
+}
+
+/* Button styling for login/register */
+.btn {
+    background-color: #ff5722;
+    color: #fff;
     padding: 10px 20px;
-    background: #e67e22;
-    color: white;
     border-radius: 5px;
-    transition: all 0.3s ease;
-    text-align: center;
-    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-nav ul li .btn:hover {
-    background: #d35400;
+.btn:hover {
+    background-color: #e64a19;
 }
 
-nav ul.auth-links {
-    /* Pushes this element to the right */
-    margin-left: auto;
-}
+/* ======================= */
+/* === RESPONSIVE STYLES === */
+/* ======================= */
 
-/* Responsive adjustments for both headers */
-@media (max-width: 992px) {
-    .header1 .logo-and-title {
+@media (max-width: 768px) {
+    .nav-menu nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .logo-and-title {
+        flex-direction: column;
         text-align: center;
     }
 
-    .header2 {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .popup-menu-btn {
-        margin-right: 0;
-    }
-
-    nav ul {
-        flex-direction: column;
+    .nav-links, .auth-links {
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
     }
 }

@@ -1,0 +1,170 @@
+/*
+  ========================================
+  Main Body and Layout Styles
+  ========================================
+*/
+body {
+    /* Set a consistent background color and text font for the whole page */
+    background-color: #f7f7f7;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+main {
+    /* Add top padding to prevent content from hiding under the fixed header */
+    padding-top: 100px; /* Adjust this value if your header height changes */
+}
+
+/*
+  ========================================
+  Hero Section Styling
+  ========================================
+*/
+.hero {
+    /* Full-screen height hero section with a background image */
+    background-image: url('../image/satay-bg.jpg'); /* Make sure this image exists */
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    /* Create a dark overlay for better text readability */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+    /* Position hero content on top of the overlay */
+    position: relative;
+    color: #fff;
+    z-index: 2; /* Ensure content is on top of the overlay */
+}
+
+.hero-content h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content .tagline {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-content .btn {
+    /* Style for the 'View Our Menu' button */
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #e67e22;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.hero-content .btn:hover {
+    background-color: #d35400;
+}
+
+/*
+  ========================================
+  Featured Section Styling (Our Signature)
+  ========================================
+*/
+.featured {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.featured h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.featured h2::after {
+    /* Add an underline effect below the heading */
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #e67e22;
+}
+
+.features {
+    /* Use a grid layout for the signature items */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.feature-item h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    margin: 15px 0 5px;
+}
+
+.feature-item p {
+    font-size: 1rem;
+    padding: 0 15px 20px;
+    color: #666;
+}
+
+/*
+  ========================================
+  Footer and General Utility Styles
+  ========================================
+*/
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+footer {
+    background-color: #222;
+    color: #aaa;
+    padding: 20px 0;
+    text-align: center;
+}

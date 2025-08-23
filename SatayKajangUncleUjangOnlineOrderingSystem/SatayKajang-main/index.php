@@ -15,29 +15,28 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satay Kajang Uncle Ujang - Login</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="CSS/header.css">
+    <title>Satay Kajang Uncle Ujang - Home</title>
+    <link rel="stylesheet" href="CSS/header.css"> 
+    <link rel="stylesheet" href="CSS/index.css">
     <link rel="stylesheet" href="CSS/footer.css">
-    <link rel="stylesheet" href="CSS/dashboard.css">
-    <link rel="stylesheet" href="CSS/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-      <header class="header1">
-            <div class="logo-and-title">
-                <div class="logo-circle">
-                    <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
-                </div>
-                <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
+    <header class="header1">
+        <div class="logo-and-title">
+            <div class="logo-circle">
+                <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
             </div>
+            <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
+        </div>
     </header>
 
     <header class="header2">
-            
+        <div class="nav-menu">
             <nav>
                 <ul class="nav-links">
+                    <li><a href="#" class="btn">New Button</a></li>
                     <li><a href="index.php" <?php if ($current_page == 'index.php') echo 'class="active"'; ?>>Home</a></li>
                     <li><a href="menu.php" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
                     <li><a href="about.php" <?php if ($current_page == 'about.php') echo 'class="active"'; ?>>About Us</a></li>
@@ -55,21 +54,21 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <?php endif; ?>
                 </ul>
             </nav>
+        </div>
     </header>
-
 
     <main>
         <section class="hero">
-        <div class="hero-content">
-            <?php if ($is_loggedin): ?>
-                <h1>Welcome, <?php echo $customer_name; ?></h1>
-            <?php else: ?>
-                <h1>Belum Try Belum Tahu,<br>Sudah Try Ingat Selalu...</h1>
-            <?php endif; ?>
-            <p class="tagline">Ramuan Rempah Ratus Turun Temurun</p>
-            <a href="menu.php" class="btn">View Our Menu</a>
-        </div>
-    </section>
+            <div class="hero-content">
+                <?php if ($is_loggedin): ?>
+                    <h1>Welcome, <?php echo $customer_name; ?></h1>
+                <?php else: ?>
+                    <h1>Belum Try Belum Tahu,<br>Sudah Try Ingat Selalu...</h1>
+                <?php endif; ?>
+                <p class="tagline">Ramuan Rempah Ratus Turun Temurun</p>
+                <a href="menu.php" class="btn">View Our Menu</a>
+            </div>
+        </section>
 
         <section class="featured">
             <div class="container">
@@ -120,6 +119,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
         </div>
     </footer>
-    <script src="script/dashboard.js"></script>
+
+    <script>
+    </script>
 </body>
 </html>
