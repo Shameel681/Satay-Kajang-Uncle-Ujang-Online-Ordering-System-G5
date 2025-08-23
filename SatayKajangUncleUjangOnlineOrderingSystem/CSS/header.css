@@ -1,3 +1,21 @@
+
+/* Universal Styles and Typography */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f7f3e9; /* Light beige for a warm feel */
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styling */
 header {
     background: #2c3e50;
     color: white;
@@ -6,7 +24,6 @@ header {
 
 header .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
 }
@@ -17,15 +34,10 @@ header .container {
     gap: 15px;
 }
 
-header h1 {
-    font-family: 'Crete Round', sans-serif;
-    white-space: nowrap;
-}
-
 .logo-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 40px; /* Smaller size */
+    height: 40px;
+    border-radius: 50%; /* Ensures circular shape */
     overflow: hidden;
     border: 2px solid white;
     flex-shrink: 0;
@@ -37,26 +49,98 @@ header h1 {
     object-fit: cover;
 }
 
-header nav ul {
+header h1 {
+    font-family: 'Crete Round', sans-serif;
+    white-space: normal;
+    font-size: 1.4rem; /* Reduced text size */
+    line-height: 1.2;
+}
+
+header h1 span {
+    display: block; /* Stack the text vertically */
+}
+
+nav {
+    margin-left: auto; /* Pushes navigation to the right */
+}
+
+nav ul {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
-header nav ul li a {
-    font-weight: bold;
-    transition: color 0.3s ease;
+nav ul li {
+    margin-left: 20px;
 }
 
-header nav ul li a:hover,
-header nav ul li a.active {
-    color: #e67e22;
+nav ul li a {
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background 0.3s ease;
 }
 
-header nav ul li a.btn {
-    background-color: #e67e22;
-    color: white;
-    padding: 10px 25px;
-    border-radius: 5px;
+nav ul li a:hover,
+nav ul li a.active {
+    background: #e67e22;
+}
+
+nav ul li .btn {
+    padding: 10px 20px;
     font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
+    display: block;
+    background: #e67e22;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+nav ul li .btn:hover {
+    background: #d35400;
+    transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .logo-and-title {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    header h1 {
+        font-size: 1rem; /* Further reduce on smaller screens */
+    }
+
+    nav {
+        margin-left: 0; /* Reset margin for mobile */
+    }
+
+    nav ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    nav ul li {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-circle {
+        width: 30px; /* Even smaller on mobile */
+        height: 30px;
+    }
+
+    nav ul li .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
 }
