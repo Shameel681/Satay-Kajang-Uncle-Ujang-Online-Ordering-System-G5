@@ -391,7 +391,7 @@ nav ul li .btn:hover {
 
 /* Family Section - Enhanced Design */
 .familysatay {
-    background: url('image/backgroundDinding2.jpg');
+    background: url('../image/backgroundDinding2.jpg');
     width: 100%;
     background-size: cover;
     background-attachment: fixed;
