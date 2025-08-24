@@ -1,0 +1,107 @@
+/* ===== Forgot Password Page ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f3e9;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Forgot Form Section */
+.forgot-form {
+    padding: 5rem 0;
+    background-color: white;
+    margin: 3rem auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: center;
+}
+
+.forgot-form h2 {
+    font-family: 'Anton', sans-serif;
+    color: #f07b3f;
+    font-size: 2.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.forgot-form p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.forgot-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    text-align: left;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #3f6068;
+}
+
+.form-group input {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #f07b3f;
+    box-shadow: 0 0 5px rgba(240, 123, 63, 0.5);
+}
+
+.forgot-form .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: #3f6068;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.forgot-form .btn:hover {
+    background-color: #2e474f;
+    transform: translateY(-2px);
+}
+
+/* Back to Login Link */
+.back-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}
+
+.back-link a {
+    color: #f07b3f;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
