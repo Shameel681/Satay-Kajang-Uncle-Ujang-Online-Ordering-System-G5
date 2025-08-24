@@ -155,3 +155,19 @@ ADD `reset_expires` DATETIME NULL;
 -- ... (rest of the SQL remains the same)
 
 COMMIT;
+
+CREATE TABLE staff (
+    staff_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    phone_no VARCHAR(20),
+    address TEXT,
+    role ENUM('Admin','Staff') DEFAULT 'Staff',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE staff
+ADD reset_token VARCHAR(100) NULL,
+ADD reset_expires DATETIME NULL;
