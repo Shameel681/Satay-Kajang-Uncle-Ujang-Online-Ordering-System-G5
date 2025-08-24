@@ -42,17 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insert_stmt->bind_param("ssss", $name, $email, $phone_no, $password_hash);
 
             if ($insert_stmt->execute()) {
-                // Get the ID of the newly registered user
-                $customer_id = $insert_stmt->insert_id;
+            // Registration success - now go to login page
+            header("Location: login.php?registered=success");
+            exit;
 
-                // **NEW FEATURE: Automatically log in the user after successful registration**
-                $_SESSION['loggedin'] = true;
-                $_SESSION['customer_id'] = $customer_id;
-                $_SESSION['name'] = $name;
-
-                // Redirect to the home page or a success page
-                header("Location: index.php");
-                exit;
             } else {
                 $message = 'Registration failed. Please try again.';
                 $message_type = 'error';
@@ -60,6 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insert_stmt->close();
         }
         $check_stmt->close();
+
+
+
+        
     }
     // Close the database connection at the end of the script
     $conn->close();
