@@ -2,69 +2,86 @@
 require_once 'connect.php';
 
 $message = '';
-$email = $_GET['email'] ?? '';
+$message_type = '';
+$token = $_GET['token'] ?? '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newpass = $_POST['password'];
+if ($token) {
+    $token_hash = hash("sha256", $token);
 
-    // Hash password
-    $hashed = password_hash($newpass, PASSWORD_DEFAULT);
-
-    $sql = "UPDATE customer SET password=? WHERE email=?";
+    $sql = "SELECT customer_id, reset_expires FROM customer WHERE reset_token=? LIMIT 1";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $hashed, $email);
-    if ($stmt->execute()) {
-        $message = "Password updated successfully! You can now <a href='login.php'>login</a>.";
+    $stmt->bind_param("s", $token_hash);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        if (strtotime($row['reset_expires']) > time()) {
+            // Form submitted
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $password = $_POST['password'] ?? '';
+                $confirm = $_POST['confirm_password'] ?? '';
+
+                if ($password === $confirm) {
+                    $hash = password_hash($password, PASSWORD_DEFAULT);
+
+                    $update = "UPDATE customer SET password=?, reset_token=NULL, reset_expires=NULL WHERE customer_id=?";
+                    $u_stmt = $conn->prepare($update);
+                    $u_stmt->bind_param("si", $hash, $row['customer_id']);
+                    $u_stmt->execute();
+
+                    if ($u_stmt->affected_rows > 0) {
+                        $message = "✅ Password updated successfully! You can now login.";
+                        $message_type = "success";
+                    } else {
+                        $message = "❌ Failed to update password. Try again.";
+                        $message_type = "error";
+                    }
+                } else {
+                    $message = "❌ Passwords do not match.";
+                    $message_type = "error";
+                }
+            }
+        } else {
+            $message = "❌ Reset link has expired.";
+            $message_type = "error";
+        }
     } else {
-        $message = "Failed to update password.";
+        $message = "❌ Invalid reset token.";
+        $message_type = "error";
     }
 }
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reset Password</title>
+    <title>New Password</title>
     <link rel="stylesheet" href="CSS/base.css">
-    <link rel="stylesheet" href="CSS/header.css">
-    <link rel="stylesheet" href="CSS/footer.css">
-    <link rel="stylesheet" href="CSS/register.css">
-    <link rel="stylesheet" href="CSS/reset_pass.css">
     <link rel="stylesheet" href="CSS/login.css">
-
+    <link rel="stylesheet" href="CSS/reset_pass.css">
 </head>
 <body>
-    <main>
-    <section class="reset-form">
-        <div class="container">
-            <h2>Reset Password</h2>
-            <p>Please enter your new password below.</p>
+    <div class="reset-container">
+        <h2>Reset Password</h2>
+        <?php if ($message): ?>
+            <div class="message-box <?= htmlspecialchars($message_type) ?>"><?= $message ?></div>
+        <?php endif; ?>
 
-            <form action="" method="POST">
-                <div class="form-group">
-                    <label for="password">New Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required>
-                </div>
-                <button type="submit" class="btn">Reset Password</button>
-            </form>
-
-            <p class="back-link">
-                <a href="login.php">← Back to Login</a>
-            </p>
-        </div>
-    </section>
-</main>
-
-    <script src="script/toast.js"></script>
-
-    
+        <?php if ($message_type !== "success"): ?>
+        <form method="POST">
+            <div class="form-group">
+                <label for="password">New Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="btn">Reset</button>
+        </form>
+        <?php else: ?>
+            <a href="login.php" class="btn">Go to Login</a>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

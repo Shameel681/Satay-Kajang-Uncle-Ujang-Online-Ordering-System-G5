@@ -48,36 +48,36 @@ if (isset($_SESSION['error_message'])) {
 <body>
 
 <header>
-        <div class="container">
-            <div class="logo-and-title">
-                <div class="logo-circle">
-                    <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
-                </div>
-                <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
+    <div class="container">
+        <div class="logo-and-title">
+            <div class="logo-circle">
+                <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
             </div>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About us</a></li>
-                    <li><a href="contact.php">Contact us</a></li>
-                    <?php if ($is_loggedin): ?>
-                      <li><a href="profCust.php">Profile</a></li>
-                    <li>
-                        <a href="logout.php" class="btn">Logout</a>
-                    </li>
-                    <?php else: ?>
-                    <li>
-                        <a href="register.php" class="btn">Register</a>
-                    </li>
-                    <li>
-                        <a href="login.php" class="btn active">Login</a>
-                    </li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
+            <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
         </div>
-    </header>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="menu.php">Menu</a></li>
+                <li><a href="about.php">About us</a></li>
+                <li><a href="contact.php">Contact us</a></li>
+                <?php if ($is_loggedin): ?>
+                  <li><a href="profCust.php">Profile</a></li>
+                <li>
+                    <a href="logout.php" class="btn">Logout</a>
+                </li>
+                <?php else: ?>
+                <li>
+                    <a href="register.php" class="btn">Register</a>
+                </li>
+                <li>
+                    <a href="login.php" class="btn active">Login</a>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </div>
+</header>
 
 <main>
   <section class="profile">
@@ -88,6 +88,7 @@ if (isset($_SESSION['error_message'])) {
       <?php if (isset($error_message)): ?>
           <div class="message-box error"><?php echo $error_message; ?></div>
       <?php endif; ?>
+
       <div class="profile-card">
         <div class="profile-header">
           <i class="fa-solid fa-user-circle profile-icon"></i>
@@ -95,47 +96,76 @@ if (isset($_SESSION['error_message'])) {
           <p>Customer Profile</p>
         </div>
         
-        <form action="profUpdate.php" method="post">
-          <div class="profile-details">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($customer['name']); ?>" required readonly>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($customer['email']); ?>" required readonly>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone_no" value="<?php echo htmlspecialchars($customer['phone_no']); ?>" readonly>
-            </div>
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <textarea id="address" name="address" readonly><?php echo htmlspecialchars($customer['address']); ?></textarea>
-            </div>
-          </div>
-          <div class="profile-actions">
-            <button type="button" id="edit-btn" class="btn"><i class="fa-solid fa-edit"></i> Edit Profile</button>
-            <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;"><i class="fa-solid fa-save"></i> Save Changes</button>
-            <button type="button" id="cancel-btn" class="btn" style="display:none;"><i class="fa-solid fa-times"></i> Cancel</button>
-          </div>
-        </form>
+        <!-- Profile Form -->
+<form action="profUpdate.php" method="post">
+  <div class="profile-details">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($customer['name']); ?>" required readonly>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($customer['email']); ?>" required readonly>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone_no" value="<?php echo htmlspecialchars($customer['phone_no']); ?>" readonly>
+    </div>
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" readonly><?php echo htmlspecialchars($customer['address']); ?></textarea>
+    </div>
+  </div>
 
+  <!-- Toggle Change Password Section -->
+  <div class="profile-actions">
+    <button type="button" id="edit-btn" class="btn"> Edit Profile</button>
+    <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;"> Save Changes</button>
+    <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
+    <a href="change_pass.php" class="btn">Change Password</a>
+
+  </div>
+</form>
+       
       </div>
     </div>
   </section>
 </main>
 
+ <!-- Footer HTML -->
 <footer>
-  <div class="container">
-    <p>© 2016 SATAY KAJANG UNCLE UJANG. All rights reserved.</p>
-    <div class="social-links">
-      <a href="#"><i class="fa-brands fa-facebook"></i></a>
-      <a href="#"><i class="fa-brands fa-twitter"></i></a>
-      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+  <div class="footer-container">
+    <div class="footer-row">
+      <!-- Left Column -->
+      <div class="footer-left">
+        <h3>Explore Our Page</h3>
+        <a href="index.php">Home</a><br>
+        <a href="about.php">About Us</a><br>
+        <a href="menu.php">Menu</a><br>
+        <a href="news.php">News</a>
+      </div>
+
+      <!-- Right Column -->
+      <div class="footer-right">
+        <h3>Staff & Admin</h3>
+        <a href="staff_login.php">Staff Login</a><br>
+        <a href="admin_login.php">Admin Login</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Satay Kajang Uncle Ujang. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
     </div>
   </div>
 </footer>
+
+
+
 <script src="script/profCust.js"></script>
 </body>
 </html>

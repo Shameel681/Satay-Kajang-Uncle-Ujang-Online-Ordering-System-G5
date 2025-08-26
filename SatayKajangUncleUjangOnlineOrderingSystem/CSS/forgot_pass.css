@@ -105,3 +105,24 @@ body {
 .back-link a:hover {
     text-decoration: underline;
 }
+
+
+.message-box {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.message-box.error {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.message-box.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}

@@ -1,6 +1,10 @@
 <?php
 // Include the database connection file, which starts the session
 require_once 'connect.php';
+require 'vendor/autoload.php'; // autoload PHPMailer
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // Initialize variables for messages
 $message = '';
@@ -9,23 +13,19 @@ $message_type = '';
 // Check if the user is logged in
 $is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 
-// Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data and use the null coalescing operator to avoid errors
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $phone_no = $_POST['phone'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Basic server-side validation to ensure all required fields are filled
     if (empty($name) || empty($email) || empty($phone_no) || empty($password)) {
         $message = 'All fields are required.';
         $message_type = 'error';
     } else {
-        // Hash the password for security before storing it in the database
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        // Check if the email already exists in the database using a prepared statement
+        // Check if email already exists
         $check_sql = "SELECT customer_id FROM customer WHERE email = ?";
         $check_stmt = $conn->prepare($check_sql);
         $check_stmt->bind_param("s", $email);
@@ -36,16 +36,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $message = 'Registration failed. The email is already registered.';
             $message_type = 'error';
         } else {
-            // Use a prepared statement to insert new user data
-            $insert_sql = "INSERT INTO customer (name, email, phone_no, password) VALUES (?, ?, ?, ?)";
+            // generate verify token
+            $verify_token = bin2hex(random_bytes(16));
+
+            // insert new user with verify_token & is_verified=0
+            $insert_sql = "INSERT INTO customer (name, email, phone_no, password, is_verified, verify_token) VALUES (?, ?, ?, ?, 0, ?)";
             $insert_stmt = $conn->prepare($insert_sql);
-            $insert_stmt->bind_param("ssss", $name, $email, $phone_no, $password_hash);
+            $insert_stmt->bind_param("sssss", $name, $email, $phone_no, $password_hash, $verify_token);
 
             if ($insert_stmt->execute()) {
-            // Registration success - now go to login page
-            header("Location: login.php?registered=success");
-            exit;
+                // Send verification email
+                $mail = new PHPMailer(true);
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com'; // Gmail SMTP
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'toonpow43@gmail.com'; // your Gmail
+                    $mail->Password   = 'mzyp uzsq aarf mmmq';   // your Gmail app password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port       = 587;
 
+                    // Recipients
+                    $mail->setFrom('youremail@gmail.com', 'Satay Kajang Uncle Ujang');
+                    $mail->addAddress($email, $name);
+
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Verify Your Email Address';
+                    $verify_link = "http://localhost/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem/verify.php?token=" . $verify_token;
+                    $mail->Body    = "
+                        <h3>Hi $name,</h3>
+                        <p>Thank you for registering. Please click the link below to verify your email:</p>
+                        <a href='$verify_link'>$verify_link</a>
+                    ";
+
+                    $mail->send();
+                    $message = 'Registration successful! Please check your email to verify your account.';
+                    $message_type = 'success';
+                } catch (Exception $e) {
+                    $message = "Registration success but email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    $message_type = 'error';
+                }
             } else {
                 $message = 'Registration failed. Please try again.';
                 $message_type = 'error';
@@ -53,15 +85,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insert_stmt->close();
         }
         $check_stmt->close();
-
-
-
-        
     }
-    // Close the database connection at the end of the script
     $conn->close();
 }
 ?>
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -120,7 +154,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <?php endif; ?>
 
-                <form class="register-form" id="registerForm" action="" method="POST">
+                <form class="register-form" id="registerForm" action="register.php" method="POST" target="_self">
+
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -143,15 +178,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2016 SATAY KAJANG UNCLE UJANG. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </footer>
+     <!-- Footer HTML -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-row">
+      <!-- Left Column -->
+      <div class="footer-left">
+        <h3>Explore Our Page</h3>
+        <a href="index.php">Home</a><br>
+        <a href="about.php">About Us</a><br>
+        <a href="menu.php">Menu</a><br>
+        <a href="news.php">News</a>
+      </div>
+
+      <!-- Right Column -->
+      <div class="footer-right">
+        <h3>Staff & Admin</h3>
+        <a href="staff_login.php">Staff Login</a><br>
+        <a href="admin_login.php">Admin Login</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Satay Kajang Uncle Ujang. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

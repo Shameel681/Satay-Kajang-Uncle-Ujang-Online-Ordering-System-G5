@@ -156,16 +156,37 @@ if ($is_loggedin) {
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2016 SATAY KAJANG UNCLE UJANG. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </footer>
+     <!-- Footer HTML -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-row">
+      <!-- Left Column -->
+      <div class="footer-left">
+        <h3>Explore Our Page</h3>
+        <a href="index.php">Home</a><br>
+        <a href="about.php">About Us</a><br>
+        <a href="menu.php">Menu</a><br>
+        <a href="news.php">News</a>
+      </div>
+
+      <!-- Right Column -->
+      <div class="footer-right">
+        <h3>Staff & Admin</h3>
+        <a href="staff_login.php">Staff Login</a><br>
+        <a href="admin_login.php">Admin Login</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Satay Kajang Uncle Ujang. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
 
     <script src="script/feedback.js"></script>
 </body>
