@@ -114,7 +114,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
         </section>
     </main>
 
-    <!-- Footer HTML -->
+     <!-- Footer HTML -->
 <footer>
   <div class="footer-container">
     <div class="footer-row">
