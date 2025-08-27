@@ -17,7 +17,8 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
     <link rel="stylesheet" href="CSS/header.css">
     <link rel="stylesheet" href="CSS/footer.css">
     <link rel="stylesheet" href="CSS/index.css">
-    <link rel="stylesheet" href="CSS/dropdown.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="CSS/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -37,19 +38,13 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                     <li><a href="menu.php">Menu</a></li>
                     <li><a href="about.php">About us</a></li>
                     <li><a href="contact.php">Contact us</a></li>
+
                     <?php if ($is_loggedin): ?>
                         <li><a href="profCust.php">Profile</a></li>
                         <li>
                             <a href="logout.php" class="btn">Logout</a>
                         </li>
                     <?php else: ?>
-                        <li class="dropdown">
-                        <button>Staff Portal ▾</button>
-                        <div class="dropdown-content">
-                            <a href="stafflogin.php">Staff Login</a>
-                            <a href="adminlogin.php">Admin Login</a>
-                        </div>
-                    </li>
                         <li>
                             <a href="register.php" class="btn">Register</a>
                         </li>
@@ -57,6 +52,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                             <a href="login.php" class="btn">Login</a>
                         </li>
                     <?php endif; ?>
+
                 </ul>
             </nav>
         </div>
@@ -114,7 +110,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
         </section>
     </main>
 
-     <!-- Footer HTML -->
+        <!-- Footer HTML -->
 <footer>
   <div class="footer-container">
     <div class="footer-row">
@@ -145,7 +141,6 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
     </div>
   </div>
 </footer>
-
 
 </body>
 </html>
