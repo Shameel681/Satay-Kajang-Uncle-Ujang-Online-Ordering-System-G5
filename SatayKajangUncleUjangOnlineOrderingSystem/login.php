@@ -146,7 +146,7 @@ if (isset($conn)) {
         <a href="index.php">Home</a><br>
         <a href="about.php">About Us</a><br>
         <a href="menu.php">Menu</a><br>
-        <a href="news.php">News</a>
+        <a href="contact.php">Contact Us</a>
       </div>
 
       <!-- Right Column -->

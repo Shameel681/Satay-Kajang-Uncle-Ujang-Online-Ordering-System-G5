@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </section>
     </main>
 
-     <!-- Footer HTML -->
+    <!-- Footer HTML -->
 <footer>
   <div class="footer-container">
     <div class="footer-row">
@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="index.php">Home</a><br>
         <a href="about.php">About Us</a><br>
         <a href="menu.php">Menu</a><br>
-        <a href="news.php">News</a>
+        <a href="contact.php">Contact Us</a>
       </div>
 
       <!-- Right Column -->

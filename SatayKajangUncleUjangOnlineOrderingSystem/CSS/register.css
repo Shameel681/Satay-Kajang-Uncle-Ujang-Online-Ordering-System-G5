@@ -25,7 +25,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Prevent wrapping on one line */
+    flex-wrap: nowrap;
 }
 
 .logo-and-title {
@@ -35,8 +35,8 @@ header .container {
 }
 
 header h1 {
-    font-family: 'crete round', sans-serif;
-    white-space: nowrap; /* Prevent title from wrapping */
+    font-family: 'Crete Round', sans-serif;
+    white-space: nowrap;
 }
 
 .logo-circle {
@@ -57,7 +57,7 @@ header h1 {
 nav ul {
     display: flex;
     align-items: center;
-    flex-wrap: nowrap; /* Prevent navigation items from wrapping */
+    flex-wrap: nowrap;
 }
 
 nav ul li {
@@ -110,7 +110,7 @@ nav ul li .btn:hover {
     nav ul {
         flex-direction: row;
         justify-content: center;
-        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        flex-wrap: wrap;
         gap: 10px;
     }
 
@@ -139,7 +139,7 @@ footer {
     text-align: center;
     position: relative;
     overflow: hidden;
-    font-family: 'crete round', sans-serif;
+    font-family: 'Crete Round', sans-serif;
 }
 
 footer .social-links {
@@ -158,21 +158,8 @@ footer .social-links a:hover {
     transform: scale(1.2);
 }
 
-footer::after {
-    content: '';
-    position: absolute;
-    bottom: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(230, 126, 34, 0.1) 0%, transparent 70%);
-    animation: rotate 20s linear infinite;
-}
 
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+
 
 /* Registration Form Section - New Styles */
 .registration-form {
