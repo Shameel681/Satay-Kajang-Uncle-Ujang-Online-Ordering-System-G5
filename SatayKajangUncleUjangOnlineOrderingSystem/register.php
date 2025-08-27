@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Content
                     $mail->isHTML(true);
                     $mail->Subject = 'Verify Your Email Address';
-                    $verify_link = "http://localhost/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem/verify.php?token=" . $verify_token;
+                    $verify_link = "http://localhost/MASTER PROJECT - SATAY KAJANG UNCLE UJANG ONLINE ORDERING SYSTEM G05/SatayKajangUncleUjangOnlineOrderingSystem/verify.php?token=" . $verify_token;
                     $mail->Body    = "
                         <h3>Hi $name,</h3>
                         <p>Thank you for registering. Please click the link below to verify your email:</p>

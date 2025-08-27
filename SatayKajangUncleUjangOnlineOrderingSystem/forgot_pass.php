@@ -65,8 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="email" name="email" required>
             </div>
             <button type="submit" class="btn">Reset Password</button>
+            <a href="login.php" type="back" class="btn" style="text-align: center;">Back To Login</a>
         </form>
     </div>
 </body>
