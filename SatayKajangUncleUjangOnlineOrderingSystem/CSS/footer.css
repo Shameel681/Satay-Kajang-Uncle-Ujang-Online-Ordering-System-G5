@@ -47,31 +47,6 @@ footer {
     width: 45%;  /* kanan 45% */
 }
 
-/* Footer Bottom */
-.footer-bottom {
-    border-top: 1px solid #2c3e50;
-    margin-top: 20px;
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.footer-bottom p {
-    margin: 0;
-}
-
-.social-links a {
-    color: #fff;
-    margin-left: 10px;
-    font-size: 18px;
-    transition: color 0.3s;
-}
-
-.social-links a:hover {
-    color: #ff7f27;
-}
 
 /* Responsive */
 @media (max-width: 800px) {

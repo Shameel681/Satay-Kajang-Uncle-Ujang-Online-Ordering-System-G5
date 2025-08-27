@@ -97,35 +97,75 @@ if (isset($_SESSION['error_message'])) {
         </div>
         
         <!-- Profile Form -->
-<form action="profUpdate.php" method="post">
-  <div class="profile-details">
-    <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($customer['name']); ?>" required readonly>
-    </div>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($customer['email']); ?>" required readonly>
-    </div>
-    <div class="form-group">
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone_no" value="<?php echo htmlspecialchars($customer['phone_no']); ?>" readonly>
-    </div>
-    <div class="form-group">
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" readonly><?php echo htmlspecialchars($customer['address']); ?></textarea>
-    </div>
+<!-- Profile Form -->
+<form action="profUpdate.php" method="POST" id="profile-form">
+  <div class="form-group">
+    <label>Name:</label>
+    <input type="text" name="name" id="name" 
+           value="<?php echo htmlspecialchars($customer['name']); ?>" 
+           disabled>
   </div>
 
-  <!-- Toggle Change Password Section -->
+  <div class="form-group">
+    <label>Email:</label>
+    <input type="email" name="email" id="email" 
+           value="<?php echo htmlspecialchars($customer['email']); ?>" 
+           disabled>
+  </div>
+
+  <div class="form-group">
+    <label>Phone:</label>
+    <input type="tel" name="phone_no" id="phone_no" 
+           value="<?php echo htmlspecialchars($customer['phone_no']); ?>" 
+           disabled>
+  </div>
+
+  <div class="form-group">
+    <label>Address:</label>
+    <textarea name="address" id="address" rows="3" disabled><?php echo htmlspecialchars($customer['address']); ?></textarea>
+  </div>
+
   <div class="profile-actions">
-    <button type="button" id="edit-btn" class="btn"> Edit Profile</button>
-    <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;"> Save Changes</button>
+    <button type="button" id="edit-btn" class="btn">Edit Profile</button>
+    <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;">Save Changes</button>
     <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
     <a href="change_pass.php" class="btn">Change Password</a>
-
   </div>
 </form>
+
+<script>
+  const editBtn = document.getElementById("edit-btn");
+  const saveBtn = document.getElementById("save-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const inputs = document.querySelectorAll("#profile-form input, #profile-form textarea");
+
+  // Simpan value asal
+  let originalValues = {};
+  inputs.forEach(input => {
+    originalValues[input.name] = input.value;
+  });
+
+  // Klik Edit → enable semua field
+  editBtn.addEventListener("click", () => {
+    inputs.forEach(input => input.disabled = false);
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+    cancelBtn.style.display = "inline-block";
+  });
+
+  // Klik Cancel → reset balik ke value asal
+  cancelBtn.addEventListener("click", () => {
+    inputs.forEach(input => {
+      input.value = originalValues[input.name];
+      input.disabled = true;
+    });
+
+    editBtn.style.display = "inline-block";
+    saveBtn.style.display = "none";
+    cancelBtn.style.display = "none";
+  });
+</script>
+
        
       </div>
     </div>

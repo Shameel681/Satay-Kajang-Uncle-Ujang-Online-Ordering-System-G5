@@ -14,161 +14,14 @@ body {
     padding: 0 20px;
 }
 
-/* Header Styling - Copied from style.css */
-header {
-    background: #2c3e50;
-    color: white;
-    padding: 20px 0;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-.logo-and-title {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-header h1 {
-    font-family: 'Crete Round', sans-serif;
-    white-space: nowrap;
-}
-
-.logo-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid white;
-    flex-shrink: 0;
-}
-
-.logo-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-nav ul {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    padding: 5px 10px;
-    border-radius: 3px;
-    transition: background 0.3s ease;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background: #e67e22;
-}
-
-nav ul li .btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    display: block;
-    background: #e67e22;
-    color: white;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-nav ul li .btn:hover {
-    background: #d35400;
-    transform: translateY(-3px);
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    header .container {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-    
-    .logo-and-title {
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    nav ul {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    nav ul li {
-        margin-left: 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .logo-circle {
-        width: 40px;
-        height: 40px;
-    }
-
-    nav ul li .btn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-}
-
-/* Footer */
-footer {
-    background: #2c3e50;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    font-family: 'Crete Round', sans-serif;
-}
-
-footer .social-links {
-    margin-top: 10px;
-}
-
-footer .social-links a {
-    color: #fff;
-    font-size: 1.5rem;
-    margin: 0 15px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-footer .social-links a:hover {
-    color: #e67e22;
-    transform: scale(1.2);
-}
-
-
-
-
-/* Registration Form Section - New Styles */
+/* Registration Form Section */
 .registration-form {
     padding: 5rem 0;
     background-color: white;
     margin: 3rem auto;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 700px;
     text-align: center;
 }
 
@@ -185,6 +38,7 @@ footer .social-links a:hover {
     margin-bottom: 2rem;
 }
 
+/* Registration Form Styles */
 .register-form {
     display: flex;
     flex-direction: column;
@@ -218,13 +72,14 @@ footer .social-links a:hover {
     box-shadow: 0 0 5px rgba(240, 123, 63, 0.5);
 }
 
+/* Button */
 .register-form .btn {
     width: 100%;
     padding: 15px;
     font-size: 1.2rem;
     margin-top: 1rem;
     display: inline-block;
-    background-color: #3f6068; /* A darker, complementary color */
+    background-color: #3f6068;
     color: white;
     text-decoration: none;
     border-radius: 8px;
@@ -237,4 +92,23 @@ footer .social-links a:hover {
     transform: translateY(-2px);
 }
 
-/* Footer Styling - Copied from style.css */
+/* Message Box for Errors/Success */
+.message-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.message-box.error {
+    background-color: #fcebeb;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+}
+
+.message-box.success {
+    background-color: #e8f9e9;
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
