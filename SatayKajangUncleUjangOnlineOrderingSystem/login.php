@@ -89,9 +89,6 @@ if (isset($conn)) {
                     <li><a href="contact.php">Contact us</a></li>
                     <?php if ($is_loggedin): ?>
                         <li><a href="profCust.php">Profile</a></li>
-                    <li>
-                        <a href="logout.php" class="btn">Logout</a>
-                    </li>
                     <?php else: ?>
                     <li>
                         <a href="register.php" class="btn">Register</a>
@@ -144,9 +141,9 @@ if (isset($conn)) {
       <div class="footer-left">
         <h3>Explore Our Page</h3>
         <a href="index.php">Home</a><br>
-        <a href="about.php">About Us</a><br>
         <a href="menu.php">Menu</a><br>
-        <a href="contact.php">Contact Us</a>
+        <a href="about.php">About Us</a><br>
+        <a href="contact.php">Contact Us</a><br>
       </div>
 
       <!-- Right Column -->

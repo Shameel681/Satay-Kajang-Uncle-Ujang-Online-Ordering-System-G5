@@ -52,7 +52,7 @@ if ($is_loggedin) {
                 </div>
                 <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
-            <nav>
+               <nav>
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="menu.php">Menu</a></li>
@@ -60,10 +60,13 @@ if ($is_loggedin) {
                     <li><a href="contact.php">Contact us</a></li>
                     <?php if ($is_loggedin): ?>
                         <li><a href="profCust.php">Profile</a></li>
-                        <li><a href="logout.php" class="btn">Logout</a></li>
                     <?php else: ?>
-                        <li><a href="register.php" class="btn">Register</a></li>
-                        <li><a href="login.php" class="btn">Login</a></li>
+                    <li>
+                        <a href="register.php" class="btn">Register</a>
+                    </li>
+                    <li>
+                        <a href="login.php" class="btn">Login</a>
+                    </li>
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -110,6 +113,8 @@ if ($is_loggedin) {
                         <h3>Visit Us</h3>
                         <p>1, Jalan Tps 1/6, Taman Pelangi Semenyih, 43500 Semenyih, Selangor</p>
                     </div>
+
+
                     <div class="contact-card">
                         <i class="fas fa-clock"></i>
                         <h3>Opening Hours</h3>
@@ -118,9 +123,23 @@ if ($is_loggedin) {
                     <div class="contact-card">
                         <i class="fas fa-phone"></i>
                         <h3>Contact Number</h3>
-                        <p>Phone: 011-1138-3819 or 01162226128<br>Email: <a href="mailto:toonnpow3@gmail.com">toonnpow3@gmail.com</a></p>
+                        <p>Phone: 011-1138-3819 / 01162226128<br>
+                        <p>Email: <a href="mailto:toonnpow3@gmail.com">toonnpow3@gmail.com</a></p>
                     </div>
                 </div>
+
+                
+                    <div class="map-container">
+                       <iframe 
+                       width="100%" 
+                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.534602808614!2d101.8576!3d2.9143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdcac7a6c91c2b%3A0x5c89cbbdf8a6c5a1!2s1%2C%20Jalan%20Tps%201%2F6%2C%20Taman%20Pelangi%20Semenyih%2C%2043500%20Semenyih%2C%20Selangor!5e0!3m2!1sen!2smy!4v1735463899983!5m2!1sen!2smy" 
+                       style="border:0;" 
+                       height="400" 
+                       loading="lazy" 
+                       allowfullscreen="" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
                 
                 <form class="contact-form" id="contactForm" action="process_feedback.php" method="POST">
                     <h3>Send Us Feedback</h3>
@@ -164,9 +183,9 @@ if ($is_loggedin) {
       <div class="footer-left">
         <h3>Explore Our Page</h3>
         <a href="index.php">Home</a><br>
-        <a href="about.php">About Us</a><br>
         <a href="menu.php">Menu</a><br>
-        <a href="news.php">News</a>
+        <a href="about.php">About Us</a><br>
+        <a href="contact.php">Contact Us</a><br>
       </div>
 
       <!-- Right Column -->

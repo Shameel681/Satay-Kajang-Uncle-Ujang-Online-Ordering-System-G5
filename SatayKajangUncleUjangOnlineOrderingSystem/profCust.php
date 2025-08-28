@@ -63,9 +63,6 @@ if (isset($_SESSION['error_message'])) {
                 <li><a href="contact.php">Contact us</a></li>
                 <?php if ($is_loggedin): ?>
                   <li><a href="profCust.php">Profile</a></li>
-                <li>
-                    <a href="logout.php" class="btn">Logout</a>
-                </li>
                 <?php else: ?>
                 <li>
                     <a href="register.php" class="btn">Register</a>
@@ -129,7 +126,8 @@ if (isset($_SESSION['error_message'])) {
     <button type="button" id="edit-btn" class="btn">Edit Profile</button>
     <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;">Save Changes</button>
     <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
-    <a href="change_pass.php" class="btn">Change Password</a>
+    <a href="change_pass.php" class="btn">Change Password</a><br><br>
+    <a href="logout.php" class="btn">Logout</a>
   </div>
 </form>
 
@@ -180,9 +178,9 @@ if (isset($_SESSION['error_message'])) {
       <div class="footer-left">
         <h3>Explore Our Page</h3>
         <a href="index.php">Home</a><br>
-        <a href="about.php">About Us</a><br>
         <a href="menu.php">Menu</a><br>
-        <a href="news.php">News</a>
+        <a href="about.php">About Us</a><br>
+        <a href="contact.php">Contact Us</a><br>
       </div>
 
       <!-- Right Column -->
