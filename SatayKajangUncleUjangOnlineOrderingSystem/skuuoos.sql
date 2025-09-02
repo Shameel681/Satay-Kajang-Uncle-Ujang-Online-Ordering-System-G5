@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2025 at 05:13 AM
+-- Generation Time: Sep 02, 2025 at 02:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,13 +46,11 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`, `reset_expiry`, `is_verified`, `verify_token`) VALUES
-(1, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'Shameel681@gmail.com', '$2y$10$uz7mOBzrPvktzY31lmnA/eQgO/XXCwyUXRUR2xrWr5/E6T3dDhumu', '011-10084626', 'selangor', NULL, NULL, NULL, 0, NULL),
-(2, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', '', '011-62226128', 'NO 1 JALAN 1 TAMAN SERI TANJUNG', 'c809f97644999a9b8e3f6f2b30711c8c7b2b26c15b12f7c635c1dfa8bbf6e40e', '2025-08-24 08:24:50', '2025-08-24 21:35:45', 0, NULL),
-(3, 'ANAS IZZUDDIN BIN MUAMAR ', 'anas3939@gmail.com', '$2y$10$4Dvud/q9cYjln6Ow0Lk7K.xlCJ9DImmL0kuNhUB3RMQMR/Q4DOd62', '011-101010101', NULL, NULL, NULL, NULL, 0, NULL),
-(4, 'suhaimi sham', 'suhaimi@gmail.com', '$2y$10$79IvAgCfEHpranqu8d7ib.urSWsjGZaY8uEWdZ08iXpskqxtOzTey', '01119181717', NULL, NULL, NULL, NULL, 0, NULL),
-(10, 'alexparley', 'alexparley123@gmail.com', '$2y$10$uUea55sKFzt8WUvFOz5UxO2sYSEN4fk.nLmvBLtMSTm5mO63T2OUq', '01163336128', NULL, NULL, NULL, NULL, 0, NULL),
-(11, 'FIKRI zakuan', 'toonpow23@gmail.com', '$2y$10$fWyZ7/rRmKtAB1z7EXdPqer6g/nu/rszQphHyJzMs40bpJnJPy7he', '01111919110', NULL, NULL, NULL, NULL, 0, NULL),
-(18, 'jujujaj', 'toonpow3@gmail.com', '$2y$10$a2d1uPop5Hmakup3/kcgRewofoDsvb0S5OjV2id82Htyv9lLhVNcK', '7777777232', 'NO 5 JALAN 1 TAMAN SRI TANJUNG', NULL, NULL, NULL, 1, NULL);
+(19, 'MUHAMMAD SUHAIMI BIN MOHD SHAM', 'm.suhaimipro@gmail.com', '$2y$10$i2Vv1tNp/a1nVGc61hnZbOoIRpasC0Z1mlPFQRTVdRQJ.Bw4QaD4K', '01113277665', NULL, NULL, NULL, NULL, 0, '91b93fa6d1fbbd6507b59041144081f4'),
+(20, 'MUHAMMAD ANAS IZZUDIN BIN MUAMAR ', 'anasizzuddin@graduate.utm.my', '$2y$10$0CEJ4RszQYGHE60cw.YT1uQVYRXvHmx3vkN.eB8Cx0E9qlbaHpnzq', '0102045904', NULL, NULL, NULL, NULL, 0, '4a37db85f42c739ce2adaa7d1489fcbd'),
+(21, 'ZUHAIKAL AIMAN BIN ZAILAN', 'zuhaikal566@gmail.com', '$2y$10$aQAb6.4Xu7BK2YViunQ.1.gYdRmcqTFptagC7AbtiKuhC.yh4dt6S', '01133114674', NULL, NULL, NULL, NULL, 0, 'ac51b47d0095cbc2aa865c3d847f1a99'),
+(22, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow3@gmail.com', '$2y$10$rAcVn8qWtVLl/doUGJEArOdBjc2HBQX24saGP9tJ0GEk6ThsZuApa', '011-6222 6128', NULL, NULL, NULL, NULL, 0, '199eb125e30897606e264033f6698275'),
+(30, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$0jtw1LPArgaEvLpFJsEaYu/E/rA7vu6AV6wNIdG2pF3XKRnNTwKq2', '011-10084626', NULL, NULL, NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -77,7 +75,8 @@ INSERT INTO `feedback_customer` (`id`, `customer_name`, `customer_email`, `feedb
 (2, 'suhaimi sham', 'suhaimi@gmail.com', 'makanan sedap gile', '2025-08-17 19:24:23'),
 (3, 'suhaimi sham', 'suhaimi@gmail.com', 'sedapnya makanan', '2025-08-17 19:28:28'),
 (4, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'Shameel681@gmail.com', 'sedap jugak ye', '2025-08-17 19:32:31'),
-(5, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', 'sedapnyooooooooooooo', '2025-08-24 05:33:18');
+(5, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', 'sedapnyooooooooooooo', '2025-08-24 05:33:18'),
+(6, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', 'test 2', '2025-08-28 06:37:45');
 
 -- --------------------------------------------------------
 
@@ -105,7 +104,8 @@ INSERT INTO `feedback_guest` (`id`, `guest_name`, `guest_email`, `feedback`, `cr
 (26, 'fikri mawardi', 'fikri@gmail.com', 'saya tak suka makanan sini', '2025-08-17 18:23:41'),
 (27, 'shameel clone', 'shameeldoubleganger@gmail.com', 'makanan ini tidak sedap', '2025-08-17 19:20:54'),
 (28, 'shameel', 'shameel@hotmail.com', 'makanan 10/10', '2025-08-17 19:23:15'),
-(29, 'MUHAMMAD ZAKUAN', 'mfitrizakuan@gmail.com', 'MAKANAN RASA BIASA BIASA JE', '2025-08-17 19:32:03');
+(29, 'MUHAMMAD ZAKUAN', 'mfitrizakuan@gmail.com', 'MAKANAN RASA BIASA BIASA JE', '2025-08-17 19:32:03'),
+(30, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', 'test 1', '2025-08-28 06:30:33');
 
 -- --------------------------------------------------------
 
@@ -163,19 +163,19 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `feedback_customer`
 --
 ALTER TABLE `feedback_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `feedback_guest`
 --
 ALTER TABLE `feedback_guest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `staff`
