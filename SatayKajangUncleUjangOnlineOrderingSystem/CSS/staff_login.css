@@ -1,0 +1,91 @@
+/* Staff Login Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef6f9; /* light blue background */
+    margin: 0;
+    padding: 0;
+}
+
+.login-form {
+    padding: 5rem 0;
+    background-color: white;
+    margin: 3rem auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: center;
+}
+
+.login-form h2 {
+    font-family: 'Anton', sans-serif;
+    color: #0077b6; /* staff color */
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-form p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #004e64;
+}
+
+.form-group input {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0077b6;
+    box-shadow: 0 0 5px rgba(0, 119, 182, 0.5);
+}
+
+.login-form .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: #0077b6;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+}
+
+.login-form .btn:hover {
+    background-color: #005f87;
+    transform: translateY(-2px);
+}
+
+/* Error Message Box */
+.message-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.message-box.error {
+    background-color: #fdeaea;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+}

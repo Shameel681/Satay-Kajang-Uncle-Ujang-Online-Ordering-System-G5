@@ -39,6 +39,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // generate verify token
             $verify_token = bin2hex(random_bytes(16));
 
+            if (empty($name) || empty($email) || empty($phone_no) || empty($password)) {
+            $message = 'All fields are required.';
+            $message_type = 'error';
+                } elseif (strlen($password) < 8) {
+                  $message = 'Password must be at least 8 characters long.';
+                  $message_type = 'error';
+                } elseif (!preg_match('/^[0-9]{11}$/', $phone_no)) {
+                  $message = 'Phone number must be exactly 11 digits.';
+                  $message_type = 'error';
+                } else {
+                   $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                // ... sambung code asal insert & email
+                 }
+
+
             // insert new user with verify_token & is_verified=0
             $insert_sql = "INSERT INTO customer (name, email, phone_no, password, is_verified, verify_token) VALUES (?, ?, ?, ?, 0, ?)";
             $insert_stmt = $conn->prepare($insert_sql);
@@ -64,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Content
                     $mail->isHTML(true);
                     $mail->Subject = 'Verify Your Email Address';
-                    $verify_link = "http://localhost/MASTER PROJECT - Satay Kajang Uncle Ujang Online Ordering System G05/SatayKajangUncleUjangOnlineOrderingSystem/verify.php?token=" . $verify_token;
+                    $verify_link = "http://localhost/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem/verify.php?token=" . $verify_token;
                     $mail->Body    = "
                         <h3>Hi $name,</h3>
                         <p>Thank you for registering. Please click the link below to verify your email:</p>
@@ -163,12 +178,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number:</label>
-                        <input type="text" id="phone" name="phone" required>
+                        <input type="text" id="phone" name="phone" 
+                        pattern="[0-9]{11}" 
+                        title="Phone number must be exactly 11 digits" 
+                        required>
                     </div>
+
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" 
+                        minlength="8" 
+                        title="Password must be at least 8 characters" 
+                        required>
                     </div>
+
                     <button type="submit" class="btn">Register</button>
                 </form>
             </div>

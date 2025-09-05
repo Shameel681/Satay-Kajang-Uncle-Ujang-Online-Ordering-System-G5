@@ -30,7 +30,7 @@ if ($token) {
                     $u_stmt->execute();
 
                     if ($u_stmt->affected_rows > 0) {
-                        $message = "✅ Password updated successfully! You can now login.";
+                        $message = "✅ Password updated successfully!";
                         $message_type = "success";
                     } else {
                         $message = "❌ Failed to update password. Try again.";
@@ -80,7 +80,7 @@ if ($token) {
             <button type="submit" class="btn">Reset</button>
         </form>
         <?php else: ?>
-            <a href="login.php" class="btn">Go to Login</a>
+            <a href="login.php" class="btn">Back to Login</a>
         <?php endif; ?>
     </div>
 </body>
