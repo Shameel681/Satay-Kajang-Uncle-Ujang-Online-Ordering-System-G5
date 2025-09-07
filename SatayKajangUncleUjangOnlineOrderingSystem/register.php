@@ -45,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } elseif (strlen($password) < 8) {
                   $message = 'Password must be at least 8 characters long.';
                   $message_type = 'error';
-                } elseif (!preg_match('/^[0-9]{11}$/', $phone_no)) {
-                  $message = 'Phone number must be exactly 11 digits.';
+                } elseif (!preg_match('/^[0-9]{10,11}$/', $phone_no)) {
+                  $message = 'Phone number must be exactly 10 or 11 digits.';
                   $message_type = 'error';
                 } else {
                    $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Content
                     $mail->isHTML(true);
                     $mail->Subject = 'Verify Your Email Address';
-                    $verify_link = "http://localhost/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem/verify.php?token=" . $verify_token;
+                    $verify_link = "http://localhost/MASTER PROJECT - SATAY KAJANG UNCLE UJANG ONLINE ORDERING SYSTEM G05/SatayKajangUncleUjangOnlineOrderingSystem/verify.php?token=" . $verify_token;
                     $mail->Body    = "
                         <h3>Hi $name,</h3>
                         <p>Thank you for registering. Please click the link below to verify your email:</p>
@@ -133,17 +133,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
-            <nav>
+               <nav>
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About us</a></li>
-                    <li><a href="contact.php">Contact us</a></li>
+                    <li><a href="customer/menu.php">Menu</a></li>
+                    <li><a href="customer/about.php">About us</a></li>
+                    <li><a href="customer/contact.php">Contact us</a></li>
                     <?php if ($is_loggedin): ?>
-                        <li><a href="profCust.php">Profile</a></li>
+                        <li><a href="customer/profCust.php">Profile</a></li>
                     <?php else: ?>
                     <li>
-                        <a href="register.php" class="btn active">Register</a>
+                        <a href="register.php" class="btn">Register</a>
                     </li>
                     <li>
                         <a href="login.php" class="btn">Login</a>
@@ -179,8 +179,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group">
                         <label for="phone">Phone Number:</label>
                         <input type="text" id="phone" name="phone" 
-                        pattern="[0-9]{11}" 
-                        title="Phone number must be exactly 11 digits" 
+                        pattern="[0-9]{10,11}" 
+                        title="Phone number must be exactly 10 or 11 digits" 
                         required>
                     </div>
 
@@ -205,17 +205,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <!-- Left Column -->
       <div class="footer-left">
         <h3>Explore Our Page</h3>
-        <a href="index.php">Home</a><br>
-        <a href="menu.php">Menu</a><br>
-        <a href="about.php">About Us</a><br>
-        <a href="contact.php">Contact Us</a><br>
+        <a href="./index.php">Home</a><br>
+        <a href="customer/menu.php">Menu</a><br>
+        <a href="customer/about.php">About Us</a><br>
+        <a href="customer/contact.php">Contact Us</a><br>
       </div>
 
       <!-- Right Column -->
       <div class="footer-right">
         <h3>Staff & Admin</h3>
-        <a href="staff_login.php">Staff Login</a><br>
-        <a href="admin_login.php">Admin Login</a>
+        <a href="./staff/staff_login.php">Staff Login</a><br>
+        <a href="./admin/admin_login.php">Admin Login</a>
       </div>
     </div>
 
