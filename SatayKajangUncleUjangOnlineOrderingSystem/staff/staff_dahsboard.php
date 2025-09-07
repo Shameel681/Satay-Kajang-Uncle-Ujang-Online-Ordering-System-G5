@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connect.php'; 
+require_once '../connect.php'; 
 if (!isset($_SESSION['staff_loggedin']) || $_SESSION['staff_loggedin'] !== true) {
     header("Location: staff_login.php");
     exit;
@@ -13,10 +13,10 @@ if (!isset($_SESSION['staff_loggedin']) || $_SESSION['staff_loggedin'] !== true)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Dashboard - Satay Kajang Uncle Ujang</title>
-    <link rel="stylesheet" href="CSS/base.css">
-    <link rel="stylesheet" href="CSS/header.css">
-    <link rel="stylesheet" href="CSS/footer.css">
-    <link rel="stylesheet" href="staff_dashboard.css">
+    <link rel="stylesheet" href="../CSS/base.css">
+    <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="stylesheet" href="..//CSS/staff_dashboard.css">
 </head>
 <body>
 
@@ -25,10 +25,10 @@ if (!isset($_SESSION['staff_loggedin']) || $_SESSION['staff_loggedin'] !== true)
     </header>
 
     <nav>
-        <a href="staff_dashboard.php">Dashboard</a>
-        <a href="staff_orders.php">Orders</a>
-        <a href="staff_customers.php">Customers</a>
-        <a href="logout.php">Logout</a>
+        <a href="../staff/staff_dashboard.php">Dashboard</a>
+        <a href="../staff/staff_orders.php">Orders</a>
+        <a href="../staff/staff_customers.php">Customers</a>
+        <a href="../logout.php">Logout</a>
     </nav>
 
     <div class="container">
@@ -52,7 +52,7 @@ if (!isset($_SESSION['staff_loggedin']) || $_SESSION['staff_loggedin'] !== true)
             </div>
         </div>
 
-        <a href="logout.php" class="logout">Logout</a>
+        <a href="../logout.php" class="logout">Logout</a>
     </div>
 
 </body>

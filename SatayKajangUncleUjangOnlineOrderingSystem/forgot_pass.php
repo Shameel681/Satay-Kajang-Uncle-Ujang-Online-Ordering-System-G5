@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->setFrom('toonpow43@gmail.com', 'Satay Kajang Uncle Ujang');
                 $mail->addAddress($email);
 
-                $reset_link = "http://localhost/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem/reset_pass.php?token=" . $token;
+                $reset_link = "http://localhost/MASTER PROJECT - SATAY KAJANG UNCLE UJANG ONLINE ORDERING SYSTEM G05/SatayKajangUncleUjangOnlineOrderingSystem/reset_pass.php?token=" . $token;
 
                 $mail->isHTML(true);
                 $mail->Subject = 'Password Reset Request';

@@ -81,20 +81,20 @@ if (isset($conn)) {
                 </div>
                 <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
-            <nav>
+               <nav>
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About us</a></li>
-                    <li><a href="contact.php">Contact us</a></li>
+                    <li><a href="customer/menu.php">Menu</a></li>
+                    <li><a href="customer/about.php">About us</a></li>
+                    <li><a href="customer/contact.php">Contact us</a></li>
                     <?php if ($is_loggedin): ?>
-                        <li><a href="profCust.php">Profile</a></li>
+                        <li><a href="customer/profCust.php">Profile</a></li>
                     <?php else: ?>
                     <li>
                         <a href="register.php" class="btn">Register</a>
                     </li>
                     <li>
-                        <a href="login.php" class="btn active">Login</a>
+                        <a href="login.php" class="btn">Login</a>
                     </li>
                     <?php endif; ?>
                 </ul>
@@ -140,17 +140,17 @@ if (isset($conn)) {
       <!-- Left Column -->
       <div class="footer-left">
         <h3>Explore Our Page</h3>
-        <a href="index.php">Home</a><br>
-        <a href="menu.php">Menu</a><br>
-        <a href="about.php">About Us</a><br>
-        <a href="contact.php">Contact Us</a><br>
+        <a href="./index.php">Home</a><br>
+        <a href="customer/menu.php">Menu</a><br>
+        <a href="customer/about.php">About Us</a><br>
+        <a href="customer/contact.php">Contact Us</a><br>
       </div>
 
       <!-- Right Column -->
       <div class="footer-right">
         <h3>Staff & Admin</h3>
-        <a href="staff_login.php">Staff Login</a><br>
-        <a href="admin_login.php">Admin Login</a>
+        <a href="./staff/staff_login.php">Staff Login</a><br>
+        <a href="./admin/admin_login.php">Admin Login</a>
       </div>
     </div>
 
@@ -164,5 +164,6 @@ if (isset($conn)) {
     </div>
   </div>
 </footer>
+
 </body>
 </html>

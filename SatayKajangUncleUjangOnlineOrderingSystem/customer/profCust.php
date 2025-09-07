@@ -1,11 +1,11 @@
 <?php
 // Include the database connection file.
 // session_start() is expected to be in this file.
-require_once 'connect.php';
+require_once '../connect.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit;
 }
 
@@ -39,42 +39,42 @@ if (isset($_SESSION['error_message'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Profile</title>
-    <link rel="stylesheet" href="CSS/base.css">
-    <link rel="stylesheet" href="CSS/header.css">
-    <link rel="stylesheet" href="CSS/footer.css">
-    <link rel="stylesheet" href="CSS/profCust.css">
+    <link rel="stylesheet" href="../CSS/base.css">
+    <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="stylesheet" href="../CSS/profCust.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
 <header>
-    <div class="container">
-        <div class="logo-and-title">
-            <div class="logo-circle">
-                <img src="image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
+        <div class="container">
+            <div class="logo-and-title">
+                <div class="logo-circle">
+                    <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
+                </div>
+                <h1><a href="../index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
-            <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
+              <nav>
+                <ul>
+                    <li><a href="../index.php">Home</a></li>
+                    <li><a href="menu.php">Menu</a></li>
+                    <li><a href="about.php">About us</a></li>
+                    <li><a href="contact.php">Contact us</a></li>
+                    <?php if ($is_loggedin): ?>
+                        <li><a href="profCust.php">Profile</a></li>
+                    <?php else: ?>
+                    <li>
+                        <a href="../register.php" class="btn">Register</a>
+                    </li>
+                    <li>
+                        <a href="../login.php" class="btn">Login</a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="about.php">About us</a></li>
-                <li><a href="contact.php">Contact us</a></li>
-                <?php if ($is_loggedin): ?>
-                  <li><a href="profCust.php">Profile</a></li>
-                <?php else: ?>
-                <li>
-                    <a href="register.php" class="btn">Register</a>
-                </li>
-                <li>
-                    <a href="login.php" class="btn active">Login</a>
-                </li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </div>
-</header>
+    </header>
 
 <main>
   <section class="profile">
@@ -126,8 +126,8 @@ if (isset($_SESSION['error_message'])) {
     <button type="button" id="edit-btn" class="btn">Edit Profile</button>
     <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;">Save Changes</button>
     <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
-    <a href="change_pass.php" class="btn">Change Password</a><br><br>
-    <a href="logout.php" class="btn">Logout</a>
+    <a href="../change_pass.php" class="btn">Change Password</a><br><br>
+    <a href="../logout.php" class="btn">Logout</a>
   </div>
 </form>
 
@@ -177,17 +177,17 @@ if (isset($_SESSION['error_message'])) {
       <!-- Left Column -->
       <div class="footer-left">
         <h3>Explore Our Page</h3>
-        <a href="index.php">Home</a><br>
-        <a href="menu.php">Menu</a><br>
-        <a href="about.php">About Us</a><br>
-        <a href="contact.php">Contact Us</a><br>
+        <a href="../index.php">Home</a><br>
+        <a href="./menu.php">Menu</a><br>
+        <a href="./about.php">About Us</a><br>
+        <a href="./contact.php">Contact Us</a><br>
       </div>
 
       <!-- Right Column -->
       <div class="footer-right">
         <h3>Staff & Admin</h3>
-        <a href="staff_login.php">Staff Login</a><br>
-        <a href="admin_login.php">Admin Login</a>
+        <a href="../staff/staff_login.php">Staff Login</a><br>
+        <a href="../admin/admin_login.php">Admin Login</a>
       </div>
     </div>
 
@@ -204,6 +204,6 @@ if (isset($_SESSION['error_message'])) {
 
 
 
-<script src="script/profCust.js"></script>
+<script src="../script/profCust.js"></script>
 </body>
 </html>

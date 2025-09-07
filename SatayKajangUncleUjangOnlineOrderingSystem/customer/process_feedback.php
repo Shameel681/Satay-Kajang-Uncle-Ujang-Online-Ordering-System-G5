@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'connect.php';
+include '../connect.php';
 
 // Start a session if one is not already started
 if (session_status() === PHP_SESSION_NONE) {
@@ -79,6 +79,6 @@ if (!empty($errors)) {
 }
 
 // Redirect back to the contact page
-header("Location: contact.php");
+header("Location: ../customer/contact.php");
 exit;
 ?>
