@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn">Update Password</button>
         </form>
-        <p><a href="../customer/profCust.php">Back to Profile</a></p>
+        <p><a href="./customer/profCust.php">Back to Profile</a></p>
     </div>
 </body>
 </html>
