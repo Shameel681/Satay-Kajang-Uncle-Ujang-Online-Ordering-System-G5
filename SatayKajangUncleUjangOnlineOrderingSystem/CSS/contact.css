@@ -98,6 +98,7 @@ margin-bottom: 15px;
     font-weight: 800 !important;     /* bold */
     color: #2c3e50;
     margin-bottom: 15px;
+    font-family: 'Crete Round', sans-serif;
 }
 
 .contact-card p {
@@ -105,6 +106,7 @@ margin-bottom: 15px;
     font-weight: 600 !important;     /* bold */
     color: #2c3e50;
     margin: 8px 0;
+    font-family: 'Crete Round', sans-serif;
 }
 
 .contact-card a {

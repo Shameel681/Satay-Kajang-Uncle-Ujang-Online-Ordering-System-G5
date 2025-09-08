@@ -118,7 +118,7 @@ if ($is_loggedin) {
                     <div class="contact-card">
                         <i class="fas fa-clock"></i>
                         <h3>Opening Hours</h3>
-                        <p>Monday-Friday: 6.00pm - 11.00pm<br>Saturday-Sunday: 5.00pm - 11pm<br><br><b>Close will be announce.</b></p>
+                        <p>Monday-Friday: 6.00pm - 11.00pm<br>Saturday-Sunday: 5.00pm - 11.00pm<br><br><b>Close will be announce.</b></p>
                     </div>
                     <div class="contact-card">
                         <i class="fas fa-phone"></i>
