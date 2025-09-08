@@ -173,14 +173,14 @@ footer .social-links a:hover {
 
 .login-form h2 {
     font-family: 'Anton', sans-serif;
-    color: #3f6068; /* Slightly different from customer login */
+    color: #f07b3f;; /* Slightly different from customer login */
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
 }
 
 .login-form p {
     font-size: 1.1rem;
-    color: #666;
+    color: #f07b3f;;
     margin-bottom: 2rem;
 }
 
@@ -200,7 +200,7 @@ footer .social-links a:hover {
 .form-group label {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #3f6068;
+    color: #f07b3f;;
 }
 
 .form-group input {
