@@ -123,7 +123,7 @@ if ($is_loggedin) {
                     <div class="contact-card">
                         <i class="fas fa-phone"></i>
                         <h3>Contact Number</h3>
-                        <p>Phone: 011-1138-3819 / 01162226128<br>
+                        <p>Phone: 011-1138-3819<br>
                         <p>Email: <a href="mailto:toonnpow3@gmail.com">toonnpow3@gmail.com</a></p>
                     </div>
                 </div>

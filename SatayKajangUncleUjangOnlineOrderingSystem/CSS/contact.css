@@ -60,26 +60,29 @@ font-family: 'Crete Round', sans-serif;
 }
 
 .contact-info {
-display: flex;
-justify-content: space-around;
-flex-wrap: wrap;
-gap: 30px;
-margin-bottom: 100px;
-align-items: stretch;
+    display: flex;
+    justify-content: center;   /* rapat tengah */
+    gap: 40px;                 /* jarak antara card */
+    flex-wrap: nowrap;         /* elak jatuh ke bawah selagi muat */
 }
+
 
 .contact-card {
     background: #fff;
-    padding: 40px !important;        /* force bigger padding */
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    width: 320px !important;         /* force bigger width */
-    min-height: 280px !important;    /* ensures equal height */
+    padding: 50px 35px;   /* lebih lega */
+    border-radius: 14px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    text-align: left;     /* lebih kemas utk alamat / maklumat */
+    width: 380px;         /* lebih lebar */
+    min-height: 320px;    /* lebih tinggi */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: center;         /* centers content vertically */
+    justify-content: flex-start;
+    line-height: 1.6;     /* ruang antara teks */
+    flex: 1 1 300px;
+    max-width: 350px;
+    margin-bottom: 80px;
 }
 
 .contact-card:hover {
@@ -88,26 +91,32 @@ box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .contact-card i {
-font-size: 2rem;
-color: #e67e22;
-margin-bottom: 15px;
+    font-size: 2.4rem;
+    color: #e67e22;
+    margin-bottom: 18px;
+    text-align: center;   /* kekalkan icon tengah */
 }
 
 .contact-card h3 {
-    font-size: 2rem !important;      /* bigger */
-    font-weight: 800 !important;     /* bold */
+    font-size: 1.6rem;    /* kecil sikit supaya lebih kemas */
+    font-weight: 700;
     color: #2c3e50;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    text-align: center;   /* kekalkan tajuk tengah */
     font-family: 'Crete Round', sans-serif;
 }
 
+
 .contact-card p {
-    font-size: 1.2rem !important;    /* bigger */
-    font-weight: 600 !important;     /* bold */
-    color: #2c3e50;
-    margin: 8px 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #444;
+    margin: 8px 0;          /* tambah sikit jarak */
+    line-height: 1.5;       /* lebih selesa dibaca */
     font-family: 'Crete Round', sans-serif;
 }
+
+
 
 .contact-card a {
     font-size: 1.2rem !important;
