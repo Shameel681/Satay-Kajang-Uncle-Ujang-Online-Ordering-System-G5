@@ -185,8 +185,10 @@ footer .social-links a:hover {
 }
 
 .login-form form {
+    max-height: 120rem;
     display: flex;
     flex-direction: column;
+    margin-bottom: 5rem;
     gap: 1.5rem;
     padding: 0 2rem;
     text-align: left;
@@ -198,6 +200,7 @@ footer .social-links a:hover {
 }
 
 .form-group label {
+    margin-top: 1rem;
     font-weight: bold;
     margin-bottom: 5px;
     color: #3f6068;;
@@ -222,6 +225,7 @@ footer .social-links a:hover {
     padding: 15px;
     font-size: 1.2rem;
     margin-top: 1rem;
+    margin-bottom: 3rem;
     display: inline-block;
     background-color: #f07b3f;
     color: white;
