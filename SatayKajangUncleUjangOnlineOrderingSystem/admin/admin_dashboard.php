@@ -1,6 +1,6 @@
 <?php
 // admin_dashboard.php
-session_start();
+require_once '../connect.php';
 
 // Example session check for admin (modify based on your login system)
 $is_loggedin = isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true;
@@ -30,15 +30,15 @@ if (!$is_loggedin) {
               <div class="logo-circle">
                   <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
               </div>
-              <h1><a href="../index.php">Satay Kajang Uncle Ujang</a></h1>
+              <h1><a href="../admin/admin_dashboard.php">Satay Kajang Uncle Ujang</a></h1>
           </div>
           <nav>
               <ul>
-                  <li><a href="../index.php">Home</a></li>
-                  <li><a href="../customer/menu.php">Menu</a></li>
-                  <li><a href="../customer/about.php">About us</a></li>
-                  <li><a href="../customer/contact.php">Contact us</a></li>
-                  <li><a href="admin_dashboard.php">Dashboard</a></li>
+                  <li><a href="../admin/admin_dashboard.php">Dashboard</a></li>
+                  <li><a href="../admin/admincustomer.php">Manage Customer</a></li>
+                  <li><a href="../admin/adminmenu.php">Manage Menu</a></li>
+                  <li><a href="../admin/adminorder.php">Order</a></li>
+                  <li><a href="../admin/adminsales.php">Sales</a></li>
                   <li><a href="admin_logout.php" class="btn">Logout</a></li>
               </ul>
           </nav>
@@ -54,22 +54,22 @@ if (!$is_loggedin) {
           <div class="card">
               <h3>Manage Customers</h3>
               <p>View, edit, or remove customer accounts.</p>
-              <a href="manage_customers.php" class="btn">Go</a>
+              <a href="../admin/admincustomer.php" class="btn">Go</a>
           </div>
           <div class="card">
               <h3>Manage Menu</h3>
               <p>Add, update, or delete menu items.</p>
-              <a href="manage_menu.php" class="btn">Go</a>
+              <a href="../admin/adminmenu.php" class="btn">Go</a>
           </div>
           <div class="card">
               <h3>Manage Orders</h3>
               <p>Track and manage customer orders.</p>
-              <a href="manage_orders.php" class="btn">Go</a>
+              <a href="../admin/adminorder.php" class="btn">Go</a>
           </div>
           <div class="card">
               <h3>Reports</h3>
               <p>View sales and performance reports.</p>
-              <a href="reports.php" class="btn">Go</a>
+              <a href="../admin/adminsales.php" class="btn">Go</a>
           </div>
       </div>
   </main>
