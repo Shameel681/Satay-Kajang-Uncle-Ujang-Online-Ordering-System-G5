@@ -54,46 +54,85 @@ if (!$is_loggedin) {
             <h1>Welcome, Admin!</h1>
             <p>Manage the system efficiently with the tools below.</p>
         </header>
-
-        <section class="dashboard-cards">
-            <div class="card">
-                <i class="fa-solid fa-users card-icon"></i>
-                <h3>Manage Customers</h3>
-                <p>View, edit, or remove customer accounts.</p>
-                <a href="admincustomer.php" class="btn">Go</a>
+        
+        <!-- Quick Stats -->
+    <section class="stats-cards">
+        <div class="stat-card">
+            <i class="fa-solid fa-users"></i>
+            <div>
+                <h3>Customers</h3>
+                <p>345</p>
             </div>
-
-            <div class="card">
-                <i class="fa-solid fa-utensils card-icon"></i>
-                <h3>Manage Staff</h3>
-                <p>Add, update, or delete menu items.</p>
-                <a href="adminstaff.php" class="btn">Go</a>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-user-tie"></i>
+            <div>
+                <h3>Staff</h3>
+                <p>12</p>
             </div>
-
-            <div class="card">
-                <i class="fa-solid fa-utensils card-icon"></i>
-                <h3>Manage Menu</h3>
-                <p>Add, update, or delete menu items.</p>
-                <a href="adminmenu.php" class="btn">Go</a>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-box"></i>
+            <div>
+                <h3>Orders</h3>
+                <p>98</p>
             </div>
-
-            <div class="card">
-                <i class="fa-solid fa-box card-icon"></i>
-                <h3>Manage Orders</h3>
-                <p>Track and manage customer orders.</p>
-                <a href="adminorder.php" class="btn">Go</a>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <div>
+                <h3>Sales</h3>
+                <p>RM 12,540</p>
             </div>
+        </div>
+    </section>
 
-            <div class="card">
-                <i class="fa-solid fa-chart-line card-icon"></i>
-                <h3>Reports</h3>
-                <p>View sales and performance reports.</p>
-                <a href="adminsales.php" class="btn">Go</a>
-            </div>
-        </section>
-    </main>
+    <!-- Charts -->
+    <section class="charts">
+        <div class="chart-card">
+            <h3>Sales Overview</h3>
+            <canvas id="salesChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h3>Orders Breakdown</h3>
+            <canvas id="ordersChart"></canvas>
+        </div>
+    </section>
+</main>
 
-</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Sales chart
+    const ctx1 = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+            datasets: [{
+                label: 'Sales (RM)',
+                data: [1200, 1900, 3000, 2500, 2800, 3500, 3000],
+                borderColor: '#e67e22',
+                backgroundColor: 'rgba(230, 126, 34, 0.1)',
+                fill: true
+            }]
+        }
+    });
+
+    // Orders chart
+    const ctx2 = document.getElementById('ordersChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Completed', 'Pending', 'Cancelled'],
+            datasets: [{
+                data: [70, 20, 10],
+                backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
+            }]
+        }
+    });
+</script>
+
+        
 
 <script>
 document.getElementById("adminDropdown").addEventListener("click", function() {
