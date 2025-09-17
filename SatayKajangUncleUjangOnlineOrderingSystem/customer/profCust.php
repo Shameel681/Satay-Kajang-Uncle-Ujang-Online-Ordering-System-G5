@@ -16,7 +16,7 @@ $customer_id = $_SESSION['customer_id'];
 $is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 
 // Prepare a SELECT statement to get the customer's current data
-$stmt = $conn->prepare("SELECT name, email, phone_no, address FROM customer WHERE customer_id = ?");
+$stmt = $conn->prepare("SELECT name, email, phone_no, address, profile_image FROM customer WHERE customer_id = ?");
 $stmt->bind_param("i", $customer_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -88,11 +88,23 @@ if (isset($_SESSION['error_message'])) {
 
       <div class="profile-card">
         <div class="profile-header">
-          <i class="fa-solid fa-user-circle profile-icon"></i>
+          <?php if (!empty($customer['profile_image'])): ?>
+          <img src="../uploads/<?php echo htmlspecialchars($customer['profile_image']); ?>" 
+          alt="Profile Image" class="profile-photo">
+          <?php else: ?>
+              <i class="fa-solid fa-user-circle profile-icon"></i>
+          <?php endif; ?>
+
+          <!-- Upload form -->
+          <form action="uploadProfileimg.php" method="POST" enctype="multipart/form-data" class="upload-form">
+              <input type="file" name="profile_image" accept="image/png, image/jpeg" required>
+              <button type="submit" class="btn">Upload</button>
+          </form>
+
           <h2><?php echo htmlspecialchars($customer['name']); ?></h2>
           <p>Customer Profile</p>
         </div>
-        
+
         <!-- Profile Form -->
 <!-- Profile Form -->
 <form action="profUpdate.php" method="POST" id="profile-form">

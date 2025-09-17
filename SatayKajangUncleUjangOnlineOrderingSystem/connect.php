@@ -1,8 +1,8 @@
 <?php
-
-//session start\
-
-session_start();
+// Start session only if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Database connection details
 $servername = "localhost";
@@ -15,7 +15,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check if the connection was successful
 if ($conn->connect_error) {
-    // If the connection fails, stop the script and display an error message
     die("Connection failed: " . $conn->connect_error);
 }
 ?>

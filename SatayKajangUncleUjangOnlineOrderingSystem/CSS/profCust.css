@@ -135,5 +135,20 @@ body {
     border: 1px solid #ddd;
 }
 
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ff7f27;
+    margin-bottom: 10px;
+}
+.upload-form {
+    margin-top: 10px;
+}
+.upload-form input[type="file"] {
+    margin-bottom: 10px;
+}
+
 
 
