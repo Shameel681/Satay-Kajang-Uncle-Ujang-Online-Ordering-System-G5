@@ -30,9 +30,12 @@ body {
 
 .sidebar-header img {
     width: 80px;
-    border-radius: 50%;
+    height: 80px;
+    object-fit: cover;   
+    border-radius: 50%;  
     margin-bottom: 10px;
 }
+
 
 .sidebar-header h2 {
     font-size: 1.2rem;

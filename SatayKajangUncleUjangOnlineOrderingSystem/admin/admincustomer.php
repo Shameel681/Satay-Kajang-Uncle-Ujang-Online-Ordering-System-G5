@@ -40,22 +40,24 @@ $result = $conn->query($sql);
         </thead>
         <tbody>
             
-        <?php if ($result->num_rows > 0): ?>
+        <?php if ($result && $result->num_rows > 0): ?>
             <?php while($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td><?= $row['user_id']; ?></td>
-                    <td><?= htmlspecialchars($row['name']); ?></td>
-                    <td><?= htmlspecialchars($row['email']); ?></td>
-                    <td><?= htmlspecialchars($row['phone']); ?></td>
-                    <td><?= htmlspecialchars($row['address']); ?></td>
+                    <td><?php echo htmlspecialchars($row['user_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['email']); ?></td>
+                    <td><?php echo htmlspecialchars($row['phone']); ?></td>
+                    <td><?php echo htmlspecialchars($row['address']); ?></td>
                     <td>
-                        <span class="status <?= $row['status'] === 'active' ? 'active' : 'inactive'; ?>">
-                            <?= ucfirst($row['status']); ?>
+                        <span class="status <?php echo ($row['status'] === 'active') ? 'active' : 'inactive'; ?>">
+                            <?php echo ucfirst(htmlspecialchars($row['status'])); ?>
                         </span>
                     </td>
-                    <td><?= date("d M Y", strtotime($row['created_at'])); ?></td>
+                    <td><?php echo date("d M Y", strtotime($row['created_at'])); ?></td>
                     <td>
-                        <a href="editcust_admin.php?id=<?= $row['user_id']; ?>" class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</a>
+                        <a href="editcust_admin.php?id=<?php echo urlencode($row['user_id']); ?>" class="btn-edit">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </a>
                     </td>
                 </tr>
             <?php endwhile; ?>
