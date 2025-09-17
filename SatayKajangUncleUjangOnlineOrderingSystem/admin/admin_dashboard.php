@@ -2,109 +2,104 @@
 // admin_dashboard.php
 require_once '../connect.php';
 
-// Example session check for admin (modify based on your login system)
-$is_loggedin = isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true;
 
+// Check session admin
+$is_loggedin = isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true;
 if (!$is_loggedin) {
-    header("Location: admin_login.php");
+    header("Location: profAdmin.php");
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard - Satay Kajang Uncle Ujang</title>
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/header.css">
-  <link rel="stylesheet" href="../css/footer.css">
-  <link rel="stylesheet" href="../css/admin_dashboard.css">
+  <link rel="stylesheet" href="../CSS/admin_dashboard.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-      <div class="container">
-          <div class="logo-and-title">
-              <div class="logo-circle">
-                  <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
-              </div>
-              <h1><a href="../admin/admin_dashboard.php">Satay Kajang Uncle Ujang</a></h1>
-          </div>
-          <nav>
-              <ul>
-                  <li><a href="../admin/admin_dashboard.php">Dashboard</a></li>
-                  <li><a href="../admin/admincustomer.php">Manage Customer</a></li>
-                  <li><a href="../admin/adminmenu.php">Manage Menu</a></li>
-                  <li><a href="../admin/adminorder.php">Order</a></li>
-                  <li><a href="../admin/adminsales.php">Sales</a></li>
-                  <li><a href="admin_logout.php" class="btn">Logout</a></li>
-              </ul>
-          </nav>
-      </div>
-  </header>
+<div class="dashboard-wrapper">
 
-  <!-- Main Admin Dashboard Content -->
-  <main class="dashboard-container">
-      <h2>Welcome, Admin!</h2>
-      <p>Here you can manage the system.</p>
+    <!-- Sidebar -->
+    <!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-header" id="adminDropdown">
+        <img src="../image/LogoSataysebenarReal.png" alt="Logo">
+        <h2>Admin Panel <i class="fa-solid fa-caret-down"></i></h2>
 
-      <div class="dashboard-cards">
-          <div class="card">
-              <h3>Manage Customers</h3>
-              <p>View, edit, or remove customer accounts.</p>
-              <a href="../admin/admincustomer.php" class="btn">Go</a>
-          </div>
-          <div class="card">
-              <h3>Manage Menu</h3>
-              <p>Add, update, or delete menu items.</p>
-              <a href="../admin/adminmenu.php" class="btn">Go</a>
-          </div>
-          <div class="card">
-              <h3>Manage Orders</h3>
-              <p>Track and manage customer orders.</p>
-              <a href="../admin/adminorder.php" class="btn">Go</a>
-          </div>
-          <div class="card">
-              <h3>Reports</h3>
-              <p>View sales and performance reports.</p>
-              <a href="../admin/adminsales.php" class="btn">Go</a>
-          </div>
-      </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-row">
-        <!-- Left Column -->
-        <div class="footer-left">
-          <h3>Explore Our Page</h3>
-          <a href="../index.php">Home</a><br>
-          <a href="../customer/menu.php">Menu</a><br>
-          <a href="../customer/about.php">About Us</a><br>
-          <a href="../customer/contact.php">Contact Us</a><br>
+        <!-- Dropdown Menu -->
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="profAdmin.php"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="admin_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
         </div>
-
-        <!-- Right Column -->
-        <div class="footer-right">
-          <h3>Staff & Admin</h3>
-          <a href="../staff/staff_login.php">Staff Login</a><br>
-          <a href="admin_login.php">Admin Login</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© 2025 Satay Kajang Uncle Ujang. All rights reserved.</p>
-        <div class="social-links">
-          <a href="#"><i class="fa-brands fa-facebook"></i></a>
-          <a href="#"><i class="fa-brands fa-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        </div>
-      </div>
     </div>
-  </footer>
+
+    <ul class="sidebar-menu">
+        <li><a href="admin_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+        <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
+        <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Staff</a></li>
+        <li><a href="adminmenu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
+        <li><a href="adminorder.php"><i class="fa-solid fa-box"></i> Orders</a></li>
+        <li><a href="adminsales.php"><i class="fa-solid fa-chart-line"></i> Sales</a></li>
+    </ul>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="dashboard-content">
+        <header class="dashboard-header">
+            <h1>Welcome, Admin!</h1>
+            <p>Manage the system efficiently with the tools below.</p>
+        </header>
+
+        <section class="dashboard-cards">
+            <div class="card">
+                <i class="fa-solid fa-users card-icon"></i>
+                <h3>Manage Customers</h3>
+                <p>View, edit, or remove customer accounts.</p>
+                <a href="admincustomer.php" class="btn">Go</a>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-utensils card-icon"></i>
+                <h3>Manage Staff</h3>
+                <p>Add, update, or delete menu items.</p>
+                <a href="adminstaff.php" class="btn">Go</a>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-utensils card-icon"></i>
+                <h3>Manage Menu</h3>
+                <p>Add, update, or delete menu items.</p>
+                <a href="adminmenu.php" class="btn">Go</a>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-box card-icon"></i>
+                <h3>Manage Orders</h3>
+                <p>Track and manage customer orders.</p>
+                <a href="adminorder.php" class="btn">Go</a>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-chart-line card-icon"></i>
+                <h3>Reports</h3>
+                <p>View sales and performance reports.</p>
+                <a href="adminsales.php" class="btn">Go</a>
+            </div>
+        </section>
+    </main>
+
+</div>
+
+<script>
+document.getElementById("adminDropdown").addEventListener("click", function() {
+    this.classList.toggle("active");
+});
+</script>
 
 </body>
 </html>
