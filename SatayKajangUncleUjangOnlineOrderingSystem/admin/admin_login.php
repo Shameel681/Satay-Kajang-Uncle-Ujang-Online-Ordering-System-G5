@@ -127,6 +127,11 @@ if (isset($conn)) {
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" required>
                     </div>
+
+                    <p class="forgot-link" style="text-align: right; margin-top: -10px; font-size: 0.9rem; color: #666;">
+                            <a href="admin_forgot.php" style="color: #f07b3f; text-decoration: none; font-weight: bold;">Forgot password?</a>
+                    </p>
+
                     <button type="submit" class="btn">Login</button>
                 </form>
             </div>

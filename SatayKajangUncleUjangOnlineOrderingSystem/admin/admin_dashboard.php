@@ -2,7 +2,6 @@
 // admin_dashboard.php
 require_once '../connect.php';
 
-
 // Check session admin
 $is_loggedin = isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true;
 if (!$is_loggedin) {
@@ -42,7 +41,7 @@ if (!$is_loggedin) {
         <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
         <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Staff</a></li>
         <li><a href="adminmenu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
-        <li><a href="adminorder.php"><i class="fa-solid fa-box"></i> Orders</a></li>
+        <li><a href="admin_order.php"><i class="fa-solid fa-box"></i> Orders</a></li>
         <li><a href="adminsales.php"><i class="fa-solid fa-chart-line"></i> Sales</a></li>
     </ul>
 </aside>
