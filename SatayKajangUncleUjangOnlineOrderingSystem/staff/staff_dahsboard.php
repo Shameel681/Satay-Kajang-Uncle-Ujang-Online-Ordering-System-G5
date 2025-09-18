@@ -16,7 +16,7 @@ if (!isset($_SESSION['staff_loggedin']) || $_SESSION['staff_loggedin'] !== true)
     <link rel="stylesheet" href="../CSS/base.css">
     <link rel="stylesheet" href="../CSS/header.css">
     <link rel="stylesheet" href="../CSS/footer.css">
-    <link rel="stylesheet" href="..//CSS/staff_dashboard.css">
+    <link rel="stylesheet" href="../CSS/staff_dashboard.css">
 </head>
 <body>
 

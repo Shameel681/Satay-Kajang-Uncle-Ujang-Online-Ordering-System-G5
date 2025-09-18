@@ -39,8 +39,8 @@ if (isset($_SESSION['error_message'])) {
     <title>Admin Profile</title>
     <link rel="stylesheet" href="../CSS/base.css">
     <link rel="stylesheet" href="../CSS/header.css">
-    <link rel="stylesheet" href="../CSS/footer.css">
     <link rel="stylesheet" href="../CSS/profAdmin.css">
+    <link rel="stylesheet" href="../CSS/register.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -118,12 +118,6 @@ if (isset($_SESSION['error_message'])) {
     </div>
   </section>
 </main>
-
-<footer>
-  <div class="footer-container">
-    <p>© 2025 Satay Kajang Uncle Ujang. Admin Panel</p>
-  </div>
-</footer>
 
 <script>
   const editBtn = document.getElementById("edit-btn");

@@ -119,8 +119,8 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
       <!-- Right Column -->
       <div class="footer-right">
         <h3>Staff & Admin</h3>
-        <a href="./staff/staff_login.php">Staff Login</a><br>
-        <a href="./admin/admin_login.php">Admin Login</a>
+        <a href="../staff/staff_login.php">Staff Login</a><br>
+        <a href="../admin/admin_login.php">Admin Login</a>
       </div>
     </div>
 

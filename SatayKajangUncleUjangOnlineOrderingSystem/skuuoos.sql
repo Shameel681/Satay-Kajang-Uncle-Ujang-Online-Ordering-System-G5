@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2025 at 11:53 PM
+-- Generation Time: Sep 18, 2025 at 08:46 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,20 +31,25 @@ CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
   `admin_name` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
+  `phone_no` varchar(20) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `is_verified` tinyint(1) NOT NULL DEFAULT 0,
   `verify_token` varchar(255) DEFAULT NULL,
   `last_login` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `reset_token` varchar(255) DEFAULT NULL,
+  `reset_expires` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `password`, `is_verified`, `verify_token`, `last_login`, `created_at`, `updated_at`) VALUES
-(3, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$J149gfHywEFwTNTZStdDDeF/8bfLsEYp.uANEeycci5j.nXuqvMRG', 1, NULL, '2025-09-09 05:48:39', '2025-09-09 05:43:46', '2025-09-09 05:48:39');
+INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `phone_no`, `address`, `password`, `is_verified`, `verify_token`, `last_login`, `created_at`, `updated_at`, `reset_token`, `reset_expires`) VALUES
+(3, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', NULL, NULL, '$2y$10$J149gfHywEFwTNTZStdDDeF/8bfLsEYp.uANEeycci5j.nXuqvMRG', 1, NULL, '2025-09-09 05:48:39', '2025-09-09 05:43:46', '2025-09-09 05:48:39', NULL, NULL),
+(5, 'Muhammad Fikri Bin Mawardi', 'toonpow3@gmail.com', '0119898256', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', '$2y$10$ByarGQwCoC2eLLtXq17pQuMLBrPpvXeLssb9QZVnmhEZ0QSFWSUdy', 1, NULL, '2025-09-18 14:04:00', '2025-09-09 06:32:48', '2025-09-18 14:04:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -63,19 +68,21 @@ CREATE TABLE `customer` (
   `reset_expires` datetime DEFAULT NULL,
   `reset_expiry` datetime DEFAULT NULL,
   `is_verified` tinyint(1) NOT NULL DEFAULT 0,
-  `verify_token` varchar(64) DEFAULT NULL
+  `verify_token` varchar(64) DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`, `reset_expiry`, `is_verified`, `verify_token`) VALUES
-(19, 'MUHAMMAD SUHAIMI BIN MOHD SHAM', 'm.suhaimipro@gmail.com', '$2y$10$i2Vv1tNp/a1nVGc61hnZbOoIRpasC0Z1mlPFQRTVdRQJ.Bw4QaD4K', '01113277665', NULL, NULL, NULL, NULL, 0, '91b93fa6d1fbbd6507b59041144081f4'),
-(20, 'MUHAMMAD ANAS IZZUDIN BIN MUAMAR ', 'anasizzuddin@graduate.utm.my', '$2y$10$0CEJ4RszQYGHE60cw.YT1uQVYRXvHmx3vkN.eB8Cx0E9qlbaHpnzq', '0102045904', NULL, NULL, NULL, NULL, 0, '4a37db85f42c739ce2adaa7d1489fcbd'),
-(21, 'ZUHAIKAL AIMAN BIN ZAILAN', 'zuhaikal566@gmail.com', '$2y$10$aQAb6.4Xu7BK2YViunQ.1.gYdRmcqTFptagC7AbtiKuhC.yh4dt6S', '01133114674', NULL, NULL, NULL, NULL, 0, 'ac51b47d0095cbc2aa865c3d847f1a99'),
-(22, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow3@gmail.com', '$2y$10$rAcVn8qWtVLl/doUGJEArOdBjc2HBQX24saGP9tJ0GEk6ThsZuApa', '011-6222 6128', NULL, NULL, NULL, NULL, 0, '199eb125e30897606e264033f6698275'),
-(33, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$AexpywrEw4bh.ogj/TizROlEUHR/J.zKpTCSVdsPyqbX9sVqw1LtO', '01110084626', NULL, NULL, NULL, NULL, 1, NULL);
+INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`, `reset_expiry`, `is_verified`, `verify_token`, `profile_image`) VALUES
+(19, 'MUHAMMAD SUHAIMI BIN MOHD SHAM', 'm.suhaimipro@gmail.com', '$2y$10$i2Vv1tNp/a1nVGc61hnZbOoIRpasC0Z1mlPFQRTVdRQJ.Bw4QaD4K', '01113277665', NULL, NULL, NULL, NULL, 0, '91b93fa6d1fbbd6507b59041144081f4', NULL),
+(20, 'MUHAMMAD ANAS IZZUDIN BIN MUAMAR ', 'anasizzuddin@graduate.utm.my', '$2y$10$0CEJ4RszQYGHE60cw.YT1uQVYRXvHmx3vkN.eB8Cx0E9qlbaHpnzq', '0102045904', NULL, NULL, NULL, NULL, 0, '4a37db85f42c739ce2adaa7d1489fcbd', NULL),
+(21, 'ZUHAIKAL AIMAN BIN ZAILAN', 'zuhaikal566@gmail.com', '$2y$10$aQAb6.4Xu7BK2YViunQ.1.gYdRmcqTFptagC7AbtiKuhC.yh4dt6S', '01133114674', NULL, NULL, NULL, NULL, 0, 'ac51b47d0095cbc2aa865c3d847f1a99', NULL),
+(33, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$AexpywrEw4bh.ogj/TizROlEUHR/J.zKpTCSVdsPyqbX9sVqw1LtO', '01110084626', NULL, NULL, NULL, NULL, 1, NULL, NULL),
+(34, 'FIKRI MAWARDI', 'toonpow43@gmail.com', '$2y$10$Vilyo7.x70A2Hd.IRUB9MeiP8gOjZclMnPbQw1G7rJ8H0tDs6PJV2', '01162226128', NULL, NULL, NULL, NULL, 0, 'bf6ce620ceb5012c648692cf7e0f8aca', NULL),
+(35, 'FIKRI MAWARDI', 'toonpow3@gmail.com', '$2y$10$YmwIMqggLTllmpoC7KxwfeoDe7fzzIhU421e.L3yhcWA4ENjwXx9S', '01162226128', NULL, NULL, NULL, NULL, 0, '70068c343d2eb9622fbf6d7ec37e91a6', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +138,8 @@ INSERT INTO `feedback_guest` (`id`, `guest_name`, `guest_email`, `feedback`, `cr
 (28, 'shameel', 'shameel@hotmail.com', 'makanan 10/10', '2025-08-17 19:23:15'),
 (29, 'MUHAMMAD ZAKUAN', 'mfitrizakuan@gmail.com', 'MAKANAN RASA BIASA BIASA JE', '2025-08-17 19:32:03'),
 (30, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', 'test 1', '2025-08-28 06:30:33'),
-(31, 'fitrizakuanazmee', 'm.fitreezakuanazmee@gmail.com', 'syedap', '2025-09-07 09:56:33');
+(31, 'fitrizakuanazmee', 'm.fitreezakuanazmee@gmail.com', 'syedap', '2025-09-07 09:56:33'),
+(32, 'MUHAMMAD SYABIL AMSYAR', 'toonpow43@gmail.com', 'gasjgdjgdggh', '2025-09-09 13:31:44');
 
 -- --------------------------------------------------------
 
@@ -146,10 +154,17 @@ CREATE TABLE `staff` (
   `password` varchar(255) NOT NULL,
   `phone_no` varchar(20) DEFAULT NULL,
   `address` text DEFAULT NULL,
-  `role` enum('Admin','Staff') DEFAULT 'Staff',
   `reset_token` varchar(100) DEFAULT NULL,
   `reset_expires` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`staff_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`) VALUES
+(101, 'Toon Pow 1', 'toonpow3@gmail.com', '$2y$10$Zbq2n3YkF7gNQdFhnx9rCe3w7I0JfD3B5bzQY8rZK5xM7vRjY9YxG', NULL, NULL, NULL, NULL),
+(102, 'shameel', 'toonpow43@gmail.com', '$2y$10$k6gaszO/75eAGJTH19Oj5eyFCXv3JcQpBuPebgmmW5WzStDJ66bMi', NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -196,13 +211,13 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `feedback_customer`
@@ -214,13 +229,13 @@ ALTER TABLE `feedback_customer`
 -- AUTO_INCREMENT for table `feedback_guest`
 --
 ALTER TABLE `feedback_guest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
