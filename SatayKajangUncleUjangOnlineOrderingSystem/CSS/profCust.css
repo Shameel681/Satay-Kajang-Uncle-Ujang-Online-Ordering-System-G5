@@ -139,10 +139,13 @@ body {
     width: 120px;
     height: 120px;
     border-radius: 50%;
+    overflow: hidden; 
     object-fit: cover;
     border: 3px solid #ff7f27;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
+    display: block; 
 }
+
 .upload-form {
     margin-top: 10px;
 }
@@ -150,5 +153,25 @@ body {
     margin-bottom: 10px;
 }
 
+/* Hide default file input */
+.upload-form input[type="file"] {
+    display: none;
+}
+
+/* Custom button style */
+.upload-btn {
+    display: inline-block;
+    background: #ff7f27;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.upload-btn:hover {
+    background: #e56e1f;
+}
 
 
