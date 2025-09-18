@@ -94,11 +94,11 @@ if (isset($_SESSION['error_message'])) {
           <?php else: ?>
               <i class="fa-solid fa-user-circle profile-icon"></i>
           <?php endif; ?>
-
           <!-- Upload form -->
           <form action="uploadProfileimg.php" method="POST" enctype="multipart/form-data" class="upload-form">
-              <input type="file" name="profile_image" accept="image/png, image/jpeg" required>
-              <button type="submit" class="btn">Upload</button>
+              <label for="profile_image" class="upload-btn">Upload Profile Image</label>
+              <input type="file" id="profile_image" name="profile_image" accept="image/png, image/jpeg" required>
+              <button type="submit" class="btn">Save</button>
           </form>
 
           <h2><?php echo htmlspecialchars($customer['name']); ?></h2>
@@ -133,6 +133,7 @@ if (isset($_SESSION['error_message'])) {
     <label>Address:</label>
     <textarea name="address" id="address" rows="3" disabled><?php echo htmlspecialchars($customer['address']); ?></textarea>
   </div>
+  
 
   <div class="profile-actions">
     <button type="button" id="edit-btn" class="btn">Edit Profile</button>
