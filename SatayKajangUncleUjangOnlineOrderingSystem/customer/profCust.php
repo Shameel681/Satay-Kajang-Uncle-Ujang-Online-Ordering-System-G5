@@ -16,8 +16,13 @@ $customer_id = $_SESSION['customer_id'];
 $is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 
 // Prepare a SELECT statement to get the customer's current data
-$stmt = $conn->prepare("SELECT name, email, phone_no, address, profile_image FROM customer WHERE customer_id = ?");
+$stmt = $conn->prepare("SELECT name, email, phone_no, address FROM customer WHERE customer_id = ?");
+if (!$stmt) {
+    die("SQL Prepare Failed: " . $conn->error);
+}
 $stmt->bind_param("i", $customer_id);
+
+
 $stmt->execute();
 $result = $stmt->get_result();
 $customer = $result->fetch_assoc();
@@ -115,12 +120,10 @@ if (isset($_SESSION['error_message'])) {
            disabled>
   </div>
 
-  <div class="form-group">
+
+    <div class="form-group">
     <label>Email:</label>
-    <input type="email" name="email" id="email" 
-           value="<?php echo htmlspecialchars($customer['email']); ?>" 
-           disabled>
-  </div>
+    <input type="email" name="email" value="<?php echo htmlspecialchars($customer['email']); ?>" disabled readonly class="readonly-field">
 
   <div class="form-group">
     <label>Phone:</label>

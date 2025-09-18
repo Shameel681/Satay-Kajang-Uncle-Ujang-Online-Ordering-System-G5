@@ -21,8 +21,11 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPL
         $target = $upload_dir . $new_name;
 
         if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $target)) {
-            $stmt = $conn->prepare("UPDATE customer SET profile_image = ? WHERE customer_id = ?");
-            $stmt->bind_param("si", $new_name, $customer_id);
+           $stmt = $conn->prepare("SELECT name, email, phone_no, address FROM customer WHERE customer_id = ?");
+        if (!$stmt) {
+             die("SQL Prepare Failed: " . $conn->error);
+            }
+            $stmt->bind_param("i", $customer_id);
             $stmt->execute();
             $stmt->close();
             $_SESSION['success_message'] = "Profile image updated successfully!";
