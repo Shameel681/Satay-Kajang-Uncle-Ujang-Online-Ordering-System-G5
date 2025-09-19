@@ -13,6 +13,24 @@ if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true)
 $message = '';
 $message_type = '';
 
+// ========== DELETE STAFF ==========
+if (isset($_GET['delete_id'])) {
+    $delete_id = intval($_GET['delete_id']);
+    $delete_sql = "DELETE FROM staff WHERE staff_id=?";
+    $stmt = $conn->prepare($delete_sql);
+    $stmt->bind_param("i", $delete_id);
+
+    if ($stmt->execute()) {
+        $message = "Staff deleted successfully.";
+        $message_type = "success";
+    } else {
+        $message = "Failed to delete staff.";
+        $message_type = "error";
+    }
+    $stmt->close();
+}
+
+// ========== ADD STAFF ==========
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -22,6 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (empty($name) || empty($email) || empty($phone_no) || empty($password) || empty($address)) {
         $message = "All fields are required.";
+        $message_type = "error";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = "Please enter a valid email address (e.g., name@example.com).";
         $message_type = "error";
     } elseif (strlen($password) < 8) {
         $message = "Password must be at least 8 characters.";
@@ -50,11 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $row = $result->fetch_assoc();
             $staff_id = ($row['max_id'] ?? 100) + 1;
 
-            // Insert staff
-            $insert_sql = "INSERT INTO staff (staff_id, name, email, password) VALUES (?, ?, ?, ?)";
-$stmt = $conn->prepare($insert_sql);
-$stmt->bind_param("isss", $staff_id, $name, $email, $password_hash);
-
+            // Insert staff (include phone_no & address)
+            $insert_sql = "INSERT INTO staff (staff_id, name, email, phone_no, address, password, created_at) 
+                           VALUES (?, ?, ?, ?, ?, ?, NOW())";
+            $stmt = $conn->prepare($insert_sql);
+            $stmt->bind_param("isssss", $staff_id, $name, $email, $phone_no, $address, $password_hash);
 
             if ($stmt->execute()) {
                 // Send verification email
@@ -78,7 +99,7 @@ $stmt->bind_param("isss", $staff_id, $name, $email, $password_hash);
                         <p>Your staff account has been created by admin.</p>
                         <p>Staff ID: <b>$staff_id</b></p>
                         <p>Password: <b>$password</b></p>
-                        <p>Please login at: <a href='http://localhost/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem/staff/staff_login.php'>Staff Login</a></p>
+                        <p>Please login at: <a href='C:\xampp\htdocs\MASTER PROJECT - Satay Kajang Uncle Ujang Online Ordering System G05\SatayKajangUncleUjangOnlineOrderingSystem/staff/staff_login.php'>Staff Login</a></p>
                         <p>After login, you may change your password.</p>
                     ";
 
@@ -99,6 +120,11 @@ $stmt->bind_param("isss", $staff_id, $name, $email, $password_hash);
         $check_stmt->close();
     }
 }
+
+// ========== FETCH STAFF ==========
+$staff_list = $conn->query("SELECT staff_id, name, email, phone_no, address, created_at, last_logged_in 
+                            FROM staff ORDER BY staff_id ASC");
+
 $conn->close();
 ?>
 
@@ -107,29 +133,74 @@ $conn->close();
 <head>
 <meta charset="UTF-8">
 <title>Manage Staff - Add Staff</title>
-<link rel="stylesheet" href="../CSS/base.css">
-<link rel="stylesheet" href="../CSS/header.css">
-<link rel="stylesheet" href="../CSS/register.css">
-<link rel="stylesheet" href="../CSS/login.css">
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../CSS/admincustomer.css">
+<link rel="stylesheet" href="../CSS/adminstaff.css">
 </head>
 <body>
+
 <header>
     <div class="container">
-        <h1>Admin Panel - Add Staff</h1>
+        <div class="logo-and-title">
+            <div class="logo-circle">
+                <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
+            </div>
+            <h1><a href="admin_dashboard.php">Admin Panel</a></h1>
+        </div>
         <nav>
             <ul>
                 <li><a href="admin_dashboard.php">Dashboard</a></li>
-                <li><a href="adminstaff.php" class="active">Manage Staff</a></li>
-                <li><a href="profAdmin.php">Profile</a></li>
+                <li><a href="admincustomer.php">Manage Customer</a></li>
+                <li><a href="adminstaff.php">Manage Staff</a></li>
+                <li><a href="manageadmin.php" class="active">Manage Admin</a></li> <li><a href="adminmenu.php">Manage Menu</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
 <main>
-<section class="add-staff">
+
+<section class="view-staff mt-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>All Staff</h2>
+            <button id="toggleFormBtn" class="btn btn-custom-register">Register New Staff</button>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th>
+                    <th>Created At</th><th>Last Login</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($staff_list && $staff_list->num_rows > 0): ?>
+                    <?php while ($staff = $staff_list->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo $staff['staff_id']; ?></td>
+                        <td><?php echo htmlspecialchars($staff['name']); ?></td>
+                        <td><?php echo htmlspecialchars($staff['email']); ?></td>
+                        <td><?php echo htmlspecialchars($staff['phone_no']); ?></td>
+                        <td><?php echo htmlspecialchars($staff['address']); ?></td>
+                        <td><?php echo $staff['created_at']; ?></td>
+                        <td><?php echo $staff['last_logged_in']; ?></td>
+                        <td>
+                            <a href="editstaff.php?id=<?php echo $staff['staff_id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="adminstaff.php?delete_id=<?php echo $staff['staff_id']; ?>" 
+                               class="btn btn-sm btn-danger" 
+                               onclick="return confirm('Are you sure you want to delete this staff?');">Delete</a>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr><td colspan="8">No staff found.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="add-staff" id="addStaffForm" style="display: none;">
     <div class="container">
         <h2>Add New Staff</h2>
         <?php if (!empty($message)): ?>
@@ -157,12 +228,21 @@ $conn->close();
                 <label>Address:</label>
                 <input type="text" name="address" required>
             </div>
-            <button type="submit" class="btn">Add Staff</button>
+            <button type="submit" class="btn btn-primary">Add Staff</button>
         </form>
     </div>
 </section>
-</main>
 
+<script>
+document.getElementById('toggleFormBtn').addEventListener('click', function() {
+    var form = document.getElementById('addStaffForm');
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
+});
+</script>
 
 </body>
 </html>

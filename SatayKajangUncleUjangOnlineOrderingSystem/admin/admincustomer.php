@@ -1,72 +1,155 @@
 <?php
-// admincustomer.php
+// admin/admincustomer.php
 require_once '../connect.php';
 
-// Check session admin
+// Initialize error message
+$error = "";
+
+// Check if admin is logged in
 if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true) {
-    header("Location: admin_login.php");
+    header("Location: profAdmin.php");
     exit;
 }
 
-// Fetch semua customer dari DB
-$sql = "SELECT user_id, name, email, phone, address, status, created_at FROM users WHERE role = 'customer'";
-$result = $conn->query($sql);
+// Handle Edit Customer
+if (isset($_POST['edit_customer'])) {
+    $id = $_POST['customer_id'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $phone_no = trim($_POST['phone_no']);
+    $address = trim($_POST['address']);
+
+    if (!preg_match('/^[0-9]{10,11}$/', $phone_no)) {
+        $error = "Phone number must be 10 or 11 digits only.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/@.+\..+$/', $email)) {
+        $error = "Please enter a valid email address (must include @ and .com).";
+    } else {
+        $stmt = $conn->prepare("UPDATE customer SET name=?, email=?, phone_no=?, address=?, updated_at=NOW() WHERE customer_id=?");
+        $stmt->bind_param("ssssi", $name, $email, $phone_no, $address, $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+}
+
+// Handle Delete Customer
+if (isset($_GET['delete'])) {
+    $id = intval($_GET['delete']);
+    $stmt = $conn->prepare("DELETE FROM customer WHERE customer_id=?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Fetch all customers
+$result = $conn->query("SELECT * FROM customer ORDER BY created_at DESC");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Manage Customers</title>
-    <link rel="stylesheet" href="../css/admincustomer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<meta charset="UTF-8">
+<title>Manage Customers</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../CSS/admincustomer.css">
 </head>
 <body>
 
+<header>
+    <div class="container">
+        <div class="logo-and-title">
+            <div class="logo-circle">
+                <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
+            </div>
+            <h1><a href="admin_dashboard.php">Admin Panel</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.php">Dashboard</a></li>
+                <li><a href="admincustomer.php">Manage Customer</a></li>
+                <li><a href="adminstaff.php">Manage Staff</a></li>
+                <li><a href="manageadmin.php" class="active">Manage Admin</a></li> <li><a href="adminmenu.php">Manage Menu</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
 <div class="container">
-    <h1>Manage Customers</h1>
-    <table class="customer-table">
-        <thead>
+    <h1 class="mb-4">Manage Customers</h1>
+
+    <?php if (!empty($error)): ?>
+        <div class="alert alert-danger"><?= $error ?></div>
+    <?php endif; ?>
+
+    <!-- Customers Table -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone</th>
+                <th>Phone No</th>
                 <th>Address</th>
-                <th>Status</th>
-                <th>Joined</th>
+                <th>Created At</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            
-        <?php if ($result && $result->num_rows > 0): ?>
-            <?php while($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['user_id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['name']); ?></td>
-                    <td><?php echo htmlspecialchars($row['email']); ?></td>
-                    <td><?php echo htmlspecialchars($row['phone']); ?></td>
-                    <td><?php echo htmlspecialchars($row['address']); ?></td>
-                    <td>
-                        <span class="status <?php echo ($row['status'] === 'active') ? 'active' : 'inactive'; ?>">
-                            <?php echo ucfirst(htmlspecialchars($row['status'])); ?>
-                        </span>
-                    </td>
-                    <td><?php echo date("d M Y", strtotime($row['created_at'])); ?></td>
-                    <td>
-                        <a href="editcust_admin.php?id=<?php echo urlencode($row['user_id']); ?>" class="btn-edit">
-                            <i class="fa-solid fa-pen"></i> Edit
-                        </a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <tr><td colspan="8">No customers found</td></tr>
-        <?php endif; ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <tr>
+                <td><?= $row['customer_id'] ?></td>
+                <td><?= htmlspecialchars($row['name']) ?></td>
+                <td><?= htmlspecialchars($row['email']) ?></td>
+                <td><?= htmlspecialchars($row['phone_no']) ?></td>
+                <td><?= htmlspecialchars($row['address']) ?></td>
+                <td><?= $row['created_at'] ?></td>
+                <td>
+                    <!-- Edit Button -->
+                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['customer_id'] ?>">Edit</button>
+                    <!-- Delete Button -->
+                    <a href="?delete=<?= $row['customer_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this customer?')">Delete</a>
+                </td>
+            </tr>
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editModal<?= $row['customer_id'] ?>" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form method="POST">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit Customer</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="hidden" name="customer_id" value="<?= $row['customer_id'] ?>">
+                      <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($row['name']) ?>" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($row['email']) ?>" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Phone No</label>
+                        <input type="text" name="phone_no" class="form-control" value="<?= htmlspecialchars($row['phone_no']) ?>" pattern="[0-9]{10,11}" title="Enter 10 or 11 digit phone number" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea name="address" class="form-control"><?= htmlspecialchars($row['address']) ?></textarea>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" name="edit_customer" class="btn btn-success">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        <?php endwhile; ?>
         </tbody>
     </table>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -35,6 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['email'] = $row['email']; // <-- store email so other pages can use it
 
+                // UPDATE last_logged_in timestamp
+                $update_sql = "UPDATE customer SET last_logged_in = CURRENT_TIMESTAMP WHERE customer_id = ?";
+                $update_stmt = $conn->prepare($update_sql);
+                $update_stmt->bind_param("i", $_SESSION['customer_id']);
+                $update_stmt->execute();
+                $update_stmt->close();
+                
                 // Redirect to the home page
                 header("Location: index.php"); 
                 exit;
@@ -82,7 +89,7 @@ if (isset($conn)) {
                 <h1><a href="index.php">Satay Kajang Uncle Ujang</a></h1>
             </div>
                <nav>
-                <ul>
+               <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="customer/menu.php">Menu</a></li>
                     <li><a href="customer/about.php">About us</a></li>
@@ -133,11 +140,9 @@ if (isset($conn)) {
         </section>
     </main>
 
-     <!-- Footer HTML -->
-<footer>
+      <footer>
   <div class="footer-container">
     <div class="footer-row">
-      <!-- Left Column -->
       <div class="footer-left">
         <h3>Explore Our Page</h3>
         <a href="./index.php">Home</a><br>
@@ -146,7 +151,6 @@ if (isset($conn)) {
         <a href="customer/contact.php">Contact Us</a><br>
       </div>
 
-      <!-- Right Column -->
       <div class="footer-right">
         <h3>Staff & Admin</h3>
         <a href="./staff/staff_login.php">Staff Login</a><br>
