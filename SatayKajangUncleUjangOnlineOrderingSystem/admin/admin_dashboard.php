@@ -4,6 +4,7 @@ require_once '../connect.php';
 
 // Check session admin
 $is_loggedin = isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true;
+$admin_name = $is_loggedin ? htmlspecialchars($_SESSION['admin_name']) : '';
 if (!$is_loggedin) {
     header("Location: profAdmin.php");
     exit;
@@ -39,11 +40,10 @@ if (!$is_loggedin) {
     <ul class="sidebar-menu">
         <li><a href="admin_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
         <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
-        <li><a href="adminstaff.php"><i class="fa-solid fa-users"></i> Manage Staff</a></li>
-        <li><a href="manageadmin.php"><i class="fa-solid fa-users"></i> Manage Admin</a></li>
-        <li><a href="../customer/menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
-        <li><a href="admin_order.php"><i class="fa-solid fa-box"></i> Orders</a></li>
-        <li><a href="adminsales.php"><i class="fa-solid fa-chart-line"></i> Sales</a></li>
+        <li><a href="adminstaff.php"><i class="fa-solid fa-user-group"></i> Manage Staff</a></li>
+        <li><a href="manageadmin.php"><i class="fa-solid fa-user-shield"></i></i> Manage Admin</a></li>
+        <li><a href="admin_menu.php"><i class="fa-solid fa-utensils"></i> View Menu</a></li>
+        <li><a href="admin_viewfeedback.php"><i class="fa-solid fa-comments"></i></i></i> View Feedback</a></li>
     </ul>
 </aside>
 
@@ -51,7 +51,7 @@ if (!$is_loggedin) {
     <!-- Main Content -->
     <main class="dashboard-content">
         <header class="dashboard-header">
-            <h1>Welcome, Admin!</h1>
+            <h1>Welcome, Admin!</h1> <strong><?php echo $admin_name; ?></strong>
             <p>Manage the system efficiently with the tools below.</p>
         </header>
         

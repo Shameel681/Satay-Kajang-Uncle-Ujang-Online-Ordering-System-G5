@@ -152,12 +152,13 @@ $conn->close();
                 <li><a href="admin_dashboard.php">Dashboard</a></li>
                 <li><a href="admincustomer.php">Manage Customer</a></li>
                 <li><a href="adminstaff.php">Manage Staff</a></li>
-                <li><a href="manageadmin.php" class="active">Manage Admin</a></li> <li><a href="adminmenu.php">Manage Menu</a></li>
+                <li><a href="manageadmin.php">Manage Admin</a></li>
+                <li><a href="admin_menu.php">View Menu</a></li>
+                <li><a href="admin_viewfeedback.php" class="active">View Feedback</a></li>
             </ul>
         </nav>
     </div>
 </header>
-
 <main>
 
 <section class="view-staff mt-5">
