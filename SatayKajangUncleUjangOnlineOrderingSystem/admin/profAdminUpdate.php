@@ -9,19 +9,32 @@ if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true)
 
 if (isset($_POST['update_profile'])) {
     $admin_id = $_SESSION['admin_id'];
-    $name = htmlspecialchars(trim($_POST['username']));
+
+    // Match form field names
+    $name = htmlspecialchars(trim($_POST['admin_name']));
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $phone_no = htmlspecialchars(trim($_POST['phone_no']));
     $address = htmlspecialchars(trim($_POST['address']));
 
-    $stmt = $conn->prepare("UPDATE admin SET admin_name = ?, email = ?, phone_no = ?, address = ? WHERE admin_id = ?");
+    // Prevent unintended email change (since it's readonly in form)
+    // Fetch original email from DB
+    $stmt = $conn->prepare("SELECT email FROM admin WHERE admin_id = ?");
+    $stmt->bind_param("i", $admin_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $email = $row['email']; // overwrite with DB value
+    $stmt->close();
+
+    // Update query
+    $stmt = $conn->prepare("UPDATE admin SET admin_name = ?, phone_no = ?, address = ? WHERE admin_id = ?");
     if (!$stmt) {
         $_SESSION['error_message'] = "SQL Error: " . $conn->error;
         header("Location: profAdmin.php");
         exit;
     }
 
-    $stmt->bind_param("ssssi", $name, $email, $phone_no, $address, $admin_id);
+    $stmt->bind_param("sssi", $name, $phone_no, $address, $admin_id);
 
     if ($stmt->execute()) {
         $_SESSION['success_message'] = "Profile updated successfully!";
