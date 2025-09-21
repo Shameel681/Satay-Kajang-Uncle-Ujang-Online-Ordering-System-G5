@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <p>Your staff account has been created by admin.</p>
                         <p>Staff ID: <b>$staff_id</b></p>
                         <p>Password: <b>$password</b></p>
-                        <p>Please login at: <a href='C:\xampp\htdocs\MASTER PROJECT - Satay Kajang Uncle Ujang Online Ordering System G05\SatayKajangUncleUjangOnlineOrderingSystem/staff/staff_login.php'>Staff Login</a></p>
+                        <p>Please login at: <a href='http://localhost/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem/staff/staff_login.php'>Staff Login</a></p>
                         <p>After login, you may change your password.</p>
                     ";
 
