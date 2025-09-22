@@ -162,9 +162,9 @@ footer .social-links a:hover {
 
 /* Admin Login Form Section */
 .login-form {
-    padding: 5rem 0;
+    padding: 2rem 0;
     background-color: white;
-    margin: 3rem auto;
+    margin: 2rem auto;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     max-width: 600px;
@@ -176,22 +176,22 @@ footer .social-links a:hover {
     font-family: 'Anton', sans-serif;
     color:#0077b6; /* Slightly different from customer login */
     font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .login-form p {
     font-size: 1.1rem;
     color: #3f6068;;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .login-form form {
     max-height: 120rem;
     display: flex;
     flex-direction: column;
-    margin-bottom: 5rem;
+    margin-bottom: 0;
     gap: 1.5rem;
-    padding: 0 2rem;
+    padding: 0.2rem;
     text-align: left;
 }
 
@@ -241,7 +241,7 @@ footer .social-links a:hover {
     transform: translateY(-2px);
 }
 
-/* Message Box */
+/* Message Box for Errors/Success */
 .message-box {
     padding: 15px;
     margin-bottom: 20px;
@@ -249,9 +249,21 @@ footer .social-links a:hover {
     text-align: center;
     font-weight: bold;
 }
-
+/* Default hidden state */
 .message-box.error {
-    background-color: #fcebeb;
-    color: #cc0000;
-    border: 1px solid #cc0000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    position: fixed;
+    top: 20px;
+    transform: translateX(-50%) translateY(-20px);
+    z-index: 9999;
+    pointer-events: none; /* so it won’t block clicks */
+}
+
+/* When active */
+.message-box.error.show {
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateX(-50%) translateY(0);
 }
