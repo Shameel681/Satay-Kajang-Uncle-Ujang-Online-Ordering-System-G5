@@ -215,3 +215,33 @@ form input:focus {
 .btn-danger:hover {
     background: #c82333;
 }
+
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #212529;
+}
+
+.profile-image-container {
+    width: 120px;         /* saiz bulatan */
+    height: 120px;
+    border-radius: 50%;   /* bulat */
+    overflow: hidden;     /* crop luar bulat */
+    border: 3px solid #212529;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* fit penuh ikut bulatan */
+    border-radius: 50%;   /* pastikan bulat */
+    display: block;
+}

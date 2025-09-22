@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true)
 $admin_id = $_SESSION['admin_id'];
 
 // Fetch admin data
-$stmt = $conn->prepare("SELECT admin_name, email, phone_no, address FROM admin WHERE admin_id = ?");
+$stmt = $conn->prepare("SELECT admin_name, email, phone_no, address, profile_image FROM admin WHERE admin_id = ?");
 if (!$stmt) {
     die("SQL Error: Please contact the administrator.");
 }
@@ -73,21 +73,40 @@ if (isset($_SESSION['error_message'])) {
 <main>
   <section class="profile">
     <div class="profile-container">
-      <?php if (isset($success_message)): ?>
-          <div class="message-box success"><?php echo $success_message; ?></div>
-      <?php endif; ?>
-      <?php if (isset($error_message)): ?>
-          <div class="message-box error"><?php echo $error_message; ?></div>
-      <?php endif; ?>
+      <!-- SATU form sahaja -->
+      <form action="upload_img_admin.php" method="POST" enctype="multipart/form-data" id="profile-form">
+        
+        <?php if (isset($success_message)): ?>
+            <div class="message-box success"><?php echo $success_message; ?></div>
+        <?php endif; ?>
+        <?php if (isset($error_message)): ?>
+            <div class="message-box error"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
-      <div class="profile-card">
-        <div class="profile-header">
-          <i class="fa-solid fa-user-shield profile-icon"></i>
-          <h2><?php echo htmlspecialchars($admin['admin_name']); ?></h2>
-          <p>Admin Profile</p>
-        </div>
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-image-container">
+              <?php if (!empty($admin['profile_image'])): ?>
+                  <img src="../uploads/admin/<?php echo htmlspecialchars($admin['profile_image']); ?>" 
+                       alt="Profile Image" class="profile-image">
+              <?php else: ?>
+                  <img src="../image/default-avatar.png" alt="Default Avatar" class="profile-image">
+              <?php endif; ?>
+            </div>
 
-        <form action="profAdminUpdate.php" method="POST" id="profile-form">
+            <h2><?php echo htmlspecialchars($admin['admin_name']); ?></h2>
+            <p>Admin Profile</p>
+          </div>
+
+          <!-- Upload gambar -->
+          <div class="form-group">
+            <label>Profile Image:</label>
+                 <input type="file" name="profile_image" accept="image/*" required>
+                    <button type="submit">Upload</button>
+          </div>
+     
+
+          <!-- Update info -->
           <div class="form-group">
             <label>Full Name:</label>
             <input type="text" name="admin_name" value="<?php echo htmlspecialchars($admin['admin_name']); ?>" disabled>
@@ -108,17 +127,20 @@ if (isset($_SESSION['error_message'])) {
             <input type="text" name="address" value="<?php echo htmlspecialchars($admin['address'] ?? ''); ?>" disabled>
           </div>
 
+          <!-- Button -->
           <div class="profile-actions">
             <button type="button" id="edit-btn" class="btn">Edit Profile</button>
             <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;">Save Changes</button>
             <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
             <a href="../admin/change_admin.php" class="btn">Change Password</a><br><br>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </section>
 </main>
+
+
 
 <script>
   const editBtn = document.getElementById("edit-btn");
