@@ -16,7 +16,7 @@ $customer_id = $_SESSION['customer_id'];
 $is_loggedin = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 
 // Prepare a SELECT statement to get the customer's current data
-$stmt = $conn->prepare("SELECT name, email, phone_no, address, profile_image FROM customer WHERE customer_id = ?");
+$stmt = $conn->prepare("SELECT name, email, phone_no, address, customer_image FROM customer WHERE customer_id = ?");
 if (!$stmt) {
     die("SQL Prepare Failed: " . $conn->error);
 }
@@ -36,6 +36,28 @@ if (isset($_SESSION['error_message'])) {
     $error_message = htmlspecialchars($_SESSION['error_message']);
     unset($_SESSION['error_message']);
 }
+
+
+if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === UPLOAD_ERR_OK) {
+    $ext = pathinfo($_FILES['customer_image']['name'], PATHINFO_EXTENSION);
+    $new_name = "cust_" . $customer_id . "." . $ext;
+    $upload_dir = "../uploads/";
+    if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+    $target = $upload_dir . $new_name;
+
+    if (move_uploaded_file($_FILES['customer_image']['tmp_name'], $target)) {
+        $stmt = $conn->prepare("UPDATE customer SET customer_image = ? WHERE customer_id = ?");
+        $stmt->bind_param("si", $new_name, $customer_id);
+        $stmt->execute();
+        $stmt->close();
+        $_SESSION['success_message'] = "Profile image updated successfully!";
+    } else {
+        $_SESSION['error_message'] = "Failed to upload image.";
+    }
+} else {
+    $_SESSION['error_message'] = "No image uploaded.";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -84,68 +106,73 @@ if (isset($_SESSION['error_message'])) {
 <main>
   <section class="profile">
     <div class="profile-container">
-      <?php if (isset($success_message)): ?>
-          <div class="message-box success"><?php echo $success_message; ?></div>
-      <?php endif; ?>
-      <?php if (isset($error_message)): ?>
-          <div class="message-box error"><?php echo $error_message; ?></div>
-      <?php endif; ?>
+      <!-- SATU form sahaja -->
+      <form action="upload_img_cust.php" method="POST" enctype="multipart/form-data" id="profile-form">
+        
+        <?php if (isset($success_message)): ?>
+            <div class="message-box success"><?php echo $success_message; ?></div>
+        <?php endif; ?>
+        <?php if (isset($error_message)): ?>
+            <div class="message-box error"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
-      <div class="profile-card">
-        <div class="profile-header">
-          <?php if (!empty($customer['profile_image'])): ?>
-          <img src="../uploads/<?php echo htmlspecialchars($customer['profile_image']); ?>" 
-          alt="Profile Image" class="profile-photo">
-          <?php else: ?>
-              <i class="fa-solid fa-user-circle profile-icon"></i>
-          <?php endif; ?>
-          <!-- Upload form -->
-          <form action="uploadProfileimg.php" method="POST" enctype="multipart/form-data" class="upload-form">
-              <label for="profile_image" class="upload-btn">Upload Profile Image</label>
-              <input type="file" id="profile_image" name="profile_image" accept="image/png, image/jpeg" required>
-              <button type="submit" class="btn">Save</button>
-          </form>
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-image-container">
+              <?php if (!empty($customer['customer_image'])): ?>
+                  <img src="../uploads/<?php echo htmlspecialchars($customer['customer_image']); ?>" alt="Profile Image" class="profile-image">
 
-          <h2><?php echo htmlspecialchars($customer['name']); ?></h2>
-          <p>Customer Profile</p>
+              <?php else: ?>
+                  <img src="../image/default-avatar.png" alt="Default Avatar" class="customer-image">
+              <?php endif; ?>
+            </div>
+
+            <h2><?php echo htmlspecialchars($customer['name']); ?></h2>
+            <p>Customer Profile</p>
+          </div>
+
+          <!-- Upload gambar -->
+          <div class="form-group">
+            <label>Profile Image:</label>
+                 <input type="file" name="customer_image" accept="image/*" required>
+                    <button type="submit">Upload</button>
+          </div>
+     
+
+          <!-- Update info -->
+          <div class="form-group">
+            <label>Full Name:</label>
+            <input type="text" name="customer_name" value="<?php echo htmlspecialchars($customer['name']); ?>" disabled>
+          </div>
+
+          <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" value="<?php echo htmlspecialchars($customer['email']); ?>" readonly class="readonly-field">
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="text" name="phone_no" value="<?php echo htmlspecialchars($customer['phone_no'] ?? ''); ?>" disabled>
+          </div>
+
+          <div class="form-group">
+            <label>Address:</label>
+            <input type="text" name="address" value="<?php echo htmlspecialchars($customer['address'] ?? ''); ?>" disabled>
+          </div>
+
+          <!-- Button -->
+          <div class="profile-actions">
+            <button type="button" id="edit-btn" class="btn">Edit Profile</button>
+            <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;">Save Changes</button>
+            <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
+            <a href="../customer/change_pass.php" class="btn">Change Password</a><br><br>
+          </div>
         </div>
+      </form>
+    </div>
+  </section>
+</main>
 
-        <!-- Profile Form -->
-<!-- Profile Form -->
-<form action="profUpdate.php" method="POST" id="profile-form">
-  <div class="form-group">
-    <label>Name:</label>
-    <input type="text" name="name" id="name" 
-           value="<?php echo htmlspecialchars($customer['name']); ?>" 
-           disabled>
-  </div>
-
-
-    <div class="form-group">
-    <label>Email:</label>
-    <input type="email" name="email" value="<?php echo htmlspecialchars($customer['email']); ?>" disabled readonly class="readonly-field">
-
-  <div class="form-group">
-    <label>Phone:</label>
-    <input type="tel" name="phone_no" id="phone_no" 
-           value="<?php echo htmlspecialchars($customer['phone_no']); ?>" 
-           disabled>
-  </div>
-
-  <div class="form-group">
-    <label>Address:</label>
-    <textarea name="address" id="address" rows="3" disabled><?php echo htmlspecialchars($customer['address']); ?></textarea>
-  </div>
-  
-
-  <div class="profile-actions">
-    <button type="button" id="edit-btn" class="btn">Edit Profile</button>
-    <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;">Save Changes</button>
-    <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
-    <a href="../change_pass.php" class="btn">Change Password</a><br><br>
-    <a href="../logout.php" class="btn">Logout</a>
-  </div>
-</form>
 
 <script>
   const editBtn = document.getElementById("edit-btn");

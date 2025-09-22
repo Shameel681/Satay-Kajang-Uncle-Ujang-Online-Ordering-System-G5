@@ -28,16 +28,83 @@ body {
     color: #ff7f27;
 }
 
-.profile-details {
-    text-align: left;
-    margin-top: 20px;
+/* Profile Image Styling (small, bulat) */
+.profile-photo {
+    width: 100px;             /* saiz lebih kecil */
+    height: 100px;
+    border-radius: 50%;        /* bulat */
+    object-fit: cover;
+    border: 3px solid #ff7f27;
+    margin: 0 auto 10px auto;
+    display: block;
 }
 
-.profile-details p {
-    font-size: 18px;
-    margin: 10px 0;
+/* Container untuk upload supaya ikut style admin */
+.upload-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
+.upload-form input[type="file"] {
+    display: none; /* hide default input */
+}
+
+/* Custom button style */
+.upload-btn {
+    display: inline-block;
+    background: #ff7f27;
+    color: white;
+    padding: 8px 15px;      /* sedikit kecil dari sebelumnya */
+    border-radius: 50px;    /* bulat */
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.upload-btn:hover {
+    background: #e56e1f;
+}
+
+/* Styling for form inputs */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff7f27;
+    background-color: #fff;
+}
+
+/* Readonly state */
+.form-group input[readonly],
+.form-group textarea[readonly] {
+    background-color: #f0f0f0;
+    cursor: default;
+    border-color: #eee;
+}
+
+/* Buttons */
 .profile-actions {
     margin-top: 25px;
 }
@@ -54,42 +121,6 @@ body {
 
 .btn:hover {
     background: #e56e1f;
-}
-
-
-/* Styling for form inputs */
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box; /* Ensures padding doesn't affect the width */
-    margin-bottom: 15px;
-    font-size: 16px;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #ff7f27;
-    background-color: #fff;
-}
-
-/* Styles for the readonly state */
-.form-group input[readonly],
-.form-group textarea[readonly] {
-    background-color: #f0f0f0;
-    cursor: default;
-    border-color: #eee;
 }
 
 /* Message Box Styling */
@@ -114,64 +145,3 @@ body {
     color: #721c24;
     border-color: #f5c6cb;
 }
-
-
-
-.change-password {
-    margin-top: 30px;
-    text-align: left;
-}
-
-.change-password h3 {
-    color: #ff7f27;
-    margin-bottom: 15px;
-}
-
-.change-password .form-group input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.profile-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden; 
-    object-fit: cover;
-    border: 3px solid #ff7f27;
-    margin: 0 auto 10px auto;
-    display: block; 
-}
-
-.upload-form {
-    margin-top: 10px;
-}
-.upload-form input[type="file"] {
-    margin-bottom: 10px;
-}
-
-/* Hide default file input */
-.upload-form input[type="file"] {
-    display: none;
-}
-
-/* Custom button style */
-.upload-btn {
-    display: inline-block;
-    background: #ff7f27;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: bold;
-}
-
-.upload-btn:hover {
-    background: #e56e1f;
-}
-
-
