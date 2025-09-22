@@ -116,10 +116,30 @@ if (isset($conn)) {
                 <p>Log in to your account to place your order!</p>
                 
                 <?php if (!empty($message)): ?>
-                <div class="message-box error">
+                <div class="message-box error show">
                     <?php echo htmlspecialchars($message); ?>
                 </div>
+
+                <script>
+                // auto fade out after 4s
+                setTimeout(() => {
+                    let box = document.querySelector(".message-box.error");
+                    if (box) {
+                    box.classList.remove("show");
+                    }
+                }, 4000);
+
+                setTimeout(() => {
+                    let box = document.querySelector(".message-box.error");
+                    if (box) {
+                    box.style.opacity = "0";
+                    box.style.transform = "translateX(0%) translateY(0px)";
+                    }
+                }, 4000); // hide after 4s
+                </script>
                 <?php endif; ?>
+
+
 
                 <form class="login-form" action="" method="POST">
                     <div class="form-group">
@@ -168,6 +188,5 @@ if (isset($conn)) {
     </div>
   </div>
 </footer>
-
 </body>
 </html>
