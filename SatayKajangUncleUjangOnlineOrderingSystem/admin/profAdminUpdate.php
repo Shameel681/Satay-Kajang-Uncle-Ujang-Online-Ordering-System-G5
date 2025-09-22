@@ -7,26 +7,30 @@ if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true)
     exit;
 }
 
+if (isset($_POST['cancel_profile'])) {
+    // 👉 Kalau tekan Cancel, jangan update. Kembali ke profile asal.
+    header("Location: profAdmin.php");
+    exit;
+}
+
 if (isset($_POST['update_profile'])) {
     $admin_id = $_SESSION['admin_id'];
 
-    // Match form field names
     $name = htmlspecialchars(trim($_POST['admin_name']));
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $phone_no = htmlspecialchars(trim($_POST['phone_no']));
     $address = htmlspecialchars(trim($_POST['address']));
 
-    // Prevent unintended email change (since it's readonly in form)
-    // Fetch original email from DB
+    // Ambil email asal daripada DB (untuk pastikan user tak boleh tukar)
     $stmt = $conn->prepare("SELECT email FROM admin WHERE admin_id = ?");
     $stmt->bind_param("i", $admin_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $email = $row['email']; // overwrite with DB value
+    $email = $row['email']; 
     $stmt->close();
 
-    // Update query
+    // Update profile
     $stmt = $conn->prepare("UPDATE admin SET admin_name = ?, phone_no = ?, address = ? WHERE admin_id = ?");
     if (!$stmt) {
         $_SESSION['error_message'] = "SQL Error: " . $conn->error;
