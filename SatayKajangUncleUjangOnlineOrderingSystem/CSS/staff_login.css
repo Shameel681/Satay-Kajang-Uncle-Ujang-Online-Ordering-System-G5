@@ -241,29 +241,24 @@ footer .social-links a:hover {
     transform: translateY(-2px);
 }
 
+
 /* Message Box for Errors/Success */
-.message-box {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    text-align: center;
+.message-box error {
+    width: fit-content;              /* shrink to fit text */
+    max-width: 90%;                  /* responsive */
+    padding: 12px 25px;
+    margin: 15px auto;
+    border-radius: 6px;
     font-weight: bold;
-}
-/* Default hidden state */
-.message-box.error {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    position: fixed;
-    top: 20px;
-    transform: translateX(-50%) translateY(-20px);
-    z-index: 9999;
-    pointer-events: none; /* so it won’t block clicks */
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: relative;
 }
 
-/* When active */
-.message-box.error.show {
-    opacity: 1;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transform: translateX(-50%) translateY(0);
+/* Default hidden state */
+.message-box.error {
+    background-color: #fcebeb;
+    color: #cc0000;
+    border: 1px solid #cc0000;
 }
+

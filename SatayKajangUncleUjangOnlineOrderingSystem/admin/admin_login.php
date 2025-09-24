@@ -106,14 +106,9 @@ if (isset($conn)) {
         </div>
     </header>
 
-    <main>
-        <section class="login-form">
-            <div class="container">
-                <h2>Admin Login</h2>
-                <p>Log in as Admin to manage the system.</p>
-                
-                   <?php if (!empty($message)): ?>
-                <div class="message-box error show">
+    <div class="container">
+    <?php if (!empty($message)): ?>
+                <div class="message-box error">
                     <?php echo htmlspecialchars($message); ?>
                 </div>
 
@@ -134,7 +129,15 @@ if (isset($conn)) {
                     }
                 }, 4000); // hide after 4s
                 </script>
-                <?php endif; ?>
+    <?php endif; ?>
+    </div>
+
+
+    <main>
+        <section class="login-form">
+            <div class="container">
+                <h2>Admin Login</h2>
+                <p>Log in as Admin to manage the system.</p>
 
                 <form class="login-form" action="" method="POST">
                     <div class="form-group">
