@@ -166,6 +166,7 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
             <button type="submit" id="save-btn" class="btn" name="update_profile" style="display:none;">Save Changes</button>
             <button type="button" id="cancel-btn" class="btn" style="display:none;">Cancel</button>
             <a href="../customer/change_pass.php" class="btn">Change Password</a><br><br>
+            <a href="../logout.php" class="btn">Logout</a>
           </div>
         </div>
       </form>
