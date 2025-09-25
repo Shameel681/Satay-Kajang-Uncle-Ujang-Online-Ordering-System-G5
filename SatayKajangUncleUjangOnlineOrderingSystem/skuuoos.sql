@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2025 at 01:16 PM
+-- Generation Time: Sep 23, 2025 at 01:28 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,16 +40,17 @@ CREATE TABLE `admin` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `reset_token` varchar(255) DEFAULT NULL,
-  `reset_expires` datetime DEFAULT NULL
+  `reset_expires` datetime DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `phone_no`, `address`, `password`, `is_verified`, `verify_token`, `last_login`, `created_at`, `updated_at`, `reset_token`, `reset_expires`) VALUES
-(3, 'MUHAMMAD SHAMEEL', 'shameel681@gmail.com', '01110084626', 'no1. jalan semarak', '$2y$10$J149gfHywEFwTNTZStdDDeF/8bfLsEYp.uANEeycci5j.nXuqvMRG', 1, NULL, '2025-09-21 19:12:50', '2025-09-09 05:43:46', '2025-09-21 19:12:50', NULL, NULL),
-(5, 'Muhammad Fikri Bin Mawardi', 'toonpow3@gmail.com', '0119898256', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', '$2y$10$ByarGQwCoC2eLLtXq17pQuMLBrPpvXeLssb9QZVnmhEZ0QSFWSUdy', 1, NULL, '2025-09-18 14:04:00', '2025-09-09 06:32:48', '2025-09-18 14:04:00', NULL, NULL);
+INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `phone_no`, `address`, `password`, `is_verified`, `verify_token`, `last_login`, `created_at`, `updated_at`, `reset_token`, `reset_expires`, `profile_image`) VALUES
+(3, 'MUHAMMAD SHAMEEL', 'shameel681@gmail.com', '01110084626', 'no1. jalan semarak', '$2y$10$J149gfHywEFwTNTZStdDDeF/8bfLsEYp.uANEeycci5j.nXuqvMRG', 1, NULL, '2025-09-21 19:12:50', '2025-09-09 05:43:46', '2025-09-21 19:12:50', NULL, NULL, NULL),
+(5, 'Muhammad Fikri Bin Mawardi', 'toonpow3@gmail.com', '0119898256', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', '$2y$10$ByarGQwCoC2eLLtXq17pQuMLBrPpvXeLssb9QZVnmhEZ0QSFWSUdy', 1, NULL, '2025-09-23 06:42:24', '2025-09-09 06:32:48', '2025-09-23 06:52:18', NULL, NULL, 'capybara.jpg');
 
 -- --------------------------------------------------------
 
@@ -64,6 +65,7 @@ CREATE TABLE `customer` (
   `password` varchar(255) NOT NULL,
   `phone_no` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `customer_image` varchar(255) DEFAULT NULL,
   `reset_token` varchar(100) DEFAULT NULL,
   `reset_expires` datetime DEFAULT NULL,
   `reset_expiry` datetime DEFAULT NULL,
@@ -79,12 +81,12 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`, `reset_expiry`, `is_verified`, `verify_token`, `profile_image`, `created_at`, `last_logged_in`, `updated_at`) VALUES
-(19, 'MUHAMMAD SUHAIMI BIN MOHD SHAM', 'm.suhaimipro@gmail.com', '$2y$10$i2Vv1tNp/a1nVGc61hnZbOoIRpasC0Z1mlPFQRTVdRQJ.Bw4QaD4K', '01113277665', '', NULL, NULL, NULL, 0, '91b93fa6d1fbbd6507b59041144081f4', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 11:11:07'),
-(20, 'MUHAMMAD ANAS IZZUDIN BIN MUAMAR ', 'anasizzuddin@graduate.utm.my', '$2y$10$0CEJ4RszQYGHE60cw.YT1uQVYRXvHmx3vkN.eB8Cx0E9qlbaHpnzq', '0102045904', NULL, NULL, NULL, NULL, 0, '4a37db85f42c739ce2adaa7d1489fcbd', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 08:16:25'),
-(21, 'ZUHAIKAL AIMAN BIN ZAILAN', 'zuhaikal566@gmail.com', '$2y$10$aQAb6.4Xu7BK2YViunQ.1.gYdRmcqTFptagC7AbtiKuhC.yh4dt6S', '01133114674', NULL, NULL, NULL, NULL, 0, 'ac51b47d0095cbc2aa865c3d847f1a99', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 08:16:25'),
-(33, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$AexpywrEw4bh.ogj/TizROlEUHR/J.zKpTCSVdsPyqbX9sVqw1LtO', '01110084626', NULL, NULL, NULL, NULL, 1, NULL, NULL, '2025-09-19 13:32:35', '2025-09-19 13:36:57', '2025-09-21 08:16:25'),
-(35, 'FIKRI MAWARDI', 'toonpow3@gmail.com', '$2y$10$YmwIMqggLTllmpoC7KxwfeoDe7fzzIhU421e.L3yhcWA4ENjwXx9S', '01162226128', NULL, NULL, NULL, NULL, 0, '70068c343d2eb9622fbf6d7ec37e91a6', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 08:16:25');
+INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`, `address`, `customer_image`, `reset_token`, `reset_expires`, `reset_expiry`, `is_verified`, `verify_token`, `profile_image`, `created_at`, `last_logged_in`, `updated_at`) VALUES
+(19, 'MUHAMMAD SUHAIMI BIN MOHD SHAM', 'm.suhaimipro@gmail.com', '$2y$10$i2Vv1tNp/a1nVGc61hnZbOoIRpasC0Z1mlPFQRTVdRQJ.Bw4QaD4K', '01113277665', '', NULL, NULL, NULL, NULL, 0, '91b93fa6d1fbbd6507b59041144081f4', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 11:11:07'),
+(20, 'MUHAMMAD ANAS IZZUDIN BIN MUAMAR ', 'anasizzuddin@graduate.utm.my', '$2y$10$0CEJ4RszQYGHE60cw.YT1uQVYRXvHmx3vkN.eB8Cx0E9qlbaHpnzq', '0102045904', NULL, NULL, NULL, NULL, NULL, 0, '4a37db85f42c739ce2adaa7d1489fcbd', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 08:16:25'),
+(21, 'ZUHAIKAL AIMAN BIN ZAILAN', 'zuhaikal566@gmail.com', '$2y$10$aQAb6.4Xu7BK2YViunQ.1.gYdRmcqTFptagC7AbtiKuhC.yh4dt6S', '01133114674', NULL, NULL, NULL, NULL, NULL, 0, 'ac51b47d0095cbc2aa865c3d847f1a99', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 08:16:25'),
+(33, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$AexpywrEw4bh.ogj/TizROlEUHR/J.zKpTCSVdsPyqbX9sVqw1LtO', '01110084626', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, '2025-09-19 13:32:35', '2025-09-19 13:36:57', '2025-09-21 08:16:25'),
+(37, 'FIKRI MAWARDI', 'toonpow43@gmail.com', '$2y$10$zOnBDUa/3aT8G4pEzCdbYOi6CVKpeQ2SUjEgUg7VrFMkO/a25zBiq', '01162226128', NULL, 'cust_37.jpg', NULL, NULL, NULL, 1, NULL, 'cust_37.jpg', '2025-09-22 22:59:57', '2025-09-22 23:00:12', '2025-09-22 23:23:55');
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,6 @@ CREATE TABLE `feedback_guest` (
 --
 
 INSERT INTO `feedback_guest` (`id`, `guest_name`, `guest_email`, `feedback`, `created_at`) VALUES
-(22, 'fikri', 'fikri@fikri.com', 'fikri', '2025-08-17 18:03:35'),
 (23, 'shameel', 'shameel@gmail.com', 'shameel', '2025-08-17 18:04:54'),
 (25, 'suhaimi test', 'test@suhaimi.com', 'saya tengah test', '2025-08-17 18:22:04'),
 (26, 'fikri mawardi', 'fikri@gmail.com', 'saya tak suka makanan sini', '2025-08-17 18:23:41'),
@@ -224,8 +225,9 @@ CREATE TABLE `staff` (
 
 INSERT INTO `staff` (`staff_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`, `created_at`, `last_logged_in`) VALUES
 (101, 'Toon Pow 1', 'toonpow3@gmail.com', '$2y$10$Zbq2n3YkF7gNQdFhnx9rCe3w7I0JfD3B5bzQY8rZK5xM7vRjY9YxG', NULL, NULL, NULL, NULL, '2025-09-19 15:23:13', NULL),
-(102, 'shameel', 'toonpow43@gmail.com', '$2y$10$k6gaszO/75eAGJTH19Oj5eyFCXv3JcQpBuPebgmmW5WzStDJ66bMi', NULL, NULL, NULL, NULL, '2025-09-19 15:23:13', NULL),
-(103, 'MUHAMMAD SHAMEELs', 'shameel681@gmail.com', '$2y$10$kLqkFw6NcZvq2Ow3KRLiQ.fZJxGGMRNzAXLPL1sgekVVceJmnckmq', '01110084626', 'no1. jalan semarak', NULL, NULL, '2025-09-21 07:34:09', NULL);
+(102, 'shameel', 'toonpow43@gmail.com', '$2y$10$k6gaszO/75eAGJTH19Oj5eyFCXv3JcQpBuPebgmmW5WzStDJ66bMi', '0194343887', 'NO 1 JALAN 1 TAMAN SRI TANJUNG', NULL, NULL, '2025-09-19 15:23:13', NULL),
+(103, 'MUHAMMAD SHAMEELs', 'shameel681@gmail.com', '$2y$10$kLqkFw6NcZvq2Ow3KRLiQ.fZJxGGMRNzAXLPL1sgekVVceJmnckmq', '01110084626', 'no1. jalan semarak', NULL, NULL, '2025-09-21 07:34:09', NULL),
+(104, 'FIKRI MAWARDI', 'justpiki123@gmail.com', '$2y$10$pItGJmIQsWldlvlYp/naJuhQSBdvGU1L4yeyLdXK9L/8mZlzKMKrS', '01162226128', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', NULL, NULL, '2025-09-21 13:15:06', NULL);
 
 --
 -- Indexes for dumped tables
@@ -284,7 +286,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `feedback_customer`
@@ -302,7 +304,7 @@ ALTER TABLE `feedback_guest`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
