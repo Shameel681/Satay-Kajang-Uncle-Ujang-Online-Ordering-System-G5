@@ -60,7 +60,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                 <h1>Belum Try Belum Tahu,<br>Sudah Try Ingat Selalu...</h1>
             <?php endif; ?>
             <p class="tagline">Ramuan Rempah Ratus Turun Temurun</p>
-            <a href="menu.php" class="btn">View Our Menu</a>
+            <a href="customer/menu.php" class="btn">View Our Menu</a>
         </div>
     </section>
 
