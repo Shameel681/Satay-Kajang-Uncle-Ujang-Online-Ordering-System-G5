@@ -37,10 +37,11 @@ if (!$is_loggedin) {
         </div>
 
         <ul class="sidebar-menu">
-            <li><a href="staff_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
-            <li><a href="staff_managecustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
-            <li><a href="staff_menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
-            <li><a href="staff_viewfeedback.php"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
+            <li><a href="admin_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
+               <li><a href="adminstaff.php"><i class="fa-solid fa-utensils"></i> Manage Staff</a></li>
+            <li><a href="admin_menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
+            <li><a href="admin_viewfeedback.php"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
         </ul>
     </aside>
 

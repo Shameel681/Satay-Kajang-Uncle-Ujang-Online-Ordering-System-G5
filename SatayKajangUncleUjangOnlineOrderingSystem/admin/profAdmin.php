@@ -45,30 +45,36 @@ if (isset($_SESSION['error_message'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile</title>
     <link rel="stylesheet" href="../CSS/ProfileAdmin.css">
+    <link rel="stylesheet" href="../CSS/admin_dashboard.css">
+    <link rel="stylesheet" href="../CSS/profCust.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="logo-and-title">
-            <div class="logo-circle">
-                <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
+<div class="dashboard-wrapper">
+
+     <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header" id="staffDropdown">
+            <img src="../image/LogoSataysebenarReal.png" alt="Logo">
+            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
+
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
-            <h1><a href="admin_dashboard.php">Admin Panel</a></h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="admin_dashboard.php">Dashboard</a></li>
-                <li><a href="admincustomer.php">Manage Customer</a></li>
-                <li><a href="adminstaff.php">Manage Staff</a></li>
-                <li><a href="manageadmin.php">Manage Admin</a></li>
-                <li><a href="admin_menu.php">View Menu</a></li>
-                <li><a href="admin_viewfeedback.php">View Feedback</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+
+        <ul class="sidebar-menu">
+            <li><a href="admin_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
+               <li><a href="adminstaff.php"><i class="fa-solid fa-utensils"></i> Manage Staff</a></li>
+            <li><a href="admin_menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
+            <li><a href="admin_viewfeedback.php"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
+        </ul>
+    </aside>
 
 <main>
   <section class="profile">
