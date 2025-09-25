@@ -23,29 +23,26 @@ if (!$is_loggedin) {
 
 <div class="dashboard-wrapper">
 
-    <!-- Sidebar -->
-    <!-- Sidebar -->
-<aside class="sidebar">
-    <div class="sidebar-header" id="adminDropdown">
-        <img src="../image/LogoSataysebenarReal.png" alt="Logo">
-        <h2>Admin Panel <i class="fa-solid fa-caret-down"></i></h2>
+     <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header" id="staffDropdown">
+            <img src="../image/LogoSataysebenarReal.png" alt="Logo">
+            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
 
-        <!-- Dropdown Menu -->
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="profAdmin.php"><i class="fa-solid fa-user"></i> Profile</a>
-            <a href="admin_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
         </div>
-    </div>
 
-    <ul class="sidebar-menu">
-        <li><a href="admin_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
-        <li><a href="admincustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
-        <li><a href="adminstaff.php"><i class="fa-solid fa-user-group"></i> Manage Staff</a></li>
-        <li><a href="manageadmin.php"><i class="fa-solid fa-user-shield"></i></i> Manage Admin</a></li>
-        <li><a href="admin_menu.php"><i class="fa-solid fa-utensils"></i> View Menu</a></li>
-        <li><a href="admin_viewfeedback.php"><i class="fa-solid fa-comments"></i></i></i> View Feedback</a></li>
-    </ul>
-</aside>
+        <ul class="sidebar-menu">
+            <li><a href="staff_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="staff_managecustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
+            <li><a href="staff_menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
+            <li><a href="staff_viewfeedback.php"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
+        </ul>
+    </aside>
 
 
     <!-- Main Content -->
