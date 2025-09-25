@@ -39,29 +39,34 @@ $guest_feedback = $conn->query("SELECT * FROM feedback_guest ORDER BY created_at
     <meta charset="UTF-8">
     <title>View Feedback</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../CSS/admin_viewfeedback.css">
+    <link rel="stylesheet" href="../CSS/admin_dashboard.css">
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="logo-and-title">
-            <div class="logo-circle">
-                <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
+<div class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header" id="staffDropdown">
+            <img src="../image/LogoSataysebenarReal.png" alt="Logo">
+            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
+
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
-            <h1><a href="staff_dashboard.php">Staff Panel</a></h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="staff_dashboard.php">Dashboard</a></li>
-                <li><a href="staff_managecustomer.php">Manage Customer</a></li>
-                <li><a href="staff_manageorder.php">Manage Order</a></li>
-                <li><a href="staff_menu.php">Manage Menu</a></li>
-                <li><a href="staff_viewfeedback.php" class="active">View Feedback</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+
+        <ul class="sidebar-menu">
+            <li><a href="staff_dashboard.php"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="staff_managecustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
+            <li><a href="staff_menu.php"><i class="fa-solid fa-users"></i> Manage Menu</a></i></li>
+            <li><a href="staff_viewfeedback.php" class="active"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
+        </ul>
+    </aside>
 
 <div class="container">
     <h1 class="mb-4">Customer Feedback</h1>
@@ -134,5 +139,12 @@ $guest_feedback = $conn->query("SELECT * FROM feedback_guest ORDER BY created_at
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+document.getElementById("staffDropdown").addEventListener("click", function() {
+    this.classList.toggle("active");
+});
+
+</script>
 </body>
 </html>

@@ -125,31 +125,37 @@ $conn->close();
 <meta charset="UTF-8">
 <title>Staff - Manage Menu</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="../CSS/admin_menu.css">
 <link rel="stylesheet" href="../CSS/staff_menu.css">
+<link rel="stylesheet" href="../CSS/admin_dashboard.css">
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="logo-and-title">
-            <div class="logo-circle">
-                <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">
-            </div>
-            <h1><a href="staff_dashboard.php">Staff Panel</a></h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="staff_dashboard.php">Dashboard</a></li>
-                <li><a href="staff_managecustomer.php">Manage Customer</a></li>
-                <li><a href="staff_manageorder.php">Manage Order</a></li>
-                <li><a href="staff_menu.php" class="active">Manage Menu</a></li>
-                <li><a href="staff_viewfeedback.php">View Feedback</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+<div class="dashboard-wrapper">
 
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header" id="staffDropdown">
+            <img src="../image/LogoSataysebenarReal.png" alt="Logo">
+            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
+
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="staff_dashboard.php"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="staff_managecustomer.php" class="active"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
+            <li><a href="staff_menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
+            <li><a href="staff_viewfeedback.php"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
+        </ul>
+    </aside>
+
+    
 <main class="container">
     <section class="view-menu mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -313,6 +319,11 @@ document.querySelectorAll('.editBtn').forEach(btn => {
         document.getElementById('edit_preview').src = this.dataset.img;
     });
 });
+
+document.getElementById("staffDropdown").addEventListener("click", function() {
+    this.classList.toggle("active");
+});
+
 </script>
 
 </body>

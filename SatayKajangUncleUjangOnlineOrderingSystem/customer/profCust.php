@@ -55,7 +55,7 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
         $_SESSION['error_message'] = "Failed to upload image.";
     }
 } else {
-    $_SESSION['error_message'] = "No image uploaded.";
+
 }
 
 ?>
@@ -134,7 +134,7 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
           <!-- Upload gambar -->
           <div class="form-group">
             <label>Profile Image:</label>
-                 <input type="file" name="customer_image" accept="image/*" required>
+                 <input type="file" name="customer_image" accept="image/*">
                     <button type="submit">Upload</button>
           </div>
      
@@ -142,7 +142,7 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
           <!-- Update info -->
           <div class="form-group">
             <label>Full Name:</label>
-            <input type="text" name="customer_name" value="<?php echo htmlspecialchars($customer['name']); ?>" disabled>
+            <input type="text" name="name" value="<?php echo htmlspecialchars($customer['name']); ?>" required disabled>
           </div>
 
           <div class="form-group">

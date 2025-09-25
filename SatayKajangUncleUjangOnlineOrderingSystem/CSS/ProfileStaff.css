@@ -13,7 +13,7 @@ body {
 
 /* Header */
 header {
-    background: #212529;
+    background:  #2c3e50;
     color: #fff;
     padding: 15px 0;
     margin-bottom: 20px;
@@ -190,14 +190,14 @@ form input:focus {
     cursor: pointer;
     text-decoration: none;
     transition: transform 0.1s ease, background-color 0.3s;
-    background: #212529;
+    background: #e65c00;
     color: #fff;
     margin: 5px;
 }
 
 .btn:hover {
     transform: scale(1.05);
-    background: #343a40;
+    background:#e65c00;
 }
 
 .btn-primary {
@@ -214,4 +214,34 @@ form input:focus {
 
 .btn-danger:hover {
     background: #c82333;
+}
+
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #212529;
+}
+
+.profile-image-container {
+    width: 120px;         /* saiz bulatan */
+    height: 120px;
+    border-radius: 50%;   /* bulat */
+    overflow: hidden;     /* crop luar bulat */
+    border: 3px solid #212529;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* fit penuh ikut bulatan */
+    border-radius: 50%;   /* pastikan bulat */
+    display: block;
 }

@@ -38,8 +38,9 @@ if (isset($_POST['update_profile'])) {
     $phone = $_POST['phone_no'] ?? '';
     $address = $_POST['address'] ?? '';
 
-    $stmt = $conn->prepare("UPDATE customer SET name=?, phone_no=?, address=?, customer_image=?  WHERE customer_id=?");
+    $stmt = $conn->prepare("UPDATE customer SET name=?, phone_no=?, address=? WHERE customer_id=?");
     $stmt->bind_param("sssi", $name, $phone, $address, $customer_id);
+
     $stmt->execute();
     $stmt->close();
     $success = true;

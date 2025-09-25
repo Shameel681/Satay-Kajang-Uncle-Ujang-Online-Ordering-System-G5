@@ -39,7 +39,6 @@ if (!$is_loggedin) {
         <ul class="sidebar-menu">
             <li><a href="staff_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
             <li><a href="staff_managecustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
-            <li><a href="staff_manageorder.php"><i class="fa-solid fa-file-invoice"></i> Manage Order</a></li>
             <li><a href="staff_menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
             <li><a href="staff_viewfeedback.php"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
         </ul>
