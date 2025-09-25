@@ -52,14 +52,14 @@ $guest_feedback = $conn->query("SELECT * FROM feedback_guest ORDER BY created_at
 
      <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="sidebar-header" id="staffDropdown">
+        <div class="sidebar-header" id="adminDropdown">
             <img src="../image/LogoSataysebenarReal.png" alt="Logo">
-            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
+            <h2>Admin Panel <i class="fa-solid fa-caret-down"></i></h2>
 
             <!-- Dropdown Menu -->
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
-                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                <a href="profAdmin.php"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="admin_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
         </div>
 
@@ -143,5 +143,11 @@ $guest_feedback = $conn->query("SELECT * FROM feedback_guest ORDER BY created_at
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById("adminDropdown").addEventListener("click", function() {
+    this.classList.toggle("active");
+});
+</script>
 </body>
 </html>

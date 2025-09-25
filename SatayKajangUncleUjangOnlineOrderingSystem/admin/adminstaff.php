@@ -146,14 +146,14 @@ $conn->close();
 
      <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="sidebar-header" id="staffDropdown">
+        <div class="sidebar-header" id="adminDropdown">
             <img src="../image/LogoSataysebenarReal.png" alt="Logo">
-            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
+            <h2>Admin Panel <i class="fa-solid fa-caret-down"></i></h2>
 
             <!-- Dropdown Menu -->
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
-                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                <a href="profAdmin.php"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="admin_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
         </div>
 
@@ -249,6 +249,12 @@ document.getElementById('toggleFormBtn').addEventListener('click', function() {
         form.style.display = 'none';
     }
 });
+
+
+document.getElementById("adminDropdown").addEventListener("click", function() {
+    this.classList.toggle("active");
+});
+
 </script>
 
 </body>

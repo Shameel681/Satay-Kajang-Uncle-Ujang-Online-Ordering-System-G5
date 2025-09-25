@@ -26,9 +26,9 @@ if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true)
 
      <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="sidebar-header" id="staffDropdown">
+        <div class="sidebar-header" id="adminDropdown">
             <img src="../image/LogoSataysebenarReal.png" alt="Logo">
-            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
+            <h2>Admin Panel <i class="fa-solid fa-caret-down"></i></h2>
 
             <!-- Dropdown Menu -->
             <div class="dropdown-menu" id="dropdownMenu">
@@ -101,5 +101,11 @@ if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true)
         </div>
     </div>
 </body>
+
+<script>
+document.getElementById("adminDropdown").addEventListener("click", function() {
+    this.classList.toggle("active");
+});
+</script>
 </body>
 </html>
