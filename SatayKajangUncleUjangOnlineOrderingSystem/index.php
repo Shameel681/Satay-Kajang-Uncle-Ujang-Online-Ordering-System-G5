@@ -78,7 +78,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                         <a href="index.php" class="nav-item nav-link active">Home</a>
                         <a href="customer/menu.php" class="nav-item nav-link">Menu</a>
                         <a href="customer/about.php" class="nav-item nav-link">About us</a>
-                        <a href="customer/contact.php" class="nav-item nav-link">Contact</a>
+                        <a href="customer/contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
                     <?php if ($is_loggedin): ?>
                         <a href="customer/profCust.php" class="btn btn-primary py-2 px-4 mx-2">Profile</a>
@@ -277,7 +277,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <h5 class="d-flex justify-content-between border-bottom pb-2">
                                                 <span>Mutton Satay Set</span>
-                                                <span class="text-primary">RM 20.00</span>
+                                                <span class="text-primary">RM 2.00</span>
                                             </h5>
                                             <small class="fst-italic">10 mutton skewers with rice cakes and cucumber.</small>
                                         </div>
@@ -408,12 +408,9 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
 
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
-                        <p>Stay updated with our latest promotions and new satay dishes!</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Sign Up</button>
-                        </div>
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Staff Portal</h4>
+                        <a class="btn btn-link" href="staff/staff_login.php">Staff Login</a>
+                        <a class="btn btn-link" href="admin/admin_login.php">Admin Login</a>
                     </div>
                 </div>
             </div>

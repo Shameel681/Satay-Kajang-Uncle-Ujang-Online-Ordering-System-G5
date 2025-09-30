@@ -1,0 +1,309 @@
+/* ================================
+   Menu Page Styles
+   ================================ */
+
+/* Reset & Basics */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Container */
+.menu {
+    padding: 50px 0;
+}
+
+.menu .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Page Title */
+.menu h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: 'Crete Round', serif;
+}
+
+/* Search Bar */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.search-form input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-form button {
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #e68900;
+}
+
+/* Category Section */
+.menu-category {
+    margin-bottom: 50px;
+}
+
+.menu-category h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff9800;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Menu List */
+.menu-category ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    width: 280px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+}
+
+.menu-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.menu-details {
+    padding: 15px;
+}
+
+.menu-details h4 {
+    font-size: 1.2rem;
+    margin: 0 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-details .price {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.menu-details p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Cart Summary */
+.cart-summary {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.cart-summary h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.cart-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.cart-summary li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-summary .cart-total {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cart-summary .btn {
+    width: 100%;
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-summary .btn:hover {
+    background-color: #e68900;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background: #fff;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+}
+
+.modal-content img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.modal-content .price {
+    font-size: 1.4rem;
+    color: #ff9800;
+    margin-bottom: 20px;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.quantity-selector button {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.quantity-selector input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .menu-category ul {
+        justify-content: center;
+    }
+
+    .menu-item {
+        width: 90%;
+    }
+
+    .search-form input {
+        width: 70%;
+    }
+}
+
+/* ================================
+   ✅ NEW SECTION FOR MAIN & SIDE DISH
+   ================================ */
+
+/* Grid for main dishes */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+/* Center side dishes */
+.menu-center {
+    display: flex;
+    justify-content: flex-start; /* ⬅ align to left */
+    gap: 20px;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+
+
+/* Section styles */
+.menu-section {
+    margin-bottom: 50px;
+}
+
+.menu-section h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 3px solid #ff9800;
+    display: inline-block;
+    padding-bottom: 5px;
+}

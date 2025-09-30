@@ -19,3 +19,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toast = document.getElementById('feedbackToast');
+    if (toast) {
+        // Show toast
+        toast.style.display = 'block';
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 5000);
+        // Close button functionality
+        const closeButton = toast.querySelector('.toast-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                toast.style.display = 'none';
+            });
+        }
+    }
+});
