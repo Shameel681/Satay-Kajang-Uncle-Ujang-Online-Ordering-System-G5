@@ -71,6 +71,7 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
     <link rel="stylesheet" href="../CSS/footer.css">
     <link rel="stylesheet" href="../CSS/profCust.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -132,11 +133,14 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
           </div>
 
           <!-- Upload gambar -->
-          <div class="form-group">
-            <label>Profile Image:</label>
-                 <input type="file" name="customer_image" accept="image/*">
-                    <button type="submit">Upload</button>
-          </div>
+          <div class="mb-3">
+  <label for="inputGroupFile01" class="form-label">Profile Image</label>
+  <div class="input-group">
+    <input type="file" class="form-control" id="inputGroupFile01" name="customer_image" accept="image/*">
+    <button class="btn btn-primary" type="submit" name="upload_img">Upload</button>
+  </div>
+</div>
+
      
 
           <!-- Update info -->
@@ -247,7 +251,7 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
 </footer>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../script/profCust.js"></script>
 </body>
 </html>

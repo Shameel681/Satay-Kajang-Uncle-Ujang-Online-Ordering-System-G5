@@ -131,11 +131,11 @@ $result = $conn->query("SELECT * FROM customer ORDER BY created_at DESC");
                       <input type="hidden" name="customer_id" value="<?= $row['customer_id'] ?>">
                       <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($row['name']) ?>" required>
+                        <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($row['name']) ?>" readonly required>
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($row['email']) ?>" required>
+                        <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($row['email']) ?>"   readonly required>
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Phone No</label>
