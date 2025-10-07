@@ -27,20 +27,16 @@ if (!$is_loggedin) {
     <aside class="sidebar">
         <div class="sidebar-header" id="staffDropdown">
             <img src="../image/LogoSataysebenarReal.png" alt="Logo">
-            <h2>Staff Panel <i class="fa-solid fa-caret-down"></i></h2>
-
-            <!-- Dropdown Menu -->
-            <div class="dropdown-menu" id="dropdownMenu">
-                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
-                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-            </div>
+            <h2>Staff Panel</h2>
         </div>
 
         <ul class="sidebar-menu">
+            <li><a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a></li>
             <li><a href="staff_dashboard.php" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
             <li><a href="staff_managecustomer.php"><i class="fa-solid fa-users"></i> Manage Customer</a></li>
             <li><a href="staff_menu.php"><i class="fa-solid fa-utensils"></i> Manage Menu</a></li>
             <li><a href="staff_viewfeedback.php"><i class="fa-solid fa-comments"></i> View Feedback</a></li>
+            <li><a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
         </ul>
     </aside>
 
