@@ -80,8 +80,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
                 <a href="../index.php" class="navbar-brand p-0">
                     <h1 class="text-primary m-0">
-                        <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo">Satay Kajang<br><small>Uncle Ujang</small>
-                    </h1>
+                        <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Logo"><small>Satay Kajang Uncle Ujang</small></h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -90,8 +89,8 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="../index.php" class="nav-item nav-link">Home</a>
                         <a href="menu.php" class="nav-item nav-link">Menu</a>
-                        <a href="about.php" class="nav-item nav-link active">About</a>
-                        <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        <a href="about.php" class="nav-item nav-link active">About Us</a>
+                        <a href="contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
                     <?php if ($is_loggedin): ?>
                         <a href="profCust.php" class="btn btn-primary py-2 px-4">Profile</a>

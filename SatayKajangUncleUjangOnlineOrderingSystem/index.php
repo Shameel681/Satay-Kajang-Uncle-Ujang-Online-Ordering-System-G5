@@ -12,7 +12,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title>Satay Kajang Uncle Ujang - Home</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -57,7 +57,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
                     
-                    <h1 class="text-primary m-0"><img src="image/LogoSataysebenarReal.png" alt="Logo">Satay Kajang<br><small> Uncle Ujang</small></h1>
+                    <h1 class="text-primary m-0"><img src="image/LogoSataysebenarReal.png" alt="Logo"><small>Satay Kajang Uncle Ujang</small></h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                      <style>
                      .navbar-brand img {
@@ -205,176 +205,164 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
         <!-- About End -->
 
         <!-- Menu Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Our Menu</h5>
-                    <h1 class="mb-5">Savor Our Signature Dishes</h1>
+        <!-- Menu Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Our Menu</h5>
+            <h1 class="mb-5">Savor Our Signature Dishes</h1>
+        </div>
+
+        <?php
+        // Fetch menu items grouped by category
+        $sql_main = "SELECT * FROM menu WHERE category = 'Main Dish'";
+        $sql_side = "SELECT * FROM menu WHERE category = 'Side Dish'";
+
+        $result_main = $conn->query($sql_main);
+        $result_side = $conn->query($sql_side);
+        ?>
+
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+            <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                        <i class="fa fa-utensils fa-2x text-primary"></i>
+                        <div class="ps-3">
+                            <small class="text-body">Popular</small>
+                            <h6 class="mt-n1 mb-0">Satay</h6>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                        <i class="fa fa-utensils fa-2x text-primary"></i>
+                        <div class="ps-3">
+                            <small class="text-body">Special</small>
+                            <h6 class="mt-n1 mb-0">Sides</h6>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- Main Dishes -->
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-4">
+                        <?php if ($result_main->num_rows > 0): ?>
+                            <?php while ($row = $result_main->fetch_assoc()): ?>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded"
+                                        src="<?php echo str_replace('../', '', htmlspecialchars($row['image_path'])); ?>"
+                                        alt="<?php echo htmlspecialchars($row['food_name']); ?>"
+                                        style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span><?php echo htmlspecialchars($row['food_name']); ?></span>
+                                                <span class="text-primary">RM <?php echo number_format($row['price'], 2); ?></span>
+                                            </h5>
+                                            <small class="fst-italic"><?php echo htmlspecialchars($row['description']); ?></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <p>No main dishes found.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
-                        <li class="nav-item">
-                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
-                                <i class="fa fa-coffee fa-2x text-primary"></i>
-                                <div class="ps-3">
-                                    <small class="text-body">Popular</small>
-                                    <h6 class="mt-n1 mb-0">Satay</h6>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
-                                <i class="fa fa-hamburger fa-2x text-primary"></i>
-                                <div class="ps-3">
-                                    <small class="text-body">Special</small>
-                                    <h6 class="mt-n1 mb-0">Sides</h6>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane fade show p-0 active">
-                            <div class="row g-4">
+
+                <!-- Side Dishes -->
+                <div id="tab-2" class="tab-pane fade show p-0">
+                    <div class="row g-4">
+                        <?php if ($result_side->num_rows > 0): ?>
+                            <?php while ($row = $result_side->fetch_assoc()): ?>
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="image/satay ayam.png" alt="Chicken Satay" style="width: 80px;">
+                                        <img class="flex-shrink-0 img-fluid rounded"
+                                        src="<?php echo str_replace('../', '', htmlspecialchars($row['image_path'])); ?>"
+                                        alt="<?php echo htmlspecialchars($row['food_name']); ?>"
+                                        style="width: 80px;">
+
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span>Chicken Satay</span>
-                                                <span class="text-primary">RM 1.40</span>
+                                                <span><?php echo htmlspecialchars($row['food_name']); ?></span>
+                                                <span class="text-primary">RM <?php echo number_format($row['price'], 2); ?></span>
                                             </h5>
-                                            <small class="fst-italic">Tender chicken skewers marinated in our secret recipe, served with peanut sauce.</small>
+                                            <small class="fst-italic"><?php echo htmlspecialchars($row['description']); ?></small>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="image/satay daging.jpg" alt="Beef Satay" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span>Beef Satay</span>
-                                                <span class="text-primary">RM 1.40</span>
-                                            </h5>
-                                            <small class="fst-italic">Juicy beef skewers with a smoky flavor, paired with rich peanut sauce.</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="image/satay perut.jpg" alt="tripe Satay" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span>Beef Tripe Satay</span>
-                                                <span class="text-primary">RM 1.60</span>
-                                            </h5>
-                                            <small class="fst-italic">Flavorful tripe skewers grilled to perfection, served with our signature sauce.</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="image/Satay kambing.jpg" alt="Mutton Satay Set" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span>Mutton Satay Set</span>
-                                                <span class="text-primary">RM 2.00</span>
-                                            </h5>
-                                            <small class="fst-italic">10 mutton skewers with rice cakes and cucumber.</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tab-2" class="tab-pane fade show p-0">
-                            <div class="row g-2">
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="image/Kuah kacang.jpg" alt="Kuah kacang" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span>Kuah Kacang</span>
-                                                <span class="text-primary">RM 10.00/kg</span>
-                                            </h5>
-                                            <small class="fst-italic">Extra serving of our rich, homemade peanut sauce.</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="image/Nasi Impit lagi.jpg" alt="Nasi Impit" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span>Nasi Impit</span>
-                                                <span class="text-primary">RM 2.50</span>
-                                            </h5>
-                                            <small class="fst-italic">Compressed rice cubes, a classic satay side dish.</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <p>No side dishes found.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<!-- Menu End -->
+
         <!-- Menu End -->
 
         <!-- Testimonial Start -->
-        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="text-center">
-                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonials</h5>
-                    <h1 class="mb-5">What Our Customers Say!</h1>
-                </div>
-                <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>The satay here is out of this world! The smoky flavor and creamy peanut sauce keep me coming back.</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;" alt="Aminah">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Aminah</h5>
-                                <small>Foodie</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Uncle Ujang's satay is the best in Kajang. The service is fast, and the food is always fresh!</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg" style="width: 50px; height: 50px;" alt="Rahim">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Rahim</h5>
-                                <small>Regular Customer</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>The mixed satay platter is perfect for sharing. Highly recommend their teh tarik too!</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg" style="width: 50px; height: 50px;" alt="Sofia">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Sofia</h5>
-                                <small>Family Diner</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Authentic satay with a cozy vibe. The staff are friendly, and the food is worth every penny.</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg" style="width: 50px; height: 50px;" alt="Zain">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Zain</h5>
-                                <small>Local Resident</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonials</h5>
+            <h1 class="mb-5">What Our Customers Say!</h1>
         </div>
-        <!-- Testimonial End -->
+        <div class="owl-carousel testimonial-carousel">
+
+            <?php
+            // Include your database connection
+            require_once 'connect.php';
+
+            // Query: get the latest 5 feedback entries
+            $sql = "SELECT customer_name, customer_email, feedback, created_at 
+                    FROM feedback_customer 
+                    ORDER BY created_at DESC 
+                    LIMIT 5";
+
+            $result = $conn->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $name = htmlspecialchars($row['customer_name']);
+                    $email = htmlspecialchars($row['customer_email']);
+                    $feedback = htmlspecialchars($row['feedback']);
+                    $date = date("F j, Y", strtotime($row['created_at']));
+
+                    echo '
+                    <div class="testimonial-item bg-transparent border rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>' . $feedback . '</p>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0 rounded-circle bg-light d-flex justify-content-center align-items-center" 
+                                style="width: 50px; height: 50px;">
+                                <i class="fa fa-user fa-lg text-primary"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h5 class="mb-1">' . $name . '</h5>
+                                <small>' . $email . '</small><br>
+                                <small class="text-muted">' . $date . '</small>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            } else {
+                echo '<p class="text-center text-muted">No feedback available yet.</p>';
+            }
+            ?>
+
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+
+
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">

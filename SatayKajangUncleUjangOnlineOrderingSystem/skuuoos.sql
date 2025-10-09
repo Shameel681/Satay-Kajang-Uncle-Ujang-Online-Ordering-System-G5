@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2025 at 01:28 AM
+-- Generation Time: Sep 30, 2025 at 09:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -49,8 +49,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `phone_no`, `address`, `password`, `is_verified`, `verify_token`, `last_login`, `created_at`, `updated_at`, `reset_token`, `reset_expires`, `profile_image`) VALUES
-(3, 'MUHAMMAD SHAMEEL', 'shameel681@gmail.com', '01110084626', 'no1. jalan semarak', '$2y$10$J149gfHywEFwTNTZStdDDeF/8bfLsEYp.uANEeycci5j.nXuqvMRG', 1, NULL, '2025-09-21 19:12:50', '2025-09-09 05:43:46', '2025-09-21 19:12:50', NULL, NULL, NULL),
-(5, 'Muhammad Fikri Bin Mawardi', 'toonpow3@gmail.com', '0119898256', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', '$2y$10$ByarGQwCoC2eLLtXq17pQuMLBrPpvXeLssb9QZVnmhEZ0QSFWSUdy', 1, NULL, '2025-09-23 06:42:24', '2025-09-09 06:32:48', '2025-09-23 06:52:18', NULL, NULL, 'capybara.jpg');
+(3, 'MUHAMMAD SHAMEEL', 'shameel681@gmail.com', '01110084626', 'no1. jalan semarak', '$2y$10$J149gfHywEFwTNTZStdDDeF/8bfLsEYp.uANEeycci5j.nXuqvMRG', 1, NULL, '2025-09-25 15:23:46', '2025-09-09 05:43:46', '2025-09-25 15:23:46', NULL, NULL, NULL),
+(5, 'Muhammad Fikri Bin Mawardi', 'toonpow3@gmail.com', '0119898256', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', '$2y$10$ByarGQwCoC2eLLtXq17pQuMLBrPpvXeLssb9QZVnmhEZ0QSFWSUdy', 1, NULL, '2025-09-25 14:55:04', '2025-09-09 06:32:48', '2025-09-25 14:55:04', NULL, NULL, 'capybara.jpg');
 
 -- --------------------------------------------------------
 
@@ -82,11 +82,10 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`, `phone_no`, `address`, `customer_image`, `reset_token`, `reset_expires`, `reset_expiry`, `is_verified`, `verify_token`, `profile_image`, `created_at`, `last_logged_in`, `updated_at`) VALUES
-(19, 'MUHAMMAD SUHAIMI BIN MOHD SHAM', 'm.suhaimipro@gmail.com', '$2y$10$i2Vv1tNp/a1nVGc61hnZbOoIRpasC0Z1mlPFQRTVdRQJ.Bw4QaD4K', '01113277665', '', NULL, NULL, NULL, NULL, 0, '91b93fa6d1fbbd6507b59041144081f4', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 11:11:07'),
-(20, 'MUHAMMAD ANAS IZZUDIN BIN MUAMAR ', 'anasizzuddin@graduate.utm.my', '$2y$10$0CEJ4RszQYGHE60cw.YT1uQVYRXvHmx3vkN.eB8Cx0E9qlbaHpnzq', '0102045904', NULL, NULL, NULL, NULL, NULL, 0, '4a37db85f42c739ce2adaa7d1489fcbd', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 08:16:25'),
-(21, 'ZUHAIKAL AIMAN BIN ZAILAN', 'zuhaikal566@gmail.com', '$2y$10$aQAb6.4Xu7BK2YViunQ.1.gYdRmcqTFptagC7AbtiKuhC.yh4dt6S', '01133114674', NULL, NULL, NULL, NULL, NULL, 0, 'ac51b47d0095cbc2aa865c3d847f1a99', NULL, '2025-09-19 13:32:35', NULL, '2025-09-21 08:16:25'),
-(33, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$AexpywrEw4bh.ogj/TizROlEUHR/J.zKpTCSVdsPyqbX9sVqw1LtO', '01110084626', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, '2025-09-19 13:32:35', '2025-09-19 13:36:57', '2025-09-21 08:16:25'),
-(37, 'FIKRI MAWARDI', 'toonpow43@gmail.com', '$2y$10$zOnBDUa/3aT8G4pEzCdbYOi6CVKpeQ2SUjEgUg7VrFMkO/a25zBiq', '01162226128', NULL, 'cust_37.jpg', NULL, NULL, NULL, 1, NULL, 'cust_37.jpg', '2025-09-22 22:59:57', '2025-09-22 23:00:12', '2025-09-22 23:23:55');
+(19, 'MUHAMMAD SUHAIMI BIN MOHD SHAM', 'm.suhaimipro@gmail.com', '$2y$10$i2Vv1tNp/a1nVGc61hnZbOoIRpasC0Z1mlPFQRTVdRQJ.Bw4QaD4K', '01162226128', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', NULL, NULL, NULL, NULL, 0, '91b93fa6d1fbbd6507b59041144081f4', NULL, '2025-09-19 13:32:35', NULL, '2025-09-25 07:01:01'),
+(20, 'MUHAMMAD ANAS IZZUDIN BIN MUAMAR', 'anasizzuddin@graduate.utm.my', '$2y$10$0CEJ4RszQYGHE60cw.YT1uQVYRXvHmx3vkN.eB8Cx0E9qlbaHpnzq', '0102045904', 'wangsa', NULL, NULL, NULL, NULL, 0, '4a37db85f42c739ce2adaa7d1489fcbd', NULL, '2025-09-19 13:32:35', NULL, '2025-09-25 07:02:29'),
+(33, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', '$2y$10$AexpywrEw4bh.ogj/TizROlEUHR/J.zKpTCSVdsPyqbX9sVqw1LtO', '01110084626', '', NULL, NULL, NULL, NULL, 1, NULL, NULL, '2025-09-19 13:32:35', '2025-09-25 07:18:00', '2025-09-25 07:18:00'),
+(37, 'FIKRI MAWARDI', 'toonpow43@gmail.com', '$2y$10$zOnBDUa/3aT8G4pEzCdbYOi6CVKpeQ2SUjEgUg7VrFMkO/a25zBiq', '0116222612', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', 'cust_37.jpg', NULL, NULL, NULL, 1, NULL, 'cust_37.jpg', '2025-09-22 22:59:57', '2025-09-30 07:36:50', '2025-09-30 07:36:50');
 
 -- --------------------------------------------------------
 
@@ -108,11 +107,8 @@ CREATE TABLE `feedback_customer` (
 
 INSERT INTO `feedback_customer` (`id`, `customer_name`, `customer_email`, `feedback`, `created_at`) VALUES
 (1, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'Shameel681@gmail.com', 'sedap', '2025-08-17 19:18:16'),
-(2, 'suhaimi sham', 'suhaimi@gmail.com', 'makanan sedap gile', '2025-08-17 19:24:23'),
-(3, 'suhaimi sham', 'suhaimi@gmail.com', 'sedapnya makanan', '2025-08-17 19:28:28'),
 (4, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'Shameel681@gmail.com', 'sedap jugak ye', '2025-08-17 19:32:31'),
-(5, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', 'sedapnyooooooooooooo', '2025-08-24 05:33:18'),
-(6, 'MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI', 'shameel681@gmail.com', 'test 2', '2025-08-28 06:37:45');
+(5, 'MUHAMMAD FIKRI BIN MAWARDI', 'toonpow43@gmail.com', 'sedapnyooooooooooooo', '2025-08-24 05:33:18');
 
 -- --------------------------------------------------------
 
@@ -133,14 +129,11 @@ CREATE TABLE `feedback_guest` (
 --
 
 INSERT INTO `feedback_guest` (`id`, `guest_name`, `guest_email`, `feedback`, `created_at`) VALUES
-(23, 'shameel', 'shameel@gmail.com', 'shameel', '2025-08-17 18:04:54'),
-(25, 'suhaimi test', 'test@suhaimi.com', 'saya tengah test', '2025-08-17 18:22:04'),
 (26, 'fikri mawardi', 'fikri@gmail.com', 'saya tak suka makanan sini', '2025-08-17 18:23:41'),
 (27, 'shameel clone', 'shameeldoubleganger@gmail.com', 'makanan ini tidak sedap', '2025-08-17 19:20:54'),
 (28, 'shameel', 'shameel@hotmail.com', 'makanan 10/10', '2025-08-17 19:23:15'),
 (29, 'MUHAMMAD ZAKUAN', 'mfitrizakuan@gmail.com', 'MAKANAN RASA BIASA BIASA JE', '2025-08-17 19:32:03'),
-(31, 'fitrizakuanazmee', 'm.fitreezakuanazmee@gmail.com', 'syedap', '2025-09-07 09:56:33'),
-(32, 'MUHAMMAD SYABIL AMSYAR', 'toonpow43@gmail.com', 'gasjgdjgdggh', '2025-09-09 13:31:44');
+(31, 'fitrizakuanazmee', 'm.fitreezakuanazmee@gmail.com', 'syedap', '2025-09-07 09:56:33');
 
 -- --------------------------------------------------------
 
@@ -164,7 +157,7 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`food_id`, `food_name`, `price`, `description`, `image_path`, `category`, `created_at`, `updated_at`) VALUES
-('F01', 'Satay Ayam', 1.30, 'Ayam diperap rempah rahsia, memanggang harum semerbak', '../image/1758449921_satay ayam.png', 'Main Dish', '2025-09-21 09:36:59', '2025-09-21 10:18:41'),
+('F01', 'Satay Ayam', 1.30, 'Ayam diperap rempah rahsia, memanggang harum semerbak', '../image/1758781835_satay ayam.png', 'Main Dish', '2025-09-21 09:36:59', '2025-09-25 06:30:35'),
 ('F02', 'Satay Daging', 1.20, 'Daging dihiris halus, lembut dan penuh rasa', '../image/satay daging.jpg', 'Main Dish', '2025-09-21 09:36:59', '2025-09-21 09:36:59'),
 ('F03', 'Satay Perut', 1.20, 'Perut direndam rempah, kenyal dan berperisa unik', '../image/satay perut.jpg', 'Main Dish', '2025-09-21 09:36:59', '2025-09-21 09:36:59'),
 ('F04', 'Satay Kambing', 2.00, 'Kambing dipanggang tepat, wangi dan tiada bau', '../image/Satay kambing.jpg', 'Main Dish', '2025-09-21 09:36:59', '2025-09-21 09:36:59'),
@@ -216,18 +209,18 @@ CREATE TABLE `staff` (
   `reset_token` varchar(100) DEFAULT NULL,
   `reset_expires` datetime DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `last_logged_in` timestamp NULL DEFAULT NULL
+  `last_logged_in` timestamp NULL DEFAULT NULL,
+  `staff_image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`staff_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`, `created_at`, `last_logged_in`) VALUES
-(101, 'Toon Pow 1', 'toonpow3@gmail.com', '$2y$10$Zbq2n3YkF7gNQdFhnx9rCe3w7I0JfD3B5bzQY8rZK5xM7vRjY9YxG', NULL, NULL, NULL, NULL, '2025-09-19 15:23:13', NULL),
-(102, 'shameel', 'toonpow43@gmail.com', '$2y$10$k6gaszO/75eAGJTH19Oj5eyFCXv3JcQpBuPebgmmW5WzStDJ66bMi', '0194343887', 'NO 1 JALAN 1 TAMAN SRI TANJUNG', NULL, NULL, '2025-09-19 15:23:13', NULL),
-(103, 'MUHAMMAD SHAMEELs', 'shameel681@gmail.com', '$2y$10$kLqkFw6NcZvq2Ow3KRLiQ.fZJxGGMRNzAXLPL1sgekVVceJmnckmq', '01110084626', 'no1. jalan semarak', NULL, NULL, '2025-09-21 07:34:09', NULL),
-(104, 'FIKRI MAWARDI', 'justpiki123@gmail.com', '$2y$10$pItGJmIQsWldlvlYp/naJuhQSBdvGU1L4yeyLdXK9L/8mZlzKMKrS', '01162226128', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', NULL, NULL, '2025-09-21 13:15:06', NULL);
+INSERT INTO `staff` (`staff_id`, `name`, `email`, `password`, `phone_no`, `address`, `reset_token`, `reset_expires`, `created_at`, `last_logged_in`, `staff_image`) VALUES
+(104, 'FIKRI MAWARDI', 'justpiki123@gmail.com', '$2y$10$D/jUdtrnz5t8D0.ZOcu.r.Hmo3nleiPfx5lLbpyBVgWVTfLk9VOfC', '01162226128', 'AG-2, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', NULL, NULL, '2025-09-21 13:15:06', NULL, 'staff_104.JPG'),
+(105, 'Ammar Zafri', 'toonpow3@gmail.com', '$2y$10$7LoMlaEaApRxH8TY3lHzM.ZF2lKxlT2oBGu6pbhEcKmRsfgXfl5jK', '01162226128', 'AG-76, JALAN DESA KENANGA 2, TAMAN DESA KENANGA', NULL, NULL, '2025-09-25 06:25:56', NULL, NULL),
+(106, 'shameel', 'shameel681@gmail.com', '$2y$10$GEJ9UCGVgq.kDlnNKeZr7.Miy85UX/WY6fiX3SM4fUp4RmTKf.Pe6', '01110084626', 'buloh', NULL, NULL, '2025-09-25 07:24:54', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -304,7 +297,7 @@ ALTER TABLE `feedback_guest`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

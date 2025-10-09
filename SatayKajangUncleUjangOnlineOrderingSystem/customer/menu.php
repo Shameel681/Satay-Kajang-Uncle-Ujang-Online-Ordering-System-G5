@@ -44,6 +44,7 @@ if ($result && $result->num_rows > 0) {
         $menu_items[$row['category']][] = $row;
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +108,7 @@ if ($result && $result->num_rows > 0) {
         <div class="container-xxl position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
                 <a href="../index.php" class="navbar-brand p-0">
-                    <h1 class="text-primary m-0"><img src="../image/LogoSataysebenarReal.png" alt="Logo">Satay Kajang<br><small>Uncle Ujang</small></h1>
+                    <h1 class="text-primary m-0"><img src="../image/LogoSataysebenarReal.png" alt="Logo"><small>Satay Kajang Uncle Ujang</small></h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -117,7 +118,7 @@ if ($result && $result->num_rows > 0) {
                         <a href="../index.php" class="nav-item nav-link">Home</a>
                         <a href="menu.php" class="nav-item nav-link active">Menu</a>
                         <a href="about.php" class="nav-item nav-link">About Us</a>
-                        <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        <a href="contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
                     <?php if ($is_loggedin): ?>
                         <a href="profCust.php" class="btn btn-primary py-2 px-4 mx-2">Profile</a>
@@ -134,7 +135,6 @@ if ($result && $result->num_rows > 0) {
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
                             <li class="breadcrumb-item text-white active" aria-current="page">Menu</li>
                         </ol>
                     </nav>
@@ -214,8 +214,10 @@ if ($result && $result->num_rows > 0) {
                                             data-image="../image/<?php echo htmlspecialchars($item['image_path']); ?>"
                                             data-description="<?php echo htmlspecialchars($item['description']); ?>">
                                             <img src="../image/<?php echo htmlspecialchars($item['image_path']); ?>" 
-                                                alt="<?php echo htmlspecialchars($item['food_name']); ?>" 
-                                                class="menu-image">
+                                            alt="<?php echo htmlspecialchars($item['food_name']); ?>" 
+                                            class="menu-image">
+
+
                                             <div class="menu-details">
                                                 <h4>
                                                     <?php echo htmlspecialchars($item['food_name']); ?> 
@@ -340,7 +342,7 @@ if ($result && $result->num_rows > 0) {
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
-    <script src="../script/menuscript.js"></script>
+    <script src="../script/menusscript.js"></script>
 
     <!-- Fallback to hide spinner -->
     <script>
