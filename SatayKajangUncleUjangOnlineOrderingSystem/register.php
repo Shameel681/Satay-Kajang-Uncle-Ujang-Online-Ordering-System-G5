@@ -191,43 +191,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Navbar & Hero End -->
 
         <!-- Registration Section -->
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                    <div class="bg-light rounded p-5 shadow">
-                        <h2 class="text-center mb-4 text-primary">Customer Registration</h2>
-                        <p class="text-center text-muted mb-4">Join us and enjoy our authentic satay!</p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="bg-light rounded p-5 shadow">
+                <h2 class="text-center mb-4 text-primary">Customer Registration</h2>
+                <p class="text-center text-muted mb-4">Join us and enjoy our authentic satay!</p>
 
-                        <?php if (!empty($message)): ?>
-                            <div class="alert alert-<?php echo $message_type === 'success' ? 'success' : 'danger'; ?>">
-                                <?php echo $message; ?>
-                            </div>
-                        <?php endif; ?>
-
-                        <form action="register.php" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label"><i class="fa fa-user"></i> Full Name</label>
-                                <input type="text" class="form-control" name="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><i class="fa fa-envelope"></i> Email</label>
-                                <input type="email" class="form-control" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><i class="fa fa-phone"></i> Phone Number</label>
-                                <input type="text" class="form-control" name="phone" pattern="[0-9]{10,11}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"><i class="fa fa-lock"></i> Password</label>
-                                <input type="password" class="form-control" name="password" minlength="8" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Register</button>
-                        </form>
+                <?php if (!empty($message)): ?>
+                    <div class="alert alert-<?php echo $message_type === 'success' ? 'success' : 'danger'; ?>">
+                        <?php echo $message; ?>
                     </div>
-                </div>
+                <?php endif; ?>
+
+                <form action="register.php" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fa fa-user"></i> Full Name</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fa fa-envelope"></i> Email</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fa fa-phone"></i> Phone Number</label>
+                        <input type="text" class="form-control" name="phone" pattern="[0-9]{10,11}" required>
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label class="form-label"><i class="fa fa-lock"></i> Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                            <button type="button" class="btn btn-outline-secondary" id="togglePassword" style="border-left: none;">
+                                <i class="fa fa-eye" id="toggleIcon"></i>
+                            </button>
+                        </div>
+                        <small class="text-muted">Password must be at least 8 characters long.</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
             </div>
         </div>
-        <!-- Registration Section End -->
+    </div>
+</div>
+<!-- Registration Section End -->
+
+<!-- Password Toggle Script -->
+<script>
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+    const toggleIcon = document.getElementById("toggleIcon");
+
+    togglePassword.addEventListener("click", () => {
+        const isHidden = password.type === "password";
+        password.type = isHidden ? "text" : "password";
+        toggleIcon.classList.toggle("fa-eye");
+        toggleIcon.classList.toggle("fa-eye-slash");
+    });
+</script>
+
 
         <!-- Footer Start (same as index) -->
         <div class="container-fluid bg-dark text-light footer pt-5 mt-5">

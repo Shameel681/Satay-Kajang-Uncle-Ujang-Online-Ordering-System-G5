@@ -189,7 +189,7 @@ if (isset($conn)) {
 
 
     <!-- Login Section -->
-    <main>
+<main>
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
@@ -210,9 +210,14 @@ if (isset($conn)) {
                             <input type="email" class="form-control" name="email" required>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3 position-relative">
                             <label class="form-label"><i class="fa fa-lock"></i> Password</label>
-                            <input type="password" class="form-control" name="password" required>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <button type="button" class="btn btn-outline-secondary" id="togglePassword" style="border-left: none;">
+                                    <i class="fa fa-eye" id="toggleIcon"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -230,6 +235,21 @@ if (isset($conn)) {
         </div>
     </div>
 </main>
+
+<!-- Password Toggle Script -->
+<script>
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+    const toggleIcon = document.getElementById("toggleIcon");
+
+    togglePassword.addEventListener("click", () => {
+        const isHidden = password.type === "password";
+        password.type = isHidden ? "text" : "password";
+        toggleIcon.classList.toggle("fa-eye");
+        toggleIcon.classList.toggle("fa-eye-slash");
+    });
+</script>
+
 
 
       <!-- Footer Start (same as index) -->
