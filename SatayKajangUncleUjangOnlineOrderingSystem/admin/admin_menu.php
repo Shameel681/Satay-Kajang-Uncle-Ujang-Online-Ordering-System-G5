@@ -32,8 +32,8 @@ if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true)
 
             <!-- Dropdown Menu -->
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="profStaff.php"><i class="fa-solid fa-user"></i> Profile</a>
-                <a href="staff_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                <a href="profAdmin.php"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="admin_logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
         </div>
 
