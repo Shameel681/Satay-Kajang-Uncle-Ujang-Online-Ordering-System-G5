@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Edit Customer</title>
-    <link rel="stylesheet" href="../css/admincustomer.css">
+    <link rel="stylesheet" href="../CSS/admincustomer.css">
 </head>
 <body>
 

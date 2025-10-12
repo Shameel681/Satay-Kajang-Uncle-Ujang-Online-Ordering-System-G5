@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../connect.php';
 require '../vendor/autoload.php'; // PHPMailer
 
