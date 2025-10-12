@@ -162,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
-                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="index.php" class="nav-item nav-link">Home</a>
                         <a href="customer/menu.php" class="nav-item nav-link">Menu</a>
                         <a href="customer/about.php" class="nav-item nav-link">About us</a>
                         <a href="customer/contact.php" class="nav-item nav-link">Contact Us</a>
