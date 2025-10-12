@@ -1,68 +1,70 @@
 <?php
+require_once '../connect.php';
 session_start();
-include '../connect.php';
 
-// Dapatkan ID admin (contoh kalau simpan dalam session)
-$admin_id = $_SESSION['admin_id'] ?? null;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = [];
-    $success_message = '';
-
-    // Handle upload image
-    if (!empty($_FILES['profile_image']['name'])) {
-        $target_dir = "../uploads/admin/";
-        $file_name = basename($_FILES['profile_image']['name']);
-        $target_file = $target_dir . $file_name;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        // Validasi jenis file
-        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
-        if (!in_array($imageFileType, $allowed_types)) {
-            $errors[] = "Only JPG, JPEG, PNG & GIF files are allowed.";
-        } else {
-            // Upload
-            if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $target_file)) {
-                // Update ke DB
-                $stmt = $conn->prepare("UPDATE admin SET profile_image = ? WHERE admin_id = ?");
-                $stmt->bind_param("si", $file_name, $admin_id);
-                if ($stmt->execute()) {
-                    $success_message = "Profile image updated successfully.";
-                } else {
-                    $errors[] = "Database error updating image.";
-                }
-                $stmt->close();
-            } else {
-                $errors[] = "Sorry, there was an error uploading your file.";
-            }
-        }
-    }
-
-    // Handle update profile info (kalau button Save ditekan)
-    if (isset($_POST['update_profile'])) {
-        $admin_name = $_POST['admin_name'];
-        $phone_no   = $_POST['phone_no'];
-        $address    = $_POST['address'];
-
-        $stmt = $conn->prepare("UPDATE admin SET admin_name=?, phone_no=?, address=? WHERE admin_id=?");
-        $stmt->bind_param("sssi", $admin_name, $phone_no, $address, $admin_id);
-
-        if ($stmt->execute()) {
-            $success_message .= " Profile info updated successfully.";
-        } else {
-            $errors[] = "Failed to update profile info.";
-        }
-        $stmt->close();
-    }
-
-    // Redirect balik ke page profile dengan mesej
-    if (!empty($success_message)) {
-        $_SESSION['success_message'] = $success_message;
-    }
-    if (!empty($errors)) {
-        $_SESSION['error_message'] = implode("<br>", $errors);
-    }
-
-    header("Location: profAdmin.php");
-    exit();
+if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true) {
+    header("Location: admin_login.php");
+    exit;
 }
+
+$admin_id = $_SESSION['admin_id'];
+
+if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+    $file = $_FILES['profile_image'];
+    $upload_dir = '../uploads/admin/';
+    
+    // Create directory if not exists
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+    
+    // Validate file
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $max_size = 2 * 1024 * 1024; // 2MB
+    
+    if (!in_array($file['type'], $allowed_types)) {
+        $_SESSION['error_message'] = "Invalid file type. Only JPG, PNG, GIF allowed.";
+    } elseif ($file['size'] > $max_size) {
+        $_SESSION['error_message'] = "File too large. Maximum 2MB allowed.";
+    } else {
+        // Generate unique filename
+        $file_ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $new_filename = $admin_id . '_' . time() . '.' . $file_ext;
+        $upload_path = $upload_dir . $new_filename;
+        
+        if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+            // Delete old image if exists
+            $old_stmt = $conn->prepare("SELECT profile_image FROM admin WHERE admin_id=?");
+            $old_stmt->bind_param("i", $admin_id);
+            $old_stmt->execute();
+            $old_result = $old_stmt->get_result();
+            $old_admin = $old_result->fetch_assoc();
+            
+            if ($old_admin && !empty($old_admin['profile_image']) && $old_admin['profile_image'] !== $new_filename) {
+                $old_path = $upload_dir . $old_admin['profile_image'];
+                if (file_exists($old_path)) {
+                    unlink($old_path);
+                }
+            }
+            $old_stmt->close();
+            
+            // Update database
+            $stmt = $conn->prepare("UPDATE admin SET profile_image=? WHERE admin_id=?");
+            $stmt->bind_param("si", $new_filename, $admin_id);
+            if ($stmt->execute()) {
+                $_SESSION['success_message'] = "Profile image uploaded successfully!";
+            } else {
+                $_SESSION['error_message'] = "Image uploaded but database update failed.";
+            }
+            $stmt->close();
+        } else {
+            $_SESSION['error_message'] = "Failed to upload image.";
+        }
+    }
+} else {
+    $_SESSION['error_message'] = "No image selected or upload error.";
+}
+
+header("Location: profAdmin.php");
+exit;
+?>
