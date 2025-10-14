@@ -1,12 +1,12 @@
 <?php
-// admin_dashboard.php
+// staff_dashboard.php
 require_once '../connect.php';
 
-// Check session admin
-$is_loggedin = isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true;
-$admin_name = $is_loggedin ? htmlspecialchars($_SESSION['admin_name']) : '';
+// Check session staff
+$is_loggedin = isset($_SESSION['staff_loggedin']) && $_SESSION['staff_loggedin'] === true;
+$staff_name = $is_loggedin ? htmlspecialchars($_SESSION['staff_name']) : '';
 if (!$is_loggedin) {
-    header("Location: profStaff.php");
+    header("Location: staff_login.php");
     exit;
 }
 ?>
@@ -14,24 +14,22 @@ if (!$is_loggedin) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Dashboard - Satay Kajang Uncle Ujang</title>
-    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: ["Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
-          urls: ["../assets/css/fonts.min.css"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: ["Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+                urls: ["../assets/css/fonts.min.css"],
+            },
+            active: function () { sessionStorage.fonts = true; }
+        });
     </script>
 
     <!-- CSS Files -->
@@ -107,24 +105,12 @@ if (!$is_loggedin) {
         </div>
 
         <div class="main-panel">
+            <!-- Main Header -->
             <div class="main-header">
                 <div class="main-header-logo">
-                    <div class="logo-header" data-background-color="dark">
-                        <a href="admin_dashboard.php" class="logo">
-                            <img src="../image/LogoSataysebenarReal.png" alt="navbar brand" class="navbar-brand" height="20" />
-                        </a>
-                        <div class="nav-toggle">
-                            <button class="btn btn-toggle toggle-sidebar">
-                                <i class="gg-menu-right"></i>
-                            </button>
-                            <button class="btn btn-toggle sidenav-toggler">
-                                <i class="gg-menu-left"></i>
-                            </button>
-                        </div>
-                        <button class="topbar-toggler more">
-                            <i class="gg-more-vertical-alt"></i>
-                        </button>
-                    </div>
+                    <a href="staff_dashboard.php" class="logo">
+                        <img src="../image/LogoSataysebenarReal.png" alt="navbar brand" class="navbar-brand" height="20" />
+                    </a>
                 </div>
                 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                     <div class="container-fluid">
@@ -142,21 +128,21 @@ if (!$is_loggedin) {
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                                     <div class="avatar-sm">
-                                        <img src="../assets/img/profile.jpg" alt="Admin" class="avatar-img rounded-circle" />
+                                        <img src="../assets/img/profile.jpg" alt="Staff" class="avatar-img rounded-circle" />
                                     </div>
                                     <span class="profile-username">
                                         <span class="op-7">Welcome,</span>
-                                        <span class="fw-bold"><?php echo $admin_name; ?></span>
+                                        <span class="fw-bold"><?php echo $staff_name; ?></span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                                     <li>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="profAdmin.php">
+                                        <a class="dropdown-item" href="profStaff.php">
                                             <i class="fa-solid fa-user me-2"></i> Profile
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="admin_logout.php">
+                                        <a class="dropdown-item" href="staff_logout.php">
                                             <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
                                         </a>
                                     </li>
@@ -172,14 +158,14 @@ if (!$is_loggedin) {
                     <!-- Header -->
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                         <div>
-                            <h1 class="fw-bold mb-3">Welcome, <strong><?php echo $admin_name; ?></strong>!</h1>
-                            <p class="op-7 mb-2">Manage the Satay Kajang Uncle Ujang system efficiently with the tools below.</p>
+                            <h1 class="fw-bold mb-3">Welcome, <strong><?php echo $staff_name; ?></strong>!</h1>
+                            <p class="op-7 mb-2">Manage Satay Kajang Uncle Ujang system with the tools below.</p>
                         </div>
                     </div>
 
                     <!-- Quick Stats Cards -->
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="card card-stats card-round">
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -198,26 +184,7 @@ if (!$is_loggedin) {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fa-solid fa-user-tie"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">Staff</p>
-                                                <h4 class="card-title">12</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="card card-stats card-round">
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -236,7 +203,7 @@ if (!$is_loggedin) {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="card card-stats card-round">
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -285,7 +252,7 @@ if (!$is_loggedin) {
                         </div>
                     </div>
 
-                    <!-- Additional Sections from Template -->
+                    <!-- Additional Sections -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
@@ -453,76 +420,71 @@ if (!$is_loggedin) {
             </div>
         </div>
 
-    <!-- Core JS Files -->
-    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    
-    <!-- jQuery Scrollbar -->
-    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Kaiadmin JS -->
-    <script src="../assets/js/kaiadmin.min.js"></script>
+        <!-- Core JS Files -->
+        <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+        <script src="../assets/js/core/popper.min.js"></script>
+        <script src="../assets/js/core/bootstrap.min.js"></script>
+        <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+        <script src="../assets/js/kaiadmin.min.js"></script>
 
-    <script>
-        // Sales Overview Chart
-        const salesCtx = document.getElementById('salesChart').getContext('2d');
-        new Chart(salesCtx, {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Sales (RM)',
-                    data: [1200, 1900, 3000, 2500, 2800, 3500, 3000],
-                    borderColor: '#e67e22',
-                    backgroundColor: 'rgba(230, 126, 34, 0.1)',
-                    fill: true,
-                    tension: 0.4,
-                    borderWidth: 3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
+        <!-- Chart JS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Sales Overview Chart
+            const salesCtx = document.getElementById('salesChart').getContext('2d');
+            new Chart(salesCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Sales (RM)',
+                        data: [1200, 1900, 3000, 2500, 2800, 3500, 3000],
+                        borderColor: '#e67e22',
+                        backgroundColor: 'rgba(230, 126, 34, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 3
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        // Orders Breakdown Chart
-        const ordersCtx = document.getElementById('ordersChart').getContext('2d');
-        new Chart(ordersCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Completed', 'Pending', 'Cancelled'],
-                datasets: [{
-                    data: [70, 20, 10],
-                    backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
+            // Orders Breakdown Chart
+            const ordersCtx = document.getElementById('ordersChart').getContext('2d');
+            new Chart(ordersCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'Pending', 'Cancelled'],
+                    datasets: [{
+                        data: [70, 20, 10],
+                        backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
                 }
-            }
-        });
-    </script>
+            });
+        </script>
 </body>
 </html>
