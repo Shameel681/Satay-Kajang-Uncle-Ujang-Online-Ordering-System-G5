@@ -1,59 +1,70 @@
 <?php
-session_start();
 require_once '../connect.php';
+session_start();
 
-// Staff login check
 if (!isset($_SESSION['staff_loggedin']) || $_SESSION['staff_loggedin'] !== true) {
     header("Location: staff_login.php");
     exit;
 }
 
 $staff_id = $_SESSION['staff_id'];
-$success = false;
 
-// Handle image upload
 if (isset($_FILES['staff_image']) && $_FILES['staff_image']['error'] === UPLOAD_ERR_OK) {
-    $allowed_types = ['image/jpeg', 'image/png'];
-    if (in_array($_FILES['staff_image']['type'], $allowed_types)) {
-        $ext = pathinfo($_FILES['staff_image']['name'], PATHINFO_EXTENSION);
-        $new_name = "staff_" . $staff_id . "." . $ext;
-        $upload_dir = "../uploads/";
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
-        }
-        $target = $upload_dir . $new_name;
-
-        if (move_uploaded_file($_FILES['staff_image']['tmp_name'], $target)) {
-            $stmt = $conn->prepare("UPDATE staff SET staff_image = ? WHERE staff_id = ?");
-            $stmt->bind_param("si", $new_name, $staff_id);
-            $stmt->execute();
+    $file = $_FILES['staff_image'];
+    $upload_dir = '../Uploads/staff/';
+    
+    // Create directory if not exists
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+    
+    // Validate file
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $max_size = 2 * 1024 * 1024; // 2MB
+    
+    if (!in_array($file['type'], $allowed_types)) {
+        $_SESSION['error_message'] = "Invalid file type. Only JPG, PNG, GIF allowed.";
+    } elseif ($file['size'] > $max_size) {
+        $_SESSION['error_message'] = "File too large. Maximum 2MB allowed.";
+    } else {
+        // Generate unique filename
+        $file_ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $new_filename = $staff_id . '_' . time() . '.' . $file_ext;
+        $upload_path = $upload_dir . $new_filename;
+        
+        if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+            // Delete old image if exists
+            $old_stmt = $conn->prepare("SELECT staff_image FROM staff WHERE staff_id=?");
+            $old_stmt->bind_param("i", $staff_id);
+            $old_stmt->execute();
+            $old_result = $old_stmt->get_result();
+            $old_staff = $old_result->fetch_assoc();
+            
+            if ($old_staff && !empty($old_staff['staff_image']) && $old_staff['staff_image'] !== $new_filename) {
+                $old_path = $upload_dir . $old_staff['staff_image'];
+                if (file_exists($old_path)) {
+                    unlink($old_path);
+                }
+            }
+            $old_stmt->close();
+            
+            // Update database
+            $stmt = $conn->prepare("UPDATE staff SET staff_image=? WHERE staff_id=?");
+            $stmt->bind_param("si", $new_filename, $staff_id);
+            if ($stmt->execute()) {
+                $_SESSION['success_message'] = "Profile image uploaded successfully!";
+            } else {
+                $_SESSION['error_message'] = "Image uploaded but database update failed.";
+            }
             $stmt->close();
-            $success = true;
+        } else {
+            $_SESSION['error_message'] = "Failed to upload image.";
         }
     }
-}
-
-// Handle profile info update
-if (isset($_POST['update_profile'])) {
-    $name = $_POST['name'] ?? '';
-    $phone = $_POST['phone_no'] ?? '';
-    $address = $_POST['address'] ?? '';
-
-    $stmt = $conn->prepare("UPDATE staff SET name=?, phone_no=?, address=? WHERE staff_id=?");
-    $stmt->bind_param("sssi", $name, $phone, $address, $staff_id);
-
-    $stmt->execute();
-    $stmt->close();
-    $success = true;
-}
-
-if ($success) {
-    $_SESSION['success_message'] = "Profile updated successfully!";
 } else {
-    $_SESSION['error_message'] = "No changes made.";
+    $_SESSION['error_message'] = "No image selected or upload error.";
 }
 
-// Redirect balik ke staff profile page
 header("Location: profStaff.php");
 exit;
 ?>
