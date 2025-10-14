@@ -82,6 +82,7 @@ if ($result && $result->num_rows > 0) {
     <link href="../CSS/bootstrap.min.css" rel="stylesheet">
     <link href="../CSS/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/menus.css">
+    <link rel="stylesheet" href="../CSS/menus1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
@@ -95,25 +96,151 @@ if ($result && $result->num_rows > 0) {
         vertical-align: middle;
     }
     .modal {
-        display: none; 
-        position: fixed; 
-        z-index: 1050; 
+        display: none;
+        position: fixed;
+        z-index: 1050;
         left: 0;
         top: 0;
-        width: 100%; 
-        height: 100%; 
-        overflow: auto; 
-        background-color: rgba(0,0,0,0.4); 
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
     }
     .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto; 
+        background-color: #fff;
+        margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%; 
+        width: 80%;
         max-width: 500px;
         text-align: center;
         border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        animation: slideIn 0.3s ease-out;
+    }
+    @keyframes slideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .product-modal .modal-header {
+        background: linear-gradient(45deg, #e67e22, #d35400);
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .success-modal .modal-header {
+        background: linear-gradient(45deg, #28a745, #218838);
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+    }
+    .confirm-modal .modal-header {
+        background: linear-gradient(45deg, #dc3545, #c82333);
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+    }
+    .modal-body {
+        padding: 20px;
+        font-size: 1.2rem;
+        color: #333;
+    }
+    .modal-footer {
+        padding: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .product-modal .modal-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    .quantity-control {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0;
+    }
+    .quantity-control button {
+        background: #e67e22;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .quantity-control button:hover {
+        background: #d35400;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(230, 126, 34, 0.3);
+    }
+    .quantity-control input {
+        width: 60px;
+        text-align: center;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1.1rem;
+    }
+    .btn-primary {
+        background: linear-gradient(45deg, #e67e22, #d35400);
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #d35400, #e67e22);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+    }
+    .btn-success {
+        background: linear-gradient(45deg, #28a745, #218838);
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+    .btn-success:hover {
+        background: linear-gradient(45deg, #218838, #1e7e34);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+    }
+    .btn-danger {
+        background: linear-gradient(45deg, #dc3545, #c82333);
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+    .btn-danger:hover {
+        background: linear-gradient(45deg, #c82333, #bd2130);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    }
+    .cart-summary {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .cart-actions .btn {
+        padding: 8px 15px;
+        border-radius: 20px;
     }
 </style>
 
@@ -216,14 +343,12 @@ if ($result && $result->num_rows > 0) {
                     <h3>Your Cart</h3>
                     <ul id="cart-items"></ul>
                     <div class="cart-total">
-    <strong>Total:</strong> <span id="total-price">RM 0.00</span>
-</div>
-<div class="cart-actions d-flex justify-content-between mt-3">
-    <button id="clear-cart-btn" class="btn btn-danger flex-fill me-2">Clear Cart</button>
-    <button id="checkout-btn" class="btn btn-primary flex-fill ms-2">Checkout</button>
-</div>
-
-
+                        <strong>Total:</strong> <span id="total-price">RM 0.00</span>
+                    </div>
+                    <div class="cart-actions d-flex justify-content-between mt-3">
+                        <button id="clear-cart-btn" class="btn btn-danger flex-fill me-2">Clear Cart</button>
+                        <button id="checkout-btn" class="btn btn-primary flex-fill ms-2">Checkout</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -278,19 +403,26 @@ if ($result && $result->num_rows > 0) {
     </div>
 
     <!-- Existing Modals -->
-    <div id="productModal" class="modal" style="display:none;">
+    <div id="productModal" class="modal product-modal" style="display:none;">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <img id="modal-image" src="" alt="">
-            <h2 id="modal-title"></h2>
-            <p id="modal-description"></p>
-            <p id="modal-price"></p>
-            <div class="quantity-control">
-                <button id="minus-btn">−</button>
-                <input type="number" id="quantity-input" value="1" min="1">
-                <button id="plus-btn">+</button>
+            <div class="modal-header">
+                <h4><i class="fa-solid fa-cart-plus me-2"></i> Add to Cart</h4>
+                <span class="close">&times;</span>
             </div>
-            <button id="add-to-cart-btn" class="btn">Add to Cart</button>
+            <div class="modal-body">
+                <img id="modal-image" src="" alt="">
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
+                <p id="modal-price"></p>
+                <div class="quantity-control">
+                    <button id="minus-btn">−</button>
+                    <input type="number" id="quantity-input" value="1" min="1">
+                    <button id="plus-btn">+</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="add-to-cart-btn" class="btn btn-primary">Add to Cart</button>
+            </div>
         </div>
     </div>
 
@@ -308,236 +440,43 @@ if ($result && $result->num_rows > 0) {
         </div>
     </div>
 
-    <!-- ✅ New JS for popup + redirect -->
+    <div id="checkout-success-modal" class="modal success-modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4><i class="fa-solid fa-check-circle me-2"></i> Order Success!</h4>
+            </div>
+            <div class="modal-body">
+                <p>Your order has been placed successfully!</p>
+                <p>Order ID: <span id="order-id"></span></p>
+                <p>Time: 08:21 PM +08, Monday, October 13, 2025</p>
+            </div>
+            <div class="modal-footer">
+                <button id="checkout-success-close-btn" class="btn btn-success">Continue Shopping</button>
+                <button id="checkout-success-close-btn" class="btn btn-success">Make Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="clear-cart-modal" class="modal confirm-modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4><i class="fa-solid fa-trash me-2"></i> Confirm Clear Cart</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to clear your cart? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="clear-cart-cancel-btn" class="btn btn-success">Cancel</button>
+                <button id="clear-cart-confirm-btn" class="btn btn-danger">Yes, Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ JS: Login check + Cart system + New Modals -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const isLoggedIn = <?php echo $is_loggedin ? 'true' : 'false'; ?>;
-        const loginAlertModal = document.getElementById('login-alert-modal');
-        const loginAlertCloseBtn = document.getElementById('login-alert-close-btn');
-
-        // Redirect to register on OK
-        if (loginAlertCloseBtn) {
-            loginAlertCloseBtn.addEventListener('click', function () {
-                window.location.href = '../register.php';
-            });
-        }
-
-        // Trigger modal for guests when Add to Cart is clicked
-        document.querySelectorAll('#add-to-cart-btn, .add-to-cart, .addItemBtn').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                if (!isLoggedIn) {
-                    e.preventDefault();
-                    if (loginAlertModal) {
-                        loginAlertModal.style.display = 'block';
-                    }
-                } else {
-                    console.log("User is logged in - normal cart logic goes here.");
-                }
-            });
-        });
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target === loginAlertModal) {
-                loginAlertModal.style.display = 'none';
-            }
-        };
-    });
-    </script>
-
-<!-- ✅ JS: Login check + Cart system -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
     const isLoggedIn = <?php echo $is_loggedin ? 'true' : 'false'; ?>;
-    const loginAlertModal = document.getElementById('login-alert-modal');
-    const loginAlertCloseBtn = document.getElementById('login-alert-close-btn');
-
-    // ========== CART STORAGE ==========
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    function saveCart() {
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartUI();
-    }
-
-    function updateCartUI() {
-        const cartItemsContainer = document.getElementById('cart-items');
-        const totalPriceElement = document.getElementById('total-price');
-        const cartSummary = document.getElementById('cart-summary');
-
-        if (!cartItemsContainer || !totalPriceElement) return;
-
-        cartItemsContainer.innerHTML = '';
-        let total = 0;
-
-        if (cart.length === 0) {
-            cartSummary.style.display = 'none';
-            return;
-        }
-
-        cartSummary.style.display = 'block';
-        cart.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name} x${item.quantity} - RM ${item.price.toFixed(2)}`;
-            cartItemsContainer.appendChild(li);
-            total += item.price * item.quantity;
-        });
-
-        totalPriceElement.textContent = `RM ${total.toFixed(2)}`;
-    }
-
-    // ========== LOGIN POPUP ==========
-    if (loginAlertCloseBtn) {
-        loginAlertCloseBtn.addEventListener('click', function () {
-            window.location.href = '../register.php';
-        });
-    }
-
-    // ========== MODAL ELEMENTS ==========
-    const productModal = document.getElementById('productModal');
-    const modalImage = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDesc = document.getElementById('modal-description');
-    const modalPrice = document.getElementById('modal-price');
-    const addToCartBtn = document.getElementById('add-to-cart-btn');
-    const minusBtn = document.getElementById('minus-btn');
-    const plusBtn = document.getElementById('plus-btn');
-    const qtyInput = document.getElementById('quantity-input');
-    const modalClose = document.querySelector('#productModal .close');
-
-    let currentItem = null;
-
-    // ========== ADD TO CART FLOW ==========
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            if (!isLoggedIn) {
-                loginAlertModal.style.display = 'block';
-                return;
-            }
-
-            // Show modal with item info
-            const item = btn.closest('.menu-item');
-            currentItem = {
-                id: item.dataset.id,
-                name: item.dataset.name,
-                price: parseFloat(item.dataset.price),
-                image: item.dataset.image,
-                description: item.dataset.description
-            };
-
-            modalImage.src = currentItem.image;
-            modalTitle.textContent = currentItem.name;
-            modalDesc.textContent = currentItem.description;
-            modalPrice.textContent = `RM ${currentItem.price.toFixed(2)}`;
-            qtyInput.value = 1;
-
-            productModal.style.display = 'block';
-        });
-    });
-
-    // Quantity controls
-    minusBtn.addEventListener('click', () => {
-        let val = parseInt(qtyInput.value);
-        if (val > 1) qtyInput.value = val - 1;
-    });
-    plusBtn.addEventListener('click', () => {
-        let val = parseInt(qtyInput.value);
-        qtyInput.value = val + 1;
-    });
-
-    // Confirm Add to Cart
-    addToCartBtn.addEventListener('click', function () {
-        const qty = parseInt(qtyInput.value);
-        if (!currentItem) return;
-
-        // Check if already in cart
-        const existing = cart.find(i => i.id === currentItem.id);
-        if (existing) {
-            existing.quantity += qty;
-        } else {
-            cart.push({ ...currentItem, quantity: qty });
-        }
-
-        saveCart();
-        productModal.style.display = 'none';
-    });
-
-    // Close modal
-    modalClose.addEventListener('click', () => {
-        productModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === productModal) {
-            productModal.style.display = 'none';
-        }
-        if (event.target === loginAlertModal) {
-            loginAlertModal.style.display = 'none';
-        }
-    });
-
-    // Load cart when page loads
-    updateCartUI();
-
-    // Checkout Button
-    // Checkout Button
-const checkoutBtn = document.getElementById('checkout-btn');
-if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', async function () {
-        if (!isLoggedIn) {
-            loginAlertModal.style.display = 'block';
-            return;
-        }
-
-        if (cart.length === 0) {
-            alert("Your cart is empty.");
-            return;
-        }
-
-        try {
-            const response = await fetch('customer_checkout.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cart })
-            });
-            const data = await response.json();
-
-            if (data.status === 'success') {
-    alert('Order placed successfully!');
-    cart = [];
-    localStorage.removeItem('cart');
-    updateCartUI(); // refresh UI instantly
-    window.location.reload(); // optional: reload page for clean slate
-} else {
-    alert(data.message || 'Failed to save order.');
-}
-
-        } catch (err) {
-            console.error(err);
-            alert('Error communicating with the server.');
-        }
-    });
-}
-
-// ========== CLEAR CART BUTTON ==========
-const clearCartBtn = document.getElementById('clear-cart-btn');
-if (clearCartBtn) {
-    clearCartBtn.addEventListener('click', function () {
-        if (confirm("Are you sure you want to clear your cart?")) {
-            cart = [];
-            localStorage.removeItem('cart');
-            updateCartUI();
-        }
-    });
-}
-
-
-});
-</script>
-
-
+    </script>
+    <script src="../script/menu.js"></script>
 </div>
 </body>
 </html>
