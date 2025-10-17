@@ -194,7 +194,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                             <div class="rounded-circle overflow-hidden m-6">
                                 <img class="img-fluid" src="../image/gambarIbu.jpg" alt="ibu">
                             </div>
-                            <h5 class="mb-0">Aminah binti Hassan</h5>
+                            <h5 class="mb-0">Alianar Binti Aliamat</h5>
                             <small>Satay Grill Master</small>
                             <div class="d-flex justify-content-center mt-3">
                                 <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -208,7 +208,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                             <div class="rounded-circle overflow-hidden m-6">
                                 <img class="img-fluid" src="../image/gambarFaris.jpg" alt="Faris">
                             </div>
-                            <h5 class="mb-0">Rahim bin Ali</h5>
+                            <h5 class="mb-0">Muhammad Faris Bin Mawardi</h5>
                             <small>Sauce Specialist</small>
                             <div class="d-flex justify-content-center mt-3">
                                 <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -222,7 +222,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                             <div class="rounded-circle overflow-hidden m-6">
                                 <img class="img-fluid" src="../image/furqan.jpg" alt="Furqan">
                             </div>
-                            <h5 class="mb-0">Siti binti Ismail</h5>
+                            <h5 class="mb-0">Muhammad Furqan Bin Mawardi</h5>
                             <small>Head of Operations</small>
                             <div class="d-flex justify-content-center mt-3">
                                 <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
