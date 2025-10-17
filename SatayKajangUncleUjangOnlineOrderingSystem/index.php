@@ -94,7 +94,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                     <div class="row align-items-center g-5">
                         <div class="col-lg-6 text-center text-lg-start">
                             <h1 class="display-3 text-white animated slideInLeft"><small>Belum Try Belum Tau,</small><br><small>Sudah Try Ingat Selalu</small></h1>
-                            <p class="text-white animated slideInLeft mb-4 pb-2">Ramuan Rempah Ratus Turun Temurun</p>
+                            <p class="text-white animated slideInLeft mb-4 pb-2">Ramuan Rempah Ratus Turun Tangga</p>
                             <a href="customer/menu.php" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Menu</a>
                         </div>
                         <div class="col-lg-6 text-center text-lg-end overflow-hidden">
