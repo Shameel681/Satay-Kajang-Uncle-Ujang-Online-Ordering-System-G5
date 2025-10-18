@@ -1,4 +1,5 @@
 <?php
+session_start();  // Tambah ini untuk akses $_SESSION
 require_once '../connect.php';
 
 header('Content-Type: application/json');
@@ -23,7 +24,6 @@ $total = 0;
 foreach ($data['cart'] as $item) {
     $total += floatval($item['price']) * intval($item['quantity']);
 }
-
 
 try {
     $conn->begin_transaction();

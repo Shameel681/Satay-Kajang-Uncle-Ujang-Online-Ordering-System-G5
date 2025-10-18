@@ -2,7 +2,7 @@
 // Ensure session is started for access to $_SESSION
 session_start();
 
-require_once '../connect.php'; 
+require_once '../connect.php';
 
 // Check if the user is logged in
 $customer_id = isset($_SESSION['customer_id']) ? $_SESSION['customer_id'] : null;
@@ -11,6 +11,7 @@ $customer_name = "Guest";
 
 if ($is_loggedin) {
     if ($conn->connect_error) {
+        // Handle connection error gracefully, though 'die' might be too harsh for production
         die("Connection failed: " . $conn->connect_error);
     }
 
@@ -45,6 +46,7 @@ if ($search !== '') {
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         error_log("Search prepare failed: " . $conn->error);
+        $result = false; // Set result to false on error
     } else {
         $like = "%$search%";
         $stmt->bind_param("ss", $like, $like);
@@ -59,10 +61,11 @@ if ($search !== '') {
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $price_float = (float)$row['price'];
-        $row['price_formatted'] = number_format($price_float, 2, '.', ''); 
+        $row['price_formatted'] = number_format($price_float, 2, '.', '');
         $menu_items[$row['category']][] = $row;
     }
 }
+// Note: $conn should be closed if no further queries are needed, but we keep it open for the datalist query below.
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +90,7 @@ if ($result && $result->num_rows > 0) {
 </head>
 
 <style>
+    /* ... (CSS styles from the original menu.php) ... */
     .navbar-brand img {
         border-radius: 50%;
         width: 50px;
@@ -354,7 +358,6 @@ if ($result && $result->num_rows > 0) {
         </section>
     </main>
 
-    <!-- Footer -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -402,7 +405,6 @@ if ($result && $result->num_rows > 0) {
         </div>
     </div>
 
-    <!-- Existing Modals -->
     <div id="productModal" class="modal product-modal" style="display:none;">
         <div class="modal-content">
             <div class="modal-header">
@@ -448,11 +450,11 @@ if ($result && $result->num_rows > 0) {
             <div class="modal-body">
                 <p>Your order has been placed successfully!</p>
                 <p>Order ID: <span id="order-id"></span></p>
-                <p>Time: 08:21 PM +08, Monday, October 13, 2025</p>
+                <p>Please proceed to payment.</p>
             </div>
             <div class="modal-footer">
                 <button id="checkout-success-close-btn" class="btn btn-success">Continue Shopping</button>
-                <button id="checkout-success-close-btn" class="btn btn-success">Make Payment</button>
+                <button id="make-payment-btn" class="btn btn-primary">Make Payment</button>
             </div>
         </div>
     </div>
@@ -472,7 +474,6 @@ if ($result && $result->num_rows > 0) {
         </div>
     </div>
 
-    <!-- ✅ JS: Login check + Cart system + New Modals -->
     <script>
     const isLoggedIn = <?php echo $is_loggedin ? 'true' : 'false'; ?>;
     </script>
