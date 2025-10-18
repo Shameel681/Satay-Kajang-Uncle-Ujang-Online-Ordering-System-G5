@@ -265,6 +265,7 @@ if ($result && $result->num_rows > 0) {
                 <div class="navbar-nav ms-auto py-0 pe-4">
                     <a href="../index.php" class="nav-item nav-link">Home</a>
                     <a href="menu.php" class="nav-item nav-link active">Menu</a>
+                    <a href="view_order_stat_cust.php" class="nav-item nav-link">Order Status</a>
                     <a href="about.php" class="nav-item nav-link">About Us</a>
                     <a href="contact.php" class="nav-item nav-link">Contact Us</a>
                 </div>
