@@ -16,11 +16,19 @@ $order_id = intval($_POST['order_id']);
 $customer_id = $_SESSION['customer_id'];
 
 // Ambil order details
-$sql = "SELECT * FROM orders WHERE order_id = ? AND customer_id = ? AND payment_status = 'Pending'";
+$sql = "SELECT 
+            o.*, 
+            c.email AS customer_email, 
+            c.phone_no AS customer_phone,
+            c.name AS customer_full_name
+        FROM orders o
+        JOIN customer c ON o.customer_id = c.customer_id
+        WHERE o.order_id = ? AND o.customer_id = ? AND o.payment_status = 'Pending'";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $order_id, $customer_id);
 $stmt->execute();
-$order = $stmt->get_result()->fetch_assoc();
+$order = $stmt->get_result()->fetch_assoc(); // $order kini mengandungi email dan phone
 $stmt->close();
 
 if (!$order) {
@@ -31,8 +39,8 @@ if (!$order) {
 // ToyyibPay API Credentials (ubah dengan yang sebenar)
 $api_key = '8w3e2e9u-fo8d-s4j6-pni9-xbgt092ljifa';  // Dapatkan dari ToyyibPay dashboard
 $category_code = '6yaipbmw';  // Kod kategori bill
-$return_url = 'http://sataykajanguncleujang.com/customer/payment_callback.php';  // URL untuk redirect selepas payment
-$callback_url = 'http://sataykajanguncleujang.com/customer/payment_callback.php';  // URL untuk callback
+$return_url = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev /customer/payment_callback.php';  // URL untuk redirect selepas payment
+$callback_url = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev /customer/payment_callback.php';  // URL untuk callback
 
 // Data untuk create bill
 $bill_data = [
@@ -42,13 +50,13 @@ $bill_data = [
     'billDescription' => 'Payment for Order #' . $order_id,
     'billPriceSetting' => 1,  // Fixed price
     'billPayorInfo' => 1,  // Collect payor info
-    'billAmount' => $order['total_amount'] * 100,  // Amount in sen (ToyyibPay guna sen)
+    'billAmount' => (int)($order['total_amount'] * 100), // Amount in sen (ToyyibPay guna sen),  
     'billReturnUrl' => $return_url,
     'billCallbackUrl' => $callback_url,
     'billExternalReferenceNo' => $order_id,  // Reference to order_id
     'billTo' => $_SESSION['customer_name'],
-    'billEmail' => '',  // Tambah email jika ada dalam session
-    'billPhone' => '',  // Tambah phone jika ada
+    'billEmail' => $order['customer_email'], // Guna email dari DB
+    'billPhone' => $order['customer_phone'], // Guna phone dari DB
 ];
 
 // Send request to ToyyibPay API
