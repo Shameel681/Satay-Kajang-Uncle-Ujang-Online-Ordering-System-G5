@@ -37,10 +37,11 @@ if (!$order) {
 }
 
 // ToyyibPay API Credentials (ubah dengan yang sebenar)
-$api_key = '8w3e2e9u-fo8d-s4j6-pni9-xbgt092ljifa';  // Dapatkan dari ToyyibPay dashboard
-$category_code = '6yaipbmw';  // Kod kategori bill
-$return_url = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev /customer/payment_callback.php';  // URL untuk redirect selepas payment
-$callback_url = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev /customer/payment_callback.php';  // URL untuk callback
+$api_key = 'epepkahf-9ets-r608-u0sh-y1vmjvq89mtm';  // Dapatkan dari ToyyibPay dashboard
+$category_code = 'xcu9w5q4';  // Kod kategori bill
+$base_domain = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev/MASTER PROJECT - Satay kajang Uncle Ujang G05\Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5\SatayKajangUncleUjangOnlineOrderingSystem';
+$return_url = $base_domain . '/customer/payment_callback.php'; // URL untuk redirect selepas payment
+$callback_url = $base_domain . '/customer/payment_callback.php';  // URL untuk callback
 
 // Data untuk create bill
 $bill_data = [
@@ -61,7 +62,7 @@ $bill_data = [
 
 // Send request to ToyyibPay API
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://toyyibpay.com/api/createBill');
+curl_setopt($ch, CURLOPT_URL, 'https://dev.toyyibpay.com/api/createBill');
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($bill_data));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -72,12 +73,16 @@ $result = json_decode($response, true);
 
 if (isset($result[0]['BillCode'])) {
     $bill_code = $result[0]['BillCode'];
-    $payment_url = 'https://toyyibpay.com/' . $bill_code;
+    $payment_url = 'https://dev.toyyibpay.com/' . $bill_code;
 
     // Simpan bill_code dalam database
     $update_sql = "UPDATE orders SET bill_code = ? WHERE order_id = ?";
     $stmt = $conn->prepare($update_sql);
+    if (!$stmt) {
+        die("SQL prepare failed (update): " . $conn->error);
+    }
     $stmt->bind_param("si", $bill_code, $order_id);
+
     $stmt->execute();
     $stmt->close();
 

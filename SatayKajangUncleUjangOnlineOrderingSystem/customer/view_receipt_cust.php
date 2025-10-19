@@ -10,7 +10,7 @@ if (!isset($_SESSION['customer_id']) || !isset($_GET['order_id'])) {
 $order_id = intval($_GET['order_id']);
 $customer_id = $_SESSION['customer_id'];
 
-// KOD TELAH DIBETULKAN: JOIN dengan jadual 'customer' untuk mendapatkan maklumat penuh pelanggan (email, phone)
+// KOD TELAH DIBETULKAN: Mengambil bill_code dan transaction_id
 $sql = "SELECT 
             o.*, 
             c.name AS customer_full_name,
@@ -25,6 +25,7 @@ $stmt->execute();
 $order = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
+// Semak status pembayaran HANYA di database (bukan di ToyyibPay)
 if (!$order || $order['payment_status'] !== 'Paid') {
     echo "<script>alert('Receipt not available or order not paid.'); window.location.href='view_order_stat_cust.php';</script>";
     exit;
@@ -43,17 +44,32 @@ $stmt_items->close();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Order Receipt</title>
+    <title>Order Receipt #<?php echo $order['order_id']; ?></title>
     <link href="../CSS/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background: #f7f7f7; font-family: Arial, sans-serif; }
-        .receipt-box { background: #fff; max-width: 600px; margin: 50px auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .receipt-box { 
+            background: #fff; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+        }
+        /* Style untuk Print/Download */
+        @media print {
+            .no-print { display: none; }
+            .receipt-box { box-shadow: none; border: 1px solid #000; }
+        }
     </style>
 </head>
 <body>
     <div class="receipt-box">
-        <h2>Order Receipt</h2>
+        <h2 class="mb-4">Official Order Receipt</h2>
+        
         <p><strong>Order ID:</strong> #<?php echo $order['order_id']; ?></p>
+        <p><strong>Transaction ID:</strong> <?php echo htmlspecialchars($order['transaction_id'] ?? 'N/A'); ?></p>
+        <hr>
         
         <h4>Customer Details:</h4>
         <p><strong>Name:</strong> <?php echo htmlspecialchars($order['customer_full_name']); ?></p>
@@ -61,11 +77,11 @@ $stmt_items->close();
         <p><strong>Phone:</strong> <?php echo htmlspecialchars($order['customer_phone']); ?></p>
         <hr>
         
-        <p><strong>Date:</strong> <?php echo $order['order_date']; ?></p>
-        <p><strong>Payment Status:</strong> <?php echo $order['payment_status']; ?></p>
-        <p><strong>Order Status:</strong> <?php echo $order['order_status']; ?></p>
+        <p><strong>Date:</strong> <?php echo date('d-M-Y H:i', strtotime($order['order_date'])); ?></p>
+        <p><strong>Payment Status:</strong> <span class="badge bg-success"><?php echo $order['payment_status']; ?></span></p>
+        <p><strong>Order Status:</strong> <span class="badge bg-info"><?php echo $order['order_status']; ?></span></p>
 
-        <h4>Items:</h4>
+        <h4 class="mt-4">Items Ordered:</h4>
         <ul class="list-group mb-3">
             <?php while ($item = $items->fetch_assoc()): ?>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -79,13 +95,15 @@ $stmt_items->close();
         </ul>
 
         <h4 class="d-flex justify-content-between">
-            <span>Total Amount:</span>
+            <span>Total Amount Paid:</span>
             <strong>RM <?php echo number_format($order['total_amount'], 2); ?></strong>
         </h4>
 
         <hr class="my-4">
-        <a href="view_order_stat_cust.php" class="btn btn-secondary">Back to Orders</a>
-        <button onclick="window.print()" class="btn btn-primary float-end">Print Receipt</button>
+        <div class="no-print">
+            <a href="view_order_stat_cust.php" class="btn btn-secondary">Back to Orders</a>
+            <button onclick="window.print()" class="btn btn-primary float-end">⬇️ Download/Print Receipt</button>
+        </div>
     </div>
 </body>
 </html>
