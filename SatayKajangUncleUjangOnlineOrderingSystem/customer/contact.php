@@ -127,9 +127,11 @@ if ($is_loggedin) {
                         <a href="menu.php" class="nav-item nav-link">Menu</a>
                         <a href="about.php" class="nav-item nav-link">About Us</a>
                         <a href="contact.php" class="nav-item nav-link active">Contact Us</a>
+                        <?php if ($is_loggedin): ?>
+                        <a href="view_order_stat_cust.php" class="nav-item nav-link">Order Status</a>
+                     <?php endif?>
                     </div>
                     <?php if ($is_loggedin): ?>
-                        <a href="view_order_stat_cust.php" class="nav-item nav-link">Order Status</a>
                         <a href="profCust.php" class="btn btn-primary py-2 px-4 mx-2">Profile</a>
                     <?php else: ?>
                         <a href="../register.php" class="btn btn-primary py-2 px-4 mx-2">Register</a>
