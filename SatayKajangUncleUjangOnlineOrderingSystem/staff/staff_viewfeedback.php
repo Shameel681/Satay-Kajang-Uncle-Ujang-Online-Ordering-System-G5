@@ -149,7 +149,13 @@ $conn->close();
                         <li class="nav-item">
                             <a href="staff_menu.php">
                                 <i class="fa-solid fa-utensils"></i>
-                                <p>View Menu</p>
+                                <p>Manage Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="staff_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
                             </a>
                         </li>
                         <li class="nav-item active">
@@ -481,25 +487,7 @@ $conn->close();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-warning bubble-shadow-small">
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">Avg Rating</p>
-                                                <h4 class="card-title">4.2 <i class="fas fa-star text-warning"></i></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -206,6 +206,12 @@ $conn->close();
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="staff_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="staff_viewfeedback.php">
                                 <i class="fa-solid fa-comments"></i>
                                 <p>View Feedback</p>

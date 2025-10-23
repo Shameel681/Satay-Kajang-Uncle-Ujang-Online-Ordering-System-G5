@@ -78,7 +78,13 @@ if (!$is_loggedin) {
                         <li class="nav-item">
                             <a href="staff_menu.php">
                                 <i class="fa-solid fa-utensils"></i>
-                                <p>View Menu</p>
+                                <p>Manage Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="staff_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
                             </a>
                         </li>
                         <li class="nav-item">
