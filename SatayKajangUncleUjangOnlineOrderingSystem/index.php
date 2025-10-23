@@ -81,6 +81,7 @@ $customer_name = $is_loggedin ? htmlspecialchars($_SESSION['name']) : '';
                         <a href="customer/contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
                     <?php if ($is_loggedin): ?>
+                        <a href="view_order_stat_cust.php" class="nav-item nav-link">Order Status</a>
                         <a href="customer/profCust.php" class="btn btn-primary py-2 px-4 mx-2">Profile</a>
                      <?php else: ?>
                          <a href="register.php" class="btn btn-primary py-2 px-4 mx-2">Register</a>

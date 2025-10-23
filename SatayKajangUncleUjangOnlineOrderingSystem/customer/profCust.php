@@ -138,6 +138,7 @@ if (isset($_FILES['customer_image']) && $_FILES['customer_image']['error'] === U
                         <a href="contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
                     <?php if ($is_loggedin): ?>
+                        <a href="view_order_stat_cust.php" class="nav-item nav-link">Order Status</a>
                         <a href="profCust.php" class="btn btn-primary py-2 px-4 active">Profile</a>
                     <?php else: ?>
                         <a href="../register.php" class="btn btn-primary py-2 px-4 mx-2">Register</a>
