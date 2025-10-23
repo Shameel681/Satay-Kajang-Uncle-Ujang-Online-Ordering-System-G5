@@ -181,7 +181,7 @@ if (isset($_SESSION['error_message'])) {
                         </li>
                         <li class="nav-item">
                             <a href="adminstaff.php">
-                                <i class="fa-solid fa-utensils"></i>
+                                <i class="fa-solid fa-user-tie"></i>
                                 <p>Manage Staff</p>
                             </a>
                         </li>
@@ -189,6 +189,12 @@ if (isset($_SESSION['error_message'])) {
                             <a href="admin_menu.php">
                                 <i class="fa-solid fa-utensils"></i>
                                 <p>View Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -249,15 +255,9 @@ if (isset($_SESSION['error_message'])) {
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <?php if (!empty($admin['profile_image'])): ?>
-                                            <img src="../uploads/admin/<?= htmlspecialchars($admin['profile_image']) ?>" alt="Admin" class="avatar-img rounded-circle" />
-                                        <?php else: ?>
-                                            <span class="avatar-title bg-primary rounded-circle"><?= strtoupper(substr($admin['admin_name'], 0, 1)) ?></span>
-                                        <?php endif; ?>
-                                    </div>
+                                    
                                     <span class="profile-username">
-                                        <span class="op-7">Hi,</span>
+                                        <span class="op-7">Welcome,</span>
                                         <span class="fw-bold"><?= htmlspecialchars($admin['admin_name']) ?></span>
                                     </span>
                                 </a>

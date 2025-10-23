@@ -216,6 +216,12 @@ $conn->close();
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="admin_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="admin_viewfeedback.php">
                                 <i class="fa-solid fa-comments"></i>
                                 <p>View Feedback</p>
@@ -273,9 +279,7 @@ $conn->close();
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <img src="../assets/img/profile.jpg" alt="Admin" class="avatar-img rounded-circle" />
-                                    </div>
+                                    
                                     <span class="profile-username">
                                         <span class="op-7">Welcome,</span>
                                         <span class="fw-bold"><?= htmlspecialchars($_SESSION['admin_name']) ?></span>

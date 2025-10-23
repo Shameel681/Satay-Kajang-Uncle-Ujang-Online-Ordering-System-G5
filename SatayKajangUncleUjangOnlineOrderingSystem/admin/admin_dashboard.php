@@ -79,7 +79,7 @@ if (!$is_loggedin) {
                         </li>
                         <li class="nav-item">
                             <a href="adminstaff.php">
-                                <i class="fa-solid fa-utensils"></i>
+                                <i class="fa-solid fa-user-tie"></i>
                                 <p>Manage Staff</p>
                             </a>
                         </li>
@@ -87,6 +87,12 @@ if (!$is_loggedin) {
                             <a href="admin_menu.php">
                                 <i class="fa-solid fa-utensils"></i>
                                 <p>View Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -147,9 +153,6 @@ if (!$is_loggedin) {
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <img src="../assets/img/profile.jpg" alt="Admin" class="avatar-img rounded-circle" />
-                                    </div>
                                     <span class="profile-username">
                                         <span class="op-7">Welcome,</span>
                                         <span class="fw-bold"><?php echo $admin_name; ?></span>

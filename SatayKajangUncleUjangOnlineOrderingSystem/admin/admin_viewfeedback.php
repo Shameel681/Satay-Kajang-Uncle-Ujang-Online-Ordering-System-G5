@@ -144,7 +144,7 @@ $guest_count = $guest_feedback ? $guest_feedback->num_rows : 0;
                         </li>
                         <li class="nav-item">
                             <a href="adminstaff.php">
-                                <i class="fa-solid fa-utensils"></i>
+                                <i class="fa-solid fa-user-tie"></i>
                                 <p>Manage Staff</p>
                             </a>
                         </li>
@@ -152,6 +152,12 @@ $guest_count = $guest_feedback ? $guest_feedback->num_rows : 0;
                             <a href="admin_menu.php">
                                 <i class="fa-solid fa-utensils"></i>
                                 <p>View Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
                             </a>
                         </li>
                         <li class="nav-item active">
@@ -212,9 +218,7 @@ $guest_count = $guest_feedback ? $guest_feedback->num_rows : 0;
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <img src="../assets/img/profile.jpg" alt="Admin" class="avatar-img rounded-circle" />
-                                    </div>
+                                    
                                     <span class="profile-username">
                                         <span class="op-7">Welcome,</span>
                                         <span class="fw-bold"><?= htmlspecialchars($_SESSION['admin_name']) ?></span>
@@ -495,25 +499,7 @@ $guest_count = $guest_feedback ? $guest_feedback->num_rows : 0;
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-warning bubble-shadow-small">
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">Avg Rating</p>
-                                                <h4 class="card-title">4.2 <i class="fas fa-star text-warning"></i></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
