@@ -239,15 +239,9 @@ $conn->close();
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <?php if (!empty($staff['staff_image'])): ?>
-                                            <img src="../Uploads/staff/<?php echo htmlspecialchars($staff['staff_image']); ?>" alt="Staff" class="avatar-img rounded-circle" />
-                                        <?php else: ?>
-                                            <span class="avatar-title bg-primary rounded-circle"><?php echo strtoupper(substr($staff['name'], 0, 1)); ?></span>
-                                        <?php endif; ?>
-                                    </div>
+                                    
                                     <span class="profile-username">
-                                        <span class="op-7">Hi,</span>
+                                        <span class="op-7">Welcome,</span>
                                         <span class="fw-bold"><?php echo htmlspecialchars($staff['name']); ?></span>
                                     </span>
                                 </a>
