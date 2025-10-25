@@ -1,92 +1,142 @@
 <?php
+// Mula sesi dan sambungkan ke database
 session_start();
-require_once '../connect.php';
+require_once '../connect.php'; 
 
-// 1. TUKAR NILAI INI dengan URL NGROK ANDA YANG SEDANG BERJALAN
-// PASTIKAN URL INI SAMA TEPAT DENGAN YANG ANDA GUNA DALAM process_payment.php
+// Tukar URL asas ini kepada URL Ngrok anda. Pastikan ia TIDAK berakhir dengan "/"
 $base_domain = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem'; 
 
-// Fungsi untuk menentukan status berdasarkan kod ToyyibPay
+// Penting untuk memastikan tiada output dihantar sebelum header
+ob_start();
+
+/**
+ * Fungsi untuk menentukan status teks berdasarkan kod status ToyyibPay.
+ * Standard ToyyibPay: 1=Paid, 2=Failed, 3=Pending/Varying Status (e.g., waiting for bank)
+ * @param int $statusCode
+ * @return array
+ */
 function getPaymentStatus($statusCode) {
     switch ($statusCode) {
         case 1:
-            return 'Paid';
+            // 💰 PAID: Transaksi berjaya
+            return ['payment' => 'Paid', 'order' => 'Processing']; 
         case 2:
-            return 'Pending';
+            // ❌ FAILED: Transaksi bank gagal atau dibatalkan oleh pengguna
+            return ['payment' => 'Failed', 'order' => 'Cancelled'];
         case 3:
-            return 'Failed';
+            // 🕒 PENDING: Transaksi dalam proses / menunggu bank / expired.
+            // Kita akan anggap gagal/dibatalkan untuk mengelakkan order diteruskan tanpa bayaran penuh.
+            return ['payment' => 'Failed', 'order' => 'Cancelled']; 
         default:
-            return 'Pending';
+            return ['payment' => 'Pending', 'order' => 'New'];
     }
 }
 
 // ====================================================================
-// A. Handle CALLBACK dari ToyyibPay (POST) - MENGEMASKINI DATABASE
+// A. Handle CALLBACK dari ToyyibPay (POST) - MENGEMASKINI DATABASE (KRITIKAL)
 // ====================================================================
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['billcode']) && isset($_POST['status'])) {
+    // Tetapkan header untuk respons callback (ToyyibPay perlu respons 200 OK)
+    header('Content-Type: text/plain');
+
+    // Logging debug untuk menyemak apa yang ToyyibPay hantar
+    $log_data = date('Y-m-d H:i:s') . " - Callback Received:\n" . print_r($_POST, true) . "\n---\n";
+    file_put_contents('callback_log.txt', $log_data, FILE_APPEND);
+
+    // Pastikan parameter utama dari ToyyibPay Callback wujud
+    if (isset($_POST['billcode']) && isset($_POST['status_id']) && isset($_POST['orderid'])) {
+        
         $bill_code = $_POST['billcode'];
-        $statusCode = intval($_POST['status']);
-        $transaction_id = isset($_POST['transaction_id']) ? $_POST['transaction_id'] : null;
+        $statusId = intval($_POST['status_id']); 
+        $transactionId = isset($_POST['transaction_id']) ? $_POST['transaction_id'] : null;
+        $orderId = intval($_POST['orderid']); // Ini adalah billExternalReferenceNo yang kita hantar
 
-        $payment_status = getPaymentStatus($statusCode);
-        $order_status = ($payment_status === 'Paid') ? 'Processing' : 'New'; 
+        $statuses = getPaymentStatus($statusId);
+        $payment_status = $statuses['payment'];
+        $order_status = $statuses['order'];
+        
+        // LOGIK UPDATE KRITIKAL: Kemas kini status dan ID transaksi
+        // Kita UPDATE hanya jika status_id BUKAN 3 (Pending)
+        if ($statusId === 1 || $statusId === 2) {
+            $sql = "UPDATE orders 
+                    SET payment_status = ?, 
+                        order_status = ?, 
+                        transaction_id = ? 
+                    WHERE order_id = ? AND bill_code = ? AND payment_status = 'Pending'";
+            
+            $stmt = $conn->prepare($sql);
+            
+            if (!$stmt) {
+                file_put_contents('callback_log.txt', date('Y-m-d H:i:s') . " - SQL Prepare FAILED: " . $conn->error . "\n", FILE_APPEND);
+                echo "ERROR";
+                $conn->close();
+                exit;
+            }
 
-        // Sila pastikan anda telah menjalankan SQL ALTER TABLE!
-        $sql = "UPDATE orders SET payment_status = ?, order_status = ?, transaction_id = ? WHERE bill_code = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $payment_status, $order_status, $transaction_id, $bill_code);
-        $stmt->execute();
-        $stmt->close();
+            // Jenis parameter: s (payment_status), s (order_status), s (transaction_id), i (order_id), s (bill_code)
+            $stmt->bind_param("sssis", $payment_status, $order_status, $transactionId, $orderId, $bill_code);
+            
+            if ($stmt->execute()) {
+                 file_put_contents('callback_log.txt', date('Y-m-d H:i:s') . " - DB Update SUCCESS for Order $orderId (Status: $payment_status)\n", FILE_APPEND);
+            } else {
+                 file_put_contents('callback_log.txt', date('Y-m-d H:i:s') . " - DB Update FAILED for Order $orderId. Error: " . $conn->error . "\n", FILE_APPEND);
+            }
+            $stmt->close();
+        } else {
+             file_put_contents('callback_log.txt', date('Y-m-d H:i:s') . " - Status ID 3 Received. No DB Update performed.\n", FILE_APPEND);
+        }
 
-        // ToyyibPay memerlukan respons 'success' yang ringkas
+        // ToyyibPay memerlukan respons 'OK' ringkas untuk setiap panggilan callback
         echo "OK"; 
+        $conn->close();
         exit;
     }
+    
+    file_put_contents('callback_log.txt', date('Y-m-d H:i:s') . " - ERROR: Missing Bill Code or Status ID in POST data.\n", FILE_APPEND);
+    echo "ERROR: Missing Parameters";
+    $conn->close();
     exit; 
 }
 
 // ====================================================================
-// B. Handle RETURN dari ToyyibPay (GET) - REDIRECT USER (DIPERBAIKI)
+// B. Handle RETURN dari ToyyibPay (GET) - REDIRECT USER
 // ====================================================================
 
 if (isset($_GET['billcode'])) {
     $bill_code = $_GET['billcode'];
 
-    // Ambil order_id, payment_status, DAN customer_id (BARIS INI DIBETULKAN)
-    $sql = "SELECT order_id, payment_status, customer_id FROM orders WHERE bill_code = ?";
+    // Ambil order_id dan customer_id
+    $sql = "SELECT order_id, customer_id FROM orders WHERE bill_code = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $bill_code);
     $stmt->execute();
-    $order = $stmt->get_result()->fetch_assoc();
+    $result = $stmt->get_result();
+    $order = $result->fetch_assoc();
     $stmt->close();
+    
+    $conn->close();
+    ob_end_clean(); // Bersihkan output buffer sebelum redirect
 
     if ($order) {
-        // 🚨 PENAMBAHAN KRITIKAL: Tetapkan semula sesi sebelum redirect 🚨
-        // Ini memastikan pengguna tidak log out apabila diarahkan ke halaman seterusnya
-        $_SESSION['customer_id'] = $order['customer_id'];
+        // Redirect ke halaman status order pelanggan
+        $redirect_url = $base_domain . "/customer/view_order_stat_cust.php?order_id=" . $order['order_id'];
         
-        if ($order['payment_status'] === 'Paid') {
-            // Mesti tambah "/customer/"
-            $redirect_url = $base_domain . "/customer/view_receipt_cust.php?order_id=" . $order['order_id'];
-            header("Location: " . $redirect_url);
-        } else {
-            // Mesti tambah "/customer/"
-            $redirect_url = $base_domain . "/customer/view_order_stat_cust.php";
-            header("Location: " . $redirect_url);
-        }
+        header("Location: " . $redirect_url);
     } 
     
     else {
-        // Jika bill_code tidak ditemui
-        $redirect_url = $base_domain . "/customer/view_order_stat_cust.php";
+        // Bill code tidak ditemui
+        $redirect_url = $base_domain . "/customer/menu.php";
         header("Location: " . $redirect_url);
     }
     exit;
 }
 
-// Jika tidak valid, redirect ke menu (menggunakan pautan mutlak)
+// Jika tiada POST atau GET yang valid, redirect ke menu
+$conn->close();
+ob_end_clean(); 
 $redirect_url = $base_domain . "/customer/menu.php";
 header("Location: " . $redirect_url);
 exit;
+?>

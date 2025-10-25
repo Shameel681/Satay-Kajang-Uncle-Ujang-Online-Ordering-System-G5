@@ -2,6 +2,15 @@
 session_start();
 require_once '../connect.php';
 
+// --- CONFIGURATIONS TOYYIBPAY (SILA GANTI NILAI INI) ---
+// ⚠️ PENTING: Gantikan 'SECRET_KEY_ANDA_YANG_SEBENAR' dengan Secret Key API dari dashboard ToyyibPay
+$api_key = 'epepkahf-9ets-r608-u0sh-y1vmjvq89mtm';
+// Category Code (Bill ID) yang diambil dari dashboard anda
+$category_code = 'xcu9w5q4'; // Ini adalah Bill ID sebenar anda
+// Gantikan dengan URL asas projek anda (tanpa /customer)
+$base_domain = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem';
+// --- AKHIR CONFIGURATIONS TOYYIBPAY ---
+
 if (!isset($_SESSION['customer_id'])) {
     header("Location: ../login.php");
     exit;
@@ -28,20 +37,18 @@ $sql = "SELECT
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $order_id, $customer_id);
 $stmt->execute();
-$order = $stmt->get_result()->fetch_assoc(); // $order kini mengandungi email dan phone
+$order = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
 if (!$order) {
-    echo "<script>alert('Invalid order!'); window.location.href='payment.php';</script>";
+    echo "<script>alert('Invalid order or order already paid!'); window.location.href='payment.php';</script>";
     exit;
 }
 
-// ToyyibPay API Credentials (ubah dengan yang sebenar)
-$api_key = 'epepkahf-9ets-r608-u0sh-y1vmjvq89mtm';  // Dapatkan dari ToyyibPay dashboard
-$category_code = 'xcu9w5q4';  // Kod kategori bill
-$base_domain = 'https://unvacantly-hydroscopical-nieves.ngrok-free.dev/MASTER PROJECT - Satay kajang Uncle Ujang G05/Satay-Kajang-Uncle-Ujang-Online-Ordering-System-G5/SatayKajangUncleUjangOnlineOrderingSystem';
-$return_url = $base_domain . '/customer/payment_callback.php'; // URL untuk redirect selepas payment
-$callback_url = $base_domain . '/customer/payment_callback.php';  // URL untuk callback
+// URL untuk redirect selepas payment
+$return_url = $base_domain . '/customer/payment_callback.php';
+// URL untuk callback (POST)
+$callback_url = $base_domain . '/customer/payment_callback.php';
 
 // Data untuk create bill
 $bill_data = [
@@ -49,15 +56,15 @@ $bill_data = [
     'categoryCode' => $category_code,
     'billName' => 'Satay Kajang Order #' . $order_id,
     'billDescription' => 'Payment for Order #' . $order_id,
-    'billPriceSetting' => 1,  // Fixed price
-    'billPayorInfo' => 1,  // Collect payor info
-    'billAmount' => (int)($order['total_amount'] * 100), // Amount in sen (ToyyibPay guna sen),  
+    'billPriceSetting' => 1,
+    'billPayorInfo' => 1,
+    'billAmount' => (int)($order['total_amount'] * 100), // Amount in sen
     'billReturnUrl' => $return_url,
     'billCallbackUrl' => $callback_url,
-    'billExternalReferenceNo' => $order_id,  // Reference to order_id
-    'billTo' => $_SESSION['customer_name'],
-    'billEmail' => $order['customer_email'], // Guna email dari DB
-    'billPhone' => $order['customer_phone'], // Guna phone dari DB
+    'billExternalReferenceNo' => $order_id, 
+    'billTo' => $order['customer_full_name'], // Guna nama penuh dari DB
+    'billEmail' => $order['customer_email'], 
+    'billPhone' => $order['customer_phone'], 
 ];
 
 // Send request to ToyyibPay API
@@ -82,7 +89,6 @@ if (isset($result[0]['BillCode'])) {
         die("SQL prepare failed (update): " . $conn->error);
     }
     $stmt->bind_param("si", $bill_code, $order_id);
-
     $stmt->execute();
     $stmt->close();
 
@@ -90,6 +96,8 @@ if (isset($result[0]['BillCode'])) {
     header("Location: $payment_url");
     exit;
 } else {
+    // Log ralat untuk debugging
+    error_log("ToyyibPay API Failed: " . $response);
     echo "<script>alert('Failed to create payment bill. Please try again.'); window.location.href='payment.php';</script>";
     exit;
 }

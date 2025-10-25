@@ -2,6 +2,7 @@
 // staff_manageorder.php
 require_once '../connect.php';
 
+
 // Check if staff is logged in
 if (!isset($_SESSION['staff_loggedin']) || $_SESSION['staff_loggedin'] !== true) {
     header("Location: staff_login.php");
@@ -21,14 +22,19 @@ if (isset($_POST['update_order_status'])) {
     // Validate status
     $valid_statuses = ['Processing', 'Completed', 'Cancelled'];
     if (in_array($new_status, $valid_statuses)) {
+        // Sediakan query dan semak jika gagal
         $stmt = $conn->prepare("UPDATE orders SET order_status = ?, updated_at = NOW() WHERE order_id = ?");
-        $stmt->bind_param("si", $new_status, $order_id);
-        if ($stmt->execute()) {
-            $success = "Order status updated successfully!";
+        if (!$stmt) {
+            $error = "❌ SQL Prepare Failed: " . $conn->error;
         } else {
-            $error = "Failed to update order status.";
+            $stmt->bind_param("si", $new_status, $order_id);
+            if ($stmt->execute()) {
+                $success = "Order status updated successfully!";
+            } else {
+                $error = "Failed to update order status: " . $stmt->error;
+            }
+            $stmt->close();
         }
-        $stmt->close();
     } else {
         $error = "Invalid order status.";
     }
@@ -61,7 +67,6 @@ $result = $conn->query($sql);
     <title>Manage Orders - Staff Dashboard</title>
     <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
-    <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
         WebFont.load({
@@ -74,7 +79,6 @@ $result = $conn->query($sql);
         });
     </script>
 
-    <!-- CSS Files -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/plugins.min.css" />
     <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
@@ -164,7 +168,6 @@ $result = $conn->query($sql);
 
 <body>
     <div class="wrapper">
-        <!-- Sidebar -->
         <div class="sidebar" data-background-color="dark">
             <div class="sidebar-logo">
                 <div class="logo-header" data-background-color="dark">
@@ -228,9 +231,7 @@ $result = $conn->query($sql);
             </div>
         </div>
 
-        <!-- Main Panel -->
         <div class="main-panel">
-            <!-- Main Header -->
             <div class="main-header">
                 <div class="main-header-logo">
                     <a href="staff_dashboard.php" class="logo">
@@ -276,10 +277,8 @@ $result = $conn->query($sql);
                 </nav>
             </div>
 
-            <!-- Main Content -->
             <div class="container">
                 <div class="page-inner">
-                    <!-- Header -->
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                         <div>
                             <h1 class="fw-bold mb-3">Manage Orders</h1>
@@ -290,7 +289,6 @@ $result = $conn->query($sql);
                         </div>
                     </div>
 
-                    <!-- Alerts -->
                     <?php if (!empty($success)): ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <i class="fa-solid fa-check-circle me-2"></i><?php echo $success; ?>
@@ -305,7 +303,6 @@ $result = $conn->query($sql);
                         </div>
                     <?php endif; ?>
 
-                    <!-- Orders List -->
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
@@ -326,12 +323,23 @@ $result = $conn->query($sql);
                                     <?php while ($order = $result->fetch_assoc()): ?>
                                         <?php
                                         // Get order items for this order
-                                        $items_sql = "SELECT oi.*, m.food_name, m.price_each 
-                                                    FROM order_items oi 
-                                                    JOIN menu m ON oi.food_id = m.food_id 
-                                                    WHERE oi.order_id = ?";
+                                        // !!! PERUBAHAN DISINI: m.price_each ditukar kepada m.price berdasarkan ralat SQL !!!
+                                        $items_sql = "SELECT oi.*, m.food_name, m.price 
+                                                      FROM order_items oi 
+                                                      JOIN menu m ON oi.food_id = m.food_id 
+                                                      WHERE oi.order_id = ?";
                                         $items_stmt = $conn->prepare($items_sql);
-                                        $items_stmt->bind_param("i", $order['order_id']);
+                                        
+                                        // Semakan ralat PHP yang telah dibetulkan sebelum ini
+                                        $items_result = false; 
+                                        
+                                        if (!$items_stmt) {
+                                            // Papar ralat SQL jika prepare gagal
+                                            echo "<div class='alert alert-danger'>Kesalahan SQL Item Pesanan untuk Order #" . $order['order_id'] . ": " . $conn->error . "</div>";
+                                            continue; // Langkau paparan pesanan ini jika item tidak dapat diambil
+                                        }
+
+                                        $items_stmt->bind_param("i", $order['order_id']); 
                                         $items_stmt->execute();
                                         $items_result = $items_stmt->get_result();
                                         ?>
@@ -368,20 +376,28 @@ $result = $conn->query($sql);
                                                     <div class="col-md-6">
                                                         <h6><i class="fas fa-shopping-cart"></i> Order Items</h6>
                                                         <div class="item-list">
-                                                            <?php while ($item = $items_result->fetch_assoc()): ?>
-                                                                <div class="item-row">
-                                                                    <div>
-                                                                        <strong><?php echo htmlspecialchars($item['food_name']); ?></strong>
-                                                                        <br>
-                                                                        <small class="text-muted">RM <?php echo number_format($item['price_each'], 2); ?> each</small>
+                                                            <?php if ($items_result && $items_result->num_rows > 0): ?>
+                                                                <?php while ($item = $items_result->fetch_assoc()): 
+                                                                    // Guna m.price (sekarang sebagai $item['price']) 
+                                                                    // Tukar $item['price_each'] kepada $item['price'] di sini
+                                                                    $item_price = $item['price']; 
+                                                                    ?>
+                                                                    <div class="item-row">
+                                                                        <div>
+                                                                            <strong><?php echo htmlspecialchars($item['food_name']); ?></strong>
+                                                                            <br>
+                                                                            <small class="text-muted">RM <?php echo number_format($item_price, 2); ?> each</small>
+                                                                        </div>
+                                                                        <div class="text-right">
+                                                                            <span class="badge badge-info">Qty: <?php echo $item['quantity']; ?></span>
+                                                                            <br>
+                                                                            <strong>RM <?php echo number_format($item_price * $item['quantity'], 2); ?></strong>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="text-right">
-                                                                        <span class="badge badge-info">Qty: <?php echo $item['quantity']; ?></span>
-                                                                        <br>
-                                                                        <strong>RM <?php echo number_format($item['price_each'] * $item['quantity'], 2); ?></strong>
-                                                                    </div>
-                                                                </div>
-                                                            <?php endwhile; ?>
+                                                                <?php endwhile; ?>
+                                                            <?php else: ?>
+                                                                <div class="text-muted">Tiada item pesanan ditemui.</div>
+                                                            <?php endif; ?>
                                                             <div class="total-row">
                                                                 <div class="d-flex justify-content-between">
                                                                     <span>Total Amount:</span>
@@ -417,15 +433,15 @@ $result = $conn->query($sql);
                                                     </div>
                                                     <div class="col-md-4 text-right">
                                                         <a href="../customer/view_order_stat_cust.php?order_id=<?php echo $order['order_id']; ?>" 
-                                                           class="btn order-details-btn" target="_blank">
-                                                            <i class="fas fa-eye"></i> View Customer Receipt
+                                                            class="btn order-details-btn" target="_blank">
+                                                             <i class="fas fa-eye"></i> View Customer Receipt
                                                         </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         
-                                        <?php $items_stmt->close(); ?>
+                                        <?php if ($items_stmt) $items_stmt->close(); // Tutup statement hanya jika ia wujud dan bukan false ?>
                                     <?php endwhile; ?>
                                 <?php else: ?>
                                     <div class="text-center py-5">
@@ -440,7 +456,6 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <!-- Footer -->
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="copyright">
@@ -451,14 +466,12 @@ $result = $conn->query($sql);
         </div>
     </div>
 
-    <!-- Core JS Files -->
-    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+      <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
     <script src="../assets/js/kaiadmin.min.js"></script>
 
-    <!-- JavaScript for Tooltips and Auto-dismiss Alerts -->
     <script>
         // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
