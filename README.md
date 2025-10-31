@@ -87,17 +87,17 @@ Use the credentials provided below to log in as **Admin**, **Staff**, or **User*
 You may add or modify these credentials as required by your system.
 
 **🧭 Admin**
-- Username: `admin1`  
-- Password: `Test123`
+- Username: `Muhammad Fikri Bin Mawardi`  
+- Password: `popiagoreng123_`
 
 **👨‍🔧 Staff**
-- Username: `staff1` — Password: `Test123`  
-- Username: `staff2` — Password: `Test123`  
-- Username: `staff3` — Password: `Test123`
+- Username: `FIKRI MAWARDI` — Password: `pikije123_`  
+- Username: `shameel` — Password: `shameel681`  
+- Username: `ANAS IZZUDIN BIN MUAMAR` — Password: `Anasizzudin`
 
 **👤 User**
-- Username: `izudin` — Password: `Test123`  
-- Username: `farysh` — Password: `Test123`
+- Username: `FIKRI MAWARDI` — Password: `Fikri123_`  
+- Username: `MUHAMMAD SHAMEEL BIN SHAMSUL ADZMI` — Password: `Shameel681`
 
 ---
 
