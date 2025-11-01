@@ -1,0 +1,121 @@
+/* Register Page Custom Styling */
+body {
+    background-color: #f7f3e9;
+    font-family: 'Crete Round', sans-serif;
+}
+
+/* Registration Section */
+.register-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    background-color: #f5E6CA;
+    min-height: 90vh;
+}
+
+.register-box {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.register-box h2 {
+    font-family: 'Pacifico', cursive;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.register-box p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.register-form .form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.register-form label {
+    display: block;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.register-form label i {
+    margin-right: 8px;
+    color: #e67e22;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.register-form input:focus {
+    border-color: #e67e22;
+    outline: none;
+    box-shadow: 0 0 5px rgba(230, 126, 34, 0.5);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+/* Message Box */
+.message-box {
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.message-box.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message-box.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .register-box {
+        padding: 30px 25px;
+    }
+
+    .register-box h2 {
+        font-size: 1.6rem;
+    }
+
+    .btn-submit {
+        font-size: 1rem;
+    }
+}

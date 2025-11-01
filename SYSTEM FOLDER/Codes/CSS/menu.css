@@ -1,0 +1,238 @@
+/* General Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+.modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+.modal .modal-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.modal .modal-footer {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+/* Cart Modal Specific */
+#cart-modal .modal-content {
+    max-width: 600px;
+}
+#cart-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.cart-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cart-item:last-child {
+    border-bottom: none;
+}
+.cart-item-details {
+    flex-grow: 1;
+    padding-right: 15px;
+}
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.btn-quantity {
+    background: #e67e22;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    line-height: 1;
+    transition: background 0.2s;
+}
+.btn-quantity:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+.item-quantity-display {
+    font-weight: bold;
+    min-width: 25px;
+    text-align: center;
+}
+.btn-remove-item {
+    background: none;
+    color: #dc3545;
+    border: none;
+    padding: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 5px;
+}
+#empty-cart-message {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    display: list-item !important;
+}
+#cart-modal-total-price-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-top: 2px solid #ddd;
+    margin-top: 10px;
+}
+
+/* Cart Icon Badge */
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    padding: 5px 8px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: 0.75rem;
+    line-height: 1;
+    z-index: 100;
+}
+
+/* Menu Header Controls */
+.menu-header-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.menu-header-controls .search-form {
+    flex-grow: 1;
+    max-width: 800px;
+    margin-right: 20px;
+}
+
+/* Cart Icon button in new location */
+#cart-icon-btn-menu {
+    display: none;
+    position: relative;
+}
+
+/* Hide old cart icon in navbar */
+#cart-icon-btn {
+    display: none !important;
+}
+
+/* Additional styles from menus.css and menus1.css (assumed minimal styles for menu layout) */
+.menu {
+    padding: 40px 0;
+}
+.menu h2 {
+    font-family: 'Pacifico', cursive;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.menu-section h2 {
+    font-family: 'Heebo', sans-serif;
+    color: #e67e22;
+    margin-bottom: 20px;
+}
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+.menu-item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.menu-item:hover {
+    transform: translateY(-5px);
+}
+.menu-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+.menu-details {
+    padding: 15px;
+}
+.menu-details h4 {
+    margin: 0 0 10px;
+    font-family: 'Nunito', sans-serif;
+    color: #333;
+}
+.menu-details .price {
+    float: right;
+    color: #e67e22;
+    font-weight: bold;
+}
+.menu-details p {
+    margin: 0 0 10px;
+    color: #666;
+}
+.menu-details .btn {
+    background: #e67e22;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+}
+.search-form {
+    display: flex;
+    align-items: center;
+}
+.search-form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    width: 100%;
+}
+.search-form button {
+    padding: 8px 15px;
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}

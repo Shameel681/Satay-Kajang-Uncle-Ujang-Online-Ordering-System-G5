@@ -1,0 +1,25 @@
+body {
+    background: #f7f7f7;
+}
+
+.order-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+.order-card:hover {
+    transform: scale(1.02);
+}
+
+.status-badge {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.status-pending { background: #fff3cd; color: #856404; }
+.status-processing { background: #cce5ff; color: #004085; }
+.status-completed { background: #d4edda; color: #155724; }
+.status-cancelled { background: #f8d7da; color: #721c24; }
