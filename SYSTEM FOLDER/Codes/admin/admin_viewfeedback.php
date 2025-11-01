@@ -1,0 +1,562 @@
+<?php
+// admin/admin_viewfeedback.php
+require_once '../connect.php';
+
+// Check if admin is logged in
+if (!isset($_SESSION['admin_loggedin']) || $_SESSION['admin_loggedin'] !== true) {
+    header("Location: profAdmin.php");
+    exit;
+}
+
+$message = '';
+$message_type = '';
+
+// Handle Delete Feedback
+if (isset($_GET['delete']) && isset($_GET['type'])) {
+    $id = intval($_GET['delete']);
+    $type = $_GET['type'];
+
+    if ($type === 'customer') {
+        $stmt = $conn->prepare("DELETE FROM feedback_customer WHERE id=?");
+        $stmt->bind_param("i", $id);
+        $table_name = 'Customer';
+    } elseif ($type === 'guest') {
+        $stmt = $conn->prepare("DELETE FROM feedback_guest WHERE id=?");
+        $stmt->bind_param("i", $id);
+        $table_name = 'Guest';
+    }
+    
+    if (isset($stmt)) {
+        if ($stmt->execute()) {
+            $message = "$table_name feedback deleted successfully.";
+            $message_type = "success";
+        } else {
+            $message = "Failed to delete $table_name feedback.";
+            $message_type = "error";
+        }
+        $stmt->close();
+    }
+}
+
+// Fetch Customer Feedback
+$customer_feedback = $conn->query("SELECT * FROM feedback_customer ORDER BY created_at DESC");
+$customer_count = $customer_feedback ? $customer_feedback->num_rows : 0;
+
+// Fetch Guest Feedback
+$guest_feedback = $conn->query("SELECT * FROM feedback_guest ORDER BY created_at DESC");
+$guest_count = $guest_feedback ? $guest_feedback->num_rows : 0;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>View Feedback - Satay Kajang Uncle Ujang</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: ["Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"],
+          urls: ["../assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    
+    <style>
+        .feedback-card {
+            border-left: 4px solid #e67e22;
+            transition: all 0.3s ease;
+        }
+        .feedback-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .feedback-rating {
+            color: #f39c12;
+        }
+        .feedback-time {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .tab-content .table {
+            background: transparent;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #e67e22;
+            border-color: #e67e22;
+            color: white;
+        }
+        .nav-tabs .nav-link {
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <div class="logo-header" data-background-color="dark">
+                    <a href="admin_dashboard.php" class="logo">
+                        <img src="../image/LogoSataysebenarReal.png" alt="Satay Kajang Uncle Ujang" class="navbar-brand" height="30" />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item">
+                            <a href="admin_dashboard.php">
+                                <i class="fa-solid fa-gauge"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admincustomer.php">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Manage Customer</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="adminstaff.php">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <p>Manage Staff</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_menu.php">
+                                <i class="fa-solid fa-utensils"></i>
+                                <p>View Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_manageorder.php">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <p>Manage Orders</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="admin_viewfeedback.php">
+                                <i class="fa-solid fa-comments"></i>
+                                <p>View Feedback</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_viewsale.php">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                                <p>View Sales</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="profAdmin.php">
+                                <i class="fa-solid fa-user"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_logout.php">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="admin_dashboard.php" class="logo">
+                            <img src="../image/LogoSataysebenarReal.png" alt="navbar brand" class="navbar-brand" height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                    <div class="container-fluid">
+                        <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="submit" class="btn btn-search pe-1">
+                                        <i class="fa fa-search search-icon"></i>
+                                    </button>
+                                </div>
+                                <input type="text" placeholder="Search feedback..." class="form-control" />
+                            </div>
+                        </nav>
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                                    
+                                    <span class="profile-username">
+                                        <span class="op-7">Welcome,</span>
+                                        <span class="fw-bold"><?= htmlspecialchars($_SESSION['admin_name']) ?></span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="profAdmin.php">
+                                            <i class="fa-solid fa-user me-2"></i> Profile
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="admin_logout.php">
+                                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="container">
+                <div class="page-inner">
+                    <!-- Header -->
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                        <div>
+                            <h1 class="fw-bold mb-3">
+                                <i class="fa-solid fa-comments text-primary me-2"></i>
+                                Customer Feedback
+                            </h1>
+                            <p class="op-7 mb-2">Review and manage feedback from customers and guests</p>
+                        </div>
+                        <div class="ms-md-auto py-2 py-md-0">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge badge-primary fs-6">
+                                    <i class="fa-solid fa-users me-1"></i><?= $customer_count ?> Customer
+                                </span>
+                                <span class="badge badge-secondary fs-6">
+                                    <i class="fa-solid fa-user me-1"></i><?= $guest_count ?> Guest
+                                </span>
+                                <span class="badge badge-info fs-6">
+                                    Total: <?= $customer_count + $guest_count ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success/Error Messages -->
+                    <?php if (!empty($message)): ?>
+                        <div class="alert alert-<?= $message_type === 'success' ? 'success' : 'danger' ?> alert-dismissible fade show" role="alert">
+                            <i class="fa-solid fa-<?= $message_type === 'success' ? 'check-circle' : 'exclamation-triangle' ?> me-2"></i>
+                            <?= $message ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Tabs for Customer and Guest Feedback -->
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="feedbackTabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="customer-tab" data-bs-toggle="tab" href="#customer-feedback" role="tab">
+                                        <i class="fa-solid fa-users me-1"></i>Customer Feedback (<?= $customer_count ?>)
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="guest-tab" data-bs-toggle="tab" href="#guest-feedback" role="tab">
+                                        <i class="fa-solid fa-user me-1"></i>Guest Feedback (<?= $guest_count ?>)
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="feedbackTabContent">
+                                <!-- Customer Feedback Tab -->
+                                <div class="tab-pane fade show active" id="customer-feedback" role="tabpanel">
+                                    <?php if ($customer_count > 0): ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>ID</th>
+                                                        <th>Customer</th>
+                                                        <th>Email</th>
+                                                        <th>Feedback</th>
+                                                        <th>Date</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                                    $customer_feedback->data_seek(0);
+                                                    $no = 1;
+                                                    while ($row = $customer_feedback->fetch_assoc()): 
+                                                    ?>
+                                                    <tr class="feedback-card">
+                                                        <td><?= $no++ ?></td>
+                                                        <td>
+                                                            <span class="badge badge-secondary">CF<?= sprintf('%04d', $row['id']) ?></span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar avatar-sm me-2">
+                                                                    <span class="avatar-title rounded-circle bg-primary">
+                                                                        <?= strtoupper(substr($row['customer_name'], 0, 1)) ?>
+                                                                    </span>
+                                                                </div>
+                                                                <strong><?= htmlspecialchars($row['customer_name']) ?></strong>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <small class="text-muted"><?= htmlspecialchars($row['customer_email']) ?></small>
+                                                        </td>
+                                                        <td>
+                                                            <div class="feedback-content" style="max-height: 100px; overflow-y: auto;">
+                                                                <?= nl2br(htmlspecialchars(substr($row['feedback'], 0, 150))) ?>
+                                                                <?= strlen($row['feedback']) > 150 ? '...' : '' ?>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <small class="feedback-time"><?= date('M d, Y H:i', strtotime($row['created_at'])) ?></small>
+                                                        </td>
+                                                        <td>
+                                                            <a href="?delete=<?= $row['id'] ?>&type=customer" 
+                                                               class="btn btn-sm btn-danger" 
+                                                               onclick="return confirm('Delete this customer feedback?')"
+                                                               title="Delete Feedback">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <?php endwhile; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="text-center py-5">
+                                            <i class="fa-solid fa-comments fa-3x text-muted mb-3"></i>
+                                            <h5 class="text-muted">No customer feedback yet</h5>
+                                            <p class="text-muted">Customer feedback will appear here when submitted.</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <!-- Guest Feedback Tab -->
+                                <div class="tab-pane fade" id="guest-feedback" role="tabpanel">
+                                    <?php if ($guest_count > 0): ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>ID</th>
+                                                        <th>Guest</th>
+                                                        <th>Email</th>
+                                                        <th>Feedback</th>
+                                                        <th>Date</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                                    $guest_feedback->data_seek(0);
+                                                    $no = 1;
+                                                    while ($row = $guest_feedback->fetch_assoc()): 
+                                                    ?>
+                                                    <tr class="feedback-card">
+                                                        <td><?= $no++ ?></td>
+                                                        <td>
+                                                            <span class="badge badge-secondary">GF<?= sprintf('%04d', $row['id']) ?></span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar avatar-sm me-2">
+                                                                    <span class="avatar-title rounded-circle bg-secondary">
+                                                                        <?= strtoupper(substr($row['guest_name'], 0, 1)) ?>
+                                                                    </span>
+                                                                </div>
+                                                                <strong><?= htmlspecialchars($row['guest_name']) ?></strong>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <small class="text-muted"><?= htmlspecialchars($row['guest_email']) ?></small>
+                                                        </td>
+                                                        <td>
+                                                            <div class="feedback-content" style="max-height: 100px; overflow-y: auto;">
+                                                                <?= nl2br(htmlspecialchars(substr($row['feedback'], 0, 150))) ?>
+                                                                <?= strlen($row['feedback']) > 150 ? '...' : '' ?>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <small class="feedback-time"><?= date('M d, Y H:i', strtotime($row['created_at'])) ?></small>
+                                                        </td>
+                                                        <td>
+                                                            <a href="?delete=<?= $row['id'] ?>&type=guest" 
+                                                               class="btn btn-sm btn-danger" 
+                                                               onclick="return confirm('Delete this guest feedback?')"
+                                                               title="Delete Feedback">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <?php endwhile; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="text-center py-5">
+                                            <i class="fa-solid fa-user fa-3x text-muted mb-3"></i>
+                                            <h5 class="text-muted">No guest feedback yet</h5>
+                                            <p class="text-muted">Guest feedback will appear here when submitted.</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Stats -->
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-icon">
+                                            <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                                <i class="fa-solid fa-users"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col col-stats ms-3 ms-sm-0">
+                                            <div class="numbers">
+                                                <p class="card-category">Customer Feedback</p>
+                                                <h4 class="card-title"><?= $customer_count ?></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-icon">
+                                            <div class="icon-big text-center icon-info bubble-shadow-small">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col col-stats ms-3 ms-sm-0">
+                                            <div class="numbers">
+                                                <p class="card-category">Guest Feedback</p>
+                                                <h4 class="card-title"><?= $guest_count ?></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-icon">
+                                            <div class="icon-big text-center icon-success bubble-shadow-small">
+                                                <i class="fa-solid fa-comments"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col col-stats ms-3 ms-sm-0">
+                                            <div class="numbers">
+                                                <p class="card-category">Total Feedback</p>
+                                                <h4 class="card-title"><?= $customer_count + $guest_count ?></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="copyright">
+                        © 2025 Satay Kajang Uncle Ujang. All rights reserved.
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Core JS Files -->
+        <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+        <script src="../assets/js/core/popper.min.js"></script>
+        <script src="../assets/js/core/bootstrap.min.js"></script>
+        <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+        <script src="../assets/js/kaiadmin.min.js"></script>
+
+        <script>
+            // Auto-dismiss alerts
+            setTimeout(function() {
+                var alerts = document.querySelectorAll('.alert');
+                alerts.forEach(function(alert) {
+                    var bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                });
+            }, 5000);
+
+            // Make feedback expandable
+            document.querySelectorAll('.feedback-content').forEach(content => {
+                if (content.scrollHeight > content.clientHeight) {
+                    content.title = 'Click to expand';
+                    content.style.cursor = 'pointer';
+                    content.addEventListener('click', function() {
+                        this.style.maxHeight = this.style.maxHeight ? null : 'none';
+                    });
+                }
+            });
+
+            // Tab switching functionality
+            document.querySelectorAll('#feedbackTabs .nav-link').forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function (e) {
+                    const target = e.target.getAttribute('href');
+                    const table = target.querySelector('.table');
+                    if (table) {
+                        table.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
